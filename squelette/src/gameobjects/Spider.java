@@ -10,10 +10,16 @@ public class Spider extends Hero {
 	public void updateObjects() {
 		move();
 	}
+	
 	private void move() {
 		Vector2 normalizedDirection = getNormalizedDirection();
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
+		getrandomInt(2);
+	}
+	
+	public double getrandomInt(int max) {
+		return Math.floor(Math.random()*max);
 	}
 	public void drawGameObject()
 	{
