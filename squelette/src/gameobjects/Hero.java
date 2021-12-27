@@ -2,6 +2,7 @@ package gameobjects;
 
 import libraries.StdDraw;
 import libraries.Vector2;
+import gameWorld.Room;
 
 public class Hero
 {
