@@ -20,7 +20,6 @@ public class Main
 		GameWorld world = new GameWorld(isaac);	
 		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		initializeDisplay();
-		System.out.println("COUCOU, tu veux voir...");
 		// Main loop of the game
 		while (!world.gameOver())
 		{
