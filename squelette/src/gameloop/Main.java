@@ -6,6 +6,7 @@ import gameWorld.TESTROOM;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Timer;
+import resources.CycleInfos;
 import resources.DisplaySettings;
 import resources.HeroInfos;
 import resources.ImagePaths;
@@ -29,6 +30,10 @@ public class Main
 		// Main loop of the game
 		while (!world.gameOver())
 		{
+			CycleInfos.Cycle++;
+			if(CycleInfos.Cycle==Integer.MAX_VALUE) {
+				CycleInfos.Cycle=0;
+			}
 			processNextStep(world);
 		}
 	}

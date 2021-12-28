@@ -15,16 +15,16 @@ public class Spider extends Hero {
 		Vector2 normalizedDirection = getNormalizedDirection();
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
-		//getrandomInt(2);
 		}
 	
 	
 	public void moveby1() {
 		double b= getrandomdouble(3)-1;
-		double a = getrandomdouble(3)-1;
+		double a= getrandomdouble(3)-1;
 		setPosition(new Vector2 (a, b));
-
 	}
+	
+	
 	public double getrandomdouble(int max) {
 		return Math.floor(Math.random()*max);
 	}
