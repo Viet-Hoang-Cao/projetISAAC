@@ -39,13 +39,17 @@ public class RoomBase extends Room {
 		
 		//DOORS
 		Vector2 pos = positionFromTileIndex(0, 4);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR, 90);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
 		pos = positionFromTileIndex(8, 4);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR, 270);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 		pos = positionFromTileIndex(4, 0);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR, 180);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
 		pos = positionFromTileIndex(4, 8);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR, 0);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
 		super.getHero().drawGameObject();
 	}
 	

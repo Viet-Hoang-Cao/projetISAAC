@@ -2,6 +2,7 @@ package gameloop;
 
 import gameWorld.GameWorld;
 import gameWorld.RoomBase;
+import gameWorld.TESTROOM;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Timer;
@@ -21,7 +22,7 @@ public class Main
 		GameWorld world = new GameWorld(isaac);
 		
 		//Test de changement de room
-		world.setCurrentRoom(new RoomBase(isaac));
+		world.setCurrentRoom(new TESTROOM(isaac));
 		
 		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		initializeDisplay();
