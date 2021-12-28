@@ -1,6 +1,6 @@
 package gameWorld;
 
-import java.util.TreeSet;
+import java.util.Set;
 
 import gameobjects.Hero;
 import libraries.StdDraw;
@@ -11,13 +11,13 @@ import resources.RoomInfos;
 public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
-	TreeSet<Vector2> physics;
+	//Set<Vector2> physics;
 	Vector2 heropreviousposition;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
 		this.heropreviousposition=super.getHero().getPosition();
-		this.physics = new TreeSet<>();
+		//this.physics = new Set<>();
 		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
