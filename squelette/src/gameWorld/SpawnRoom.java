@@ -18,7 +18,7 @@ public class SpawnRoom extends Room {
 		super(hero);
 		this.heropreviousposition=super.getHero().getPosition();
 		//this.physics = new Set<>();
-		wallphysics();
+		//wallphysics();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -100,14 +100,14 @@ public class SpawnRoom extends Room {
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
-	
+	/*
 	public void addPhysics(Vector2 pos) {
 		this.physics.add(pos);
 	}
 	
 	public void removePhysics(Vector2 pos) {
 		this.physics.remove(pos);
-	}
+	}*/
 	
 	/**
 	 * Convert a tile index to a 0-1 position.
