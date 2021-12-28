@@ -50,15 +50,15 @@ public class SpawnRoom extends Room {
 		addOpenDoorRight();
 		
 		//hero physics
-		if(physics.contains(super.getHero().getPosition()))
+		//if(physics.contains(super.getHero().getPosition()))
 			super.getHero().setPosition(heropreviousposition);
 		super.getHero().drawGameObject();
 		heropreviousposition = super.getHero().getPosition();
 	}
-	
+
 	/**
 	 * ajoute la physique des murs
-	 */
+	 *//*
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
 			physics.add(positionFromTileIndex(0, i));
@@ -66,7 +66,7 @@ public class SpawnRoom extends Room {
 			physics.add(positionFromTileIndex(8, i));
 			physics.add(positionFromTileIndex(i, 8));
 		}
-	}
+	}*/
 	
 	/**
 	 * dessine une door en haut
