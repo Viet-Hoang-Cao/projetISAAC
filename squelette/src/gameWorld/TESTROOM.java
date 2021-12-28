@@ -3,6 +3,10 @@ package gameWorld;
 import java.util.LinkedList;
 
 import gameobjects.Hero;
+import gameobjects.Spider;
+import resources.ImagePaths;
+import resources.RoomInfos;
+import resources.SpiderInfos;
 
 //classe de test pour tes appels de monstres ;p
 
@@ -24,6 +28,14 @@ public class TESTROOM extends SpawnRoom {
 		for (Hero m: this.monsters) {
 			m.drawGameObject();
 		}
+	}
+	
+	@Override
+	public void drawRoom() {
+		super.drawRoom();
+		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		addmonster(spider1);
+		drawmonsters();
 	}
 
 }
