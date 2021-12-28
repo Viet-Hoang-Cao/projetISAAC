@@ -6,7 +6,7 @@ import gameobjects.Hero;
 
 //classe de test pour tes appels de monstres ;p
 
-public class TESTROOM extends RoomBase {
+public class TESTROOM extends SpawnRoom {
 	
 	private LinkedList<Hero> monsters;
 

@@ -6,9 +6,9 @@ import libraries.Vector2;
 import resources.ImagePaths;
 import resources.RoomInfos;
 
-public class RoomBase extends Room {
+public class SpawnRoom extends Room {
 
-	public RoomBase(Hero hero) {
+	public SpawnRoom(Hero hero) {
 		super(hero);
 		// TODO Auto-generated constructor stub
 	}

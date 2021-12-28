@@ -1,7 +1,7 @@
 package gameloop;
 
 import gameWorld.GameWorld;
-import gameWorld.RoomBase;
+import gameWorld.SpawnRoom;
 import gameWorld.TESTROOM;
 import gameobjects.Hero;
 import libraries.StdDraw;
