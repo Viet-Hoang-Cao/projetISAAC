@@ -20,7 +20,7 @@ public class Spider extends Hero {
 	
 	
 	public int moveby1(int a) {
-		int PlusOrMinus = Math.round(Math.random());
+		int PlusOrMinus = (int)Math.round(Math.random());
 		getrandomInt(PlusOrMinus);
 		if(a>1) {
 			Vector2 direction;
