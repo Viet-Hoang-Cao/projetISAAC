@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import gameobjects.Hero;
 import gameobjects.Spider;
+import resources.CycleInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 import resources.SpiderInfos;
@@ -12,15 +13,17 @@ import resources.SpiderInfos;
 
 public class TESTROOM extends SpawnRoom {
 	
-	private LinkedList<Hero> monsters;
+	private LinkedList<Spider> monsters;
 
 	public TESTROOM(Hero hero) {
 		super(hero);
-		this.monsters = new LinkedList<Hero>();
+		this.monsters = new LinkedList<Spider>();
+		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		addmonster(spider1);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void addmonster(Hero monster) {
+	public void addmonster(Spider monster) {
 		this.monsters.add(monster);
 	}
 	
@@ -29,12 +32,17 @@ public class TESTROOM extends SpawnRoom {
 			m.drawGameObject();
 		}
 	}
+	public void moveby1allMonsters() {
+		for (Spider m: this.monsters) {
+			m.moveby1();
+		}
+	}
 	
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
-		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
-		addmonster(spider1);
+		if (CycleInfos.Cycle%10==0)
+		moveby1allMonsters();
 		drawmonsters();
 	}
 

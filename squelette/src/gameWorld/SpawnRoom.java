@@ -51,7 +51,7 @@ public class SpawnRoom extends Room {
 		
 		//hero physics
 		//if(physics.contains(super.getHero().getPosition()))
-			super.getHero().setPosition(heropreviousposition);
+			//super.getHero().setPosition(heropreviousposition);
 		super.getHero().drawGameObject();
 		heropreviousposition = super.getHero().getPosition();
 	}
