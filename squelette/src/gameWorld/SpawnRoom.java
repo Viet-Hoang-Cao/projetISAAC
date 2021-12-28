@@ -1,6 +1,7 @@
 package gameWorld;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 import gameobjects.Hero;
 import libraries.StdDraw;
@@ -11,14 +12,14 @@ import resources.RoomInfos;
 public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
-	//Set<Vector2> physics;
+	Set<String> physics;
 	Vector2 heropreviousposition;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
 		this.heropreviousposition=super.getHero().getPosition();
-		//this.physics = new Set<>();
-		//wallphysics();
+		this.physics = new TreeSet<>();
+		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -58,15 +59,15 @@ public class SpawnRoom extends Room {
 
 	/**
 	 * ajoute la physique des murs
-	 *//*
+	 */
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
-			physics.add(positionFromTileIndex(0, i));
-			physics.add(positionFromTileIndex(i, 0));
-			physics.add(positionFromTileIndex(8, i));
-			physics.add(positionFromTileIndex(i, 8));
+			physics.add(positionFromTileIndex(0, i).toString());
+			physics.add(positionFromTileIndex(i, 0).toString());
+			physics.add(positionFromTileIndex(8, i).toString());
+			physics.add(positionFromTileIndex(i, 8).toString());
 		}
-	}*/
+	}
 	
 	/**
 	 * dessine une door en haut
@@ -100,14 +101,14 @@ public class SpawnRoom extends Room {
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
-	/*
+	
 	public void addPhysics(Vector2 pos) {
-		this.physics.add(pos);
+		this.physics.add(pos.toString());
 	}
 	
 	public void removePhysics(Vector2 pos) {
-		this.physics.remove(pos);
-	}*/
+		this.physics.remove(pos.toString());
+	}
 	
 	/**
 	 * Convert a tile index to a 0-1 position.
