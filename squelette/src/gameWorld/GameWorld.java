@@ -37,6 +37,7 @@ public class GameWorld
 	{
 		currentRoom.drawRoom();
 	}
+	
 
 	/*
 	 * Keys processing
@@ -60,5 +61,9 @@ public class GameWorld
 		{
 			hero.goLeftNext();
 		}
+	}
+
+	public void setCurrentRoom(Room currentRoom) {
+		this.currentRoom = currentRoom;
 	}
 }

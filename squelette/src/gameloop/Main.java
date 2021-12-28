@@ -1,6 +1,7 @@
 package gameloop;
 
 import gameWorld.GameWorld;
+import gameWorld.RoomBase;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Timer;
@@ -17,7 +18,11 @@ public class Main
 	{
 		// Hero, world and display initialisation.
 		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC);
-		GameWorld world = new GameWorld(isaac);	
+		GameWorld world = new GameWorld(isaac);
+		
+		//Test de changement de room
+		world.setCurrentRoom(new RoomBase(isaac));
+		
 		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		initializeDisplay();
 		// Main loop of the game
