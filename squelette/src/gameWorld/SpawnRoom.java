@@ -1,5 +1,7 @@
 package gameWorld;
 
+import java.util.TreeSet;
+
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
@@ -7,9 +9,16 @@ import resources.ImagePaths;
 import resources.RoomInfos;
 
 public class SpawnRoom extends Room {
-
+	
+	//Contient tout les emplacements ou le joueur ne peut pas aller
+	TreeSet<Vector2> physics;
+	Vector2 heropreviousposition;
+	
 	public SpawnRoom(Hero hero) {
 		super(hero);
+		this.heropreviousposition=super.getHero().getPosition();
+		this.physics = new TreeSet<>();
+		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -22,7 +31,7 @@ public class SpawnRoom extends Room {
 		// For every tile, set background color.
 		StdDraw.setPenColor(StdDraw.GRAY);
 		for (int i = 0; i < RoomInfos.NB_TILES; i++)
-		{
+		{	
 			for (int j = 0; j < RoomInfos.NB_TILES; j++)
 			{	
 				if(j==0) StdDraw.setPenColor(150,75,0);
@@ -38,19 +47,66 @@ public class SpawnRoom extends Room {
 		}
 		
 		//DOORS
+		addOpenDoorRight();
+		
+		//hero physics
+		if(physics.contains(super.getHero().getPosition()))
+			super.getHero().setPosition(heropreviousposition);
+		super.getHero().drawGameObject();
+		heropreviousposition = super.getHero().getPosition();
+	}
+	
+	/**
+	 * ajoute la physique des murs
+	 */
+	public void wallphysics() {
+		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
+			physics.add(positionFromTileIndex(0, i));
+			physics.add(positionFromTileIndex(i, 0));
+			physics.add(positionFromTileIndex(8, i));
+			physics.add(positionFromTileIndex(i, 8));
+		}
+	}
+	
+	/**
+	 * dessine une door en haut
+	 */
+	public void addOpenDoorUp() {
+		Vector2 pos = positionFromTileIndex(4, 8);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
+	}
+	/**
+	 * dessine une door en bas
+	 */	
+	public void addOpenDoorDown() {
+		Vector2 pos = positionFromTileIndex(4, 0);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
+	}
+	/**
+	 * dessine une door à gauche
+	 */
+	public void addOpenDoorLeft() {
 		Vector2 pos = positionFromTileIndex(0, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
-		pos = positionFromTileIndex(8, 4);
+	}
+	/**
+	 * dessine une door à droite
+	 */
+	public void addOpenDoorRight() {
+		Vector2 pos = positionFromTileIndex(8, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
-		pos = positionFromTileIndex(4, 0);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
-				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
-		pos = positionFromTileIndex(4, 8);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
-				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
-		super.getHero().drawGameObject();
+	}
+	
+	public void addPhysics(Vector2 pos) {
+		this.physics.add(pos);
+	}
+	
+	public void removePhysics(Vector2 pos) {
+		this.physics.remove(pos);
 	}
 	
 	/**
