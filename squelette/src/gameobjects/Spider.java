@@ -16,8 +16,17 @@ public class Spider extends Hero {
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
 		getrandomInt(2);
-	}
+		}
 	
+	
+	public int moveby1(int a) {
+		int PlusOrMinus = Math.round(Math.random());
+		getrandomInt(PlusOrMinus);
+		if(a>1) {
+			Vector2 direction;
+		}
+		return a;
+	}
 	public double getrandomInt(int max) {
 		return Math.floor(Math.random()*max);
 	}
