@@ -38,7 +38,8 @@ public class SpawnRoom extends Room {
 				if(j==RoomInfos.NB_TILES-1)StdDraw.setPenColor(150,75,0);
 				
 				Vector2 position = positionFromTileIndex(i, j);
-				StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
+				StdDraw.filledRectangle(position.getX(), position.getY(), 
+						RoomInfos.HALF_TILE_SIZE.getX(),
 						RoomInfos.HALF_TILE_SIZE.getY());
 				
 				if(i!=0 && i!=RoomInfos.NB_TILES-1)StdDraw.setPenColor(StdDraw.GRAY);
@@ -53,7 +54,22 @@ public class SpawnRoom extends Room {
 		//walls
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
-				StdDraw.picture(v.getX(), v.getY(), ImagePaths.WALL, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+				if(v.getX()==0) {
+					getHero().goRightNext();
+					getHero().updateGameObject();
+				}
+				if(v.getX()==8) {
+					getHero().goLeftNext();
+					getHero().updateGameObject();
+				}
+				if(v.getY()==0) {
+					getHero().goUpNext();
+					getHero().updateGameObject();
+				}
+				if(v.getY()==8) {
+					getHero().goDownNext();
+					getHero().updateGameObject();
+				}
 			}
 		}
 		getHero().drawGameObject();
