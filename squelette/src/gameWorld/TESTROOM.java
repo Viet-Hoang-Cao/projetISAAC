@@ -54,7 +54,7 @@ public class TESTROOM extends SpawnRoom {
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
-		if (CycleInfos.Cycle%3==0)
+		if (CycleInfos.Cycle%5==0)
 		moveby1allMonsters();
 		drawmonsters();
 	}
