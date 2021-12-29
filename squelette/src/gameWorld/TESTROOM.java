@@ -30,6 +30,18 @@ public class TESTROOM extends SpawnRoom {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	/*
+	 * Make every entity that compose a room process one step
+	 */
+	public void updateRoom()
+	{
+		for (Hero m: this.monsters) { 
+			collisionWalls(m);
+		}
+		super.updateRoom();
+	}
+	
 	private void addmonster(Fly fly1) {
 		this.monsters.add(fly1);
 	}

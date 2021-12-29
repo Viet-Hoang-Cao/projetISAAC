@@ -78,6 +78,28 @@ public class SpawnRoom extends Room {
 			}
 		}
 	}
+	
+	/**
+	 * prend effet si le hero cogne un mur
+	 */
+	public void collisionWalls(Hero monster) {
+		for(Vector2 v : wallphysics ) {
+			if(Physics.rectangleCollision(monster.getPosition(), monster.getSize(), v, RoomInfos.TILE_SIZE)) {
+				if(monster.getDirection().getX()==-1) {
+					monster.goRightNext();
+				}
+				if(monster.getDirection().getX()==1) {
+					monster.goLeftNext();
+				}
+				if(monster.getDirection().getY()==-1) {
+					monster.goUpNext();
+				}
+				if(monster.getDirection().getY()==1) {
+					monster.goDownNext();
+				}
+			}
+		}
+	}
 
 	/**
 	 * ajoute la physique des murs
