@@ -6,6 +6,7 @@ import java.util.Random;
 public class Spider extends Hero {
 	public Spider(Vector2 position, Vector2 size, double speed, String imagepath) {
 		super(position, size, speed, imagepath);
+		
 		}
 	public void updateObjects() {
 		move();
@@ -15,13 +16,16 @@ public class Spider extends Hero {
 		Vector2 normalizedDirection = getNormalizedDirection();
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
+		getDirection();
 		}
 	
 	
 	public void moveby1() {
 		double b= getrandomdouble(3)-1;
 		double a= getrandomdouble(3)-1;
-		setPosition(new Vector2 (a, b));
+		getDirection().addX(a);
+		getDirection().addY(b);
+		move();
 	}
 	
 	
