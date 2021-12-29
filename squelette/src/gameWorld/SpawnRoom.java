@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameobjects.Hero;
+import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
@@ -48,7 +49,13 @@ public class SpawnRoom extends Room {
 		//DOORS
 		addOpenDoorRight();
 		
-		//hero physics
+		
+		//walls
+		for(Vector2 v : wallphysics ) {
+			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
+				StdDraw.picture(v.getX(), v.getY(), ImagePaths.WALL, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+			}
+		}
 		getHero().drawGameObject();
 
 	}
@@ -98,13 +105,7 @@ public class SpawnRoom extends Room {
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
 	
-	public void addPhysics(Vector2 pos) {
-		this.wallphysics.add(pos);
-	}
-	
-	public void removePhysics(Vector2 pos) {
-		this.wallphysics.remove(pos);
-	}
+
 	
 	/**
 	 * Convert a tile index to a 0-1 position.
