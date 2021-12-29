@@ -1,5 +1,8 @@
 package gameWorld;
-import java.util.TreeMap;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
@@ -9,13 +12,11 @@ import resources.RoomInfos;
 public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
-	TreeMap<String, Vector2> physicsVector2;
-	Vector2 heropreviousposition;
+	List<Vector2> wallphysics;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
-		this.physicsVector2 = new TreeMap<>();
-		this.heropreviousposition = new Vector2(hero.getPosition().getX(), hero.getPosition().getY());
+		this.wallphysics = new ArrayList<>();
 		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
@@ -57,10 +58,10 @@ public class SpawnRoom extends Room {
 	 */
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
-			physicsVector2.put(positionFromTileIndex(0, i).toString(),positionFromTileIndex(0, i));
-			physicsVector2.put(positionFromTileIndex(i, 0).toString(),positionFromTileIndex(i, 0));
-			physicsVector2.put(positionFromTileIndex(8, i).toString(),positionFromTileIndex(8,i));
-			physicsVector2.put(positionFromTileIndex(i, 8).toString(),positionFromTileIndex(i,8));
+			wallphysics.add(positionFromTileIndex(0, i));
+			wallphysics.add(positionFromTileIndex(i, 0));
+			wallphysics.add(positionFromTileIndex(8, i));
+			wallphysics.add(positionFromTileIndex(i, 8));
 		}
 	}
 	
@@ -98,11 +99,11 @@ public class SpawnRoom extends Room {
 	}
 	
 	public void addPhysics(Vector2 pos) {
-		this.physics.add(pos.toString());
+		this.wallphysics.add(pos);
 	}
 	
 	public void removePhysics(Vector2 pos) {
-		this.physics.remove(pos.toString());
+		this.wallphysics.remove(pos);
 	}
 	
 	/**
