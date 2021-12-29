@@ -5,5 +5,6 @@ import libraries.Vector2;
 import java.util.Random;
 
 public class Fly extends Hero{
+	public Fly 
 
 }
