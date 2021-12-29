@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
+import libraries.Vector2;
 import resources.CycleInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
@@ -22,9 +23,9 @@ public class TESTROOM extends SpawnRoom {
 	public TESTROOM(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		Spider spider1=new Spider(RoomInfos.POSITION_CENTER_OF_ROOM, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		Spider spider1=new Spider(positionFromTileIndex(1, 1), SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		addmonster(spider1);
-		Fly fly1= new Fly(RoomInfos.POSITION_CENTER_OF_ROOM, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
+		Fly fly1= new Fly(positionFromTileIndex(1, 1), FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
 		addmonster(fly1);
 		// TODO Auto-generated constructor stub
 	}
@@ -50,6 +51,20 @@ public class TESTROOM extends SpawnRoom {
 			n.moveby1();
 		}
 	}
+	
+	/**
+	 * Convert a tile index to a 0-1 position.
+	 * 
+	 * @param indexX
+	 * @param indexY
+	 * @return
+	 */
+	private static Vector2 positionFromTileIndex(int indexX, int indexY)
+	{
+		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
+				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
+	}
+
 	
 	@Override
 	public void drawRoom() {
