@@ -1,8 +1,5 @@
 package gameWorld;
-
-import java.util.Set;
-import java.util.TreeSet;
-
+import java.util.TreeMap;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
@@ -12,13 +9,13 @@ import resources.RoomInfos;
 public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
-	Set<String> physics;
+	TreeMap<String, Vector2> physicsVector2;
 	Vector2 heropreviousposition;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
-		this.heropreviousposition=getHero().getPosition();
-		this.physics = new TreeSet<>();
+		this.physicsVector2 = new TreeMap<>();
+		this.heropreviousposition = new Vector2(hero.getPosition().getX(), hero.getPosition().getY());
 		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
@@ -51,10 +48,8 @@ public class SpawnRoom extends Room {
 		addOpenDoorRight();
 		
 		//hero physics
-		if(physics.contains(getHero().getPosition().toString()))
-			getHero().setPosition(heropreviousposition);
 		getHero().drawGameObject();
-		heropreviousposition = getHero().getPosition();
+
 	}
 
 	/**
@@ -62,10 +57,10 @@ public class SpawnRoom extends Room {
 	 */
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
-			physics.add(positionFromTileIndex(0, i).toString());
-			physics.add(positionFromTileIndex(i, 0).toString());
-			physics.add(positionFromTileIndex(8, i).toString());
-			physics.add(positionFromTileIndex(i, 8).toString());
+			physicsVector2.put(positionFromTileIndex(0, i).toString(),positionFromTileIndex(0, i));
+			physicsVector2.put(positionFromTileIndex(i, 0).toString(),positionFromTileIndex(i, 0));
+			physicsVector2.put(positionFromTileIndex(8, i).toString(),positionFromTileIndex(8,i));
+			physicsVector2.put(positionFromTileIndex(i, 8).toString(),positionFromTileIndex(i,8));
 		}
 	}
 	
