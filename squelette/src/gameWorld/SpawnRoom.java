@@ -52,7 +52,8 @@ public class SpawnRoom extends Room {
 		
 		
 		//walls
-		
+		Vector2 position = positionFromTileIndex(4, 8);
+		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
 		getHero().drawGameObject();
 
 	}
@@ -64,24 +65,24 @@ public class SpawnRoom extends Room {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(getHero().getDirection().getX()==-1) {
-					getHero().getDirection().addX(6);
+					getHero().getDirection().addX(2);
 				}
 				if(getHero().getDirection().getX()==1) {
-					getHero().getDirection().addX(-6);
+					getHero().getDirection().addX(-2);
 				}
 				if(getHero().getDirection().getY()==-1) {
-					getHero().getDirection().addY(6);
+					getHero().getDirection().addY(2);
 				}
 				if(getHero().getDirection().getY()==1) {
-					getHero().getDirection().addY(-6);
+					getHero().getDirection().addY(-2);
 				}
 			}
 		}
 	}
 	
 	/**
-	 * prend effet si le hero cogne un mur
-	 */
+	 * prend effet si le hero specifié cogne un mur
+	 *//*
 	public void collisionWalls(Hero monster) {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(monster.getPosition(), monster.getSize(), v, RoomInfos.TILE_SIZE)) {
@@ -99,7 +100,7 @@ public class SpawnRoom extends Room {
 				}
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * ajoute la physique des murs
