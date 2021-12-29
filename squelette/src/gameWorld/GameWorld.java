@@ -1,7 +1,6 @@
 package gameWorld;
 
 import gameobjects.Hero;
-import gameobjects.Spider;
 import libraries.StdDraw;
 import resources.Controls;
 
@@ -9,7 +8,6 @@ public class GameWorld
 {
 	private Room currentRoom;
 	private Hero hero;
-	private Spider spider;
 
 	// A world needs a hero
 	public GameWorld(Hero hero)

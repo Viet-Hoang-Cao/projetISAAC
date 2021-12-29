@@ -11,8 +11,6 @@ import resources.DisplaySettings;
 import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
-import resources.SpiderInfos;
-import gameobjects.Spider;
 
 public class Main
 {

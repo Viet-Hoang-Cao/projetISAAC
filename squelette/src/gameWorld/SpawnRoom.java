@@ -17,7 +17,7 @@ public class SpawnRoom extends Room {
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
-		this.heropreviousposition=super.getHero().getPosition();
+		this.heropreviousposition=getHero().getPosition();
 		this.physics = new TreeSet<>();
 		wallphysics();
 		// TODO Auto-generated constructor stub
@@ -51,10 +51,10 @@ public class SpawnRoom extends Room {
 		addOpenDoorRight();
 		
 		//hero physics
-		//if(physics.contains(super.getHero().getPosition()))
-			//super.getHero().setPosition(heropreviousposition);
-		super.getHero().drawGameObject();
-		heropreviousposition = super.getHero().getPosition();
+		if(physics.contains(getHero().getPosition().toString()))
+			getHero().setPosition(heropreviousposition);
+		getHero().drawGameObject();
+		heropreviousposition = getHero().getPosition();
 	}
 
 	/**
