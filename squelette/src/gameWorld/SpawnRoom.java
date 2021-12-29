@@ -52,28 +52,33 @@ public class SpawnRoom extends Room {
 		
 		
 		//walls
+		
+		getHero().drawGameObject();
+
+	}
+	
+	/**
+	 * prend effet si le hero cogne un mur
+	 */
+	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
-				if(v.getX()==0) {
-					getHero().goRightNext();
-					getHero().updateGameObject();
+				//StdDraw.picture(v.getX(), v.getY(), ImagePaths.WALL, 
+						//RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+				if(getHero().getDirection().getX()==-1) {
+					getHero().getDirection().addX(100);
 				}
-				if(v.getX()==8) {
-					getHero().goLeftNext();
-					getHero().updateGameObject();
+				if(getHero().getDirection().getX()==1) {
+					getHero().getDirection().addX(-100);
 				}
-				if(v.getY()==0) {
-					getHero().goUpNext();
-					getHero().updateGameObject();
+				if(getHero().getDirection().getY()==-1) {
+					getHero().getDirection().addY(100);
 				}
-				if(v.getY()==8) {
-					getHero().goDownNext();
-					getHero().updateGameObject();
+				if(getHero().getDirection().getY()==1) {
+					getHero().getDirection().addY(-100);
 				}
 			}
 		}
-		getHero().drawGameObject();
-
 	}
 
 	/**
@@ -86,6 +91,16 @@ public class SpawnRoom extends Room {
 			wallphysics.add(positionFromTileIndex(8, i));
 			wallphysics.add(positionFromTileIndex(i, 8));
 		}
+	}
+	
+	@Override
+	/*
+	 * Make every entity that compose a room process one step
+	 */
+	public void updateRoom()
+	{
+		collisionWalls();
+		super.updateRoom();
 	}
 	
 	/**
