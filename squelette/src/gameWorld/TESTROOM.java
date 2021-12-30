@@ -23,9 +23,9 @@ public class TESTROOM extends SpawnRoom {
 	public TESTROOM(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		Spider spider1=new Spider(positionFromTileIndex(1, 1), SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		Spider spider1=new Spider(RoomInfos.POSITION_ALEATOIRE, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		addmonster(spider1);
-		Fly fly1= new Fly(positionFromTileIndex(1, 1), FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
+		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
 		addmonster(fly1);
 		// TODO Auto-generated constructor stub
 	}
