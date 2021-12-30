@@ -22,6 +22,7 @@ public class SpawnRoom extends Room {
 		//et enlever des elements
 		wallphysics();
 		addOpenDoorRightPhysics();
+		addRockPhysics(3, 3);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -35,12 +36,15 @@ public class SpawnRoom extends Room {
 		//WALLS
 		DrawWalls();
 		//DOORS
-		addOpenDoorRight();
+		drawOpenDoorRight();
 		//Isaac position
 		Vector2 position = positionFromTileIndex(4, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
 		//Redraw of Isaac
 		getHero().drawGameObject();
+		
+		//draw a rock
+		drawRocks(3, 3);
 	}
 	
 	/**
@@ -169,7 +173,7 @@ public class SpawnRoom extends Room {
 	/**
 	 * dessine une door en bas
 	 */	
-	public void addOpenDoorDown() {
+	public void drawOpenDoorDown() {
 		Vector2 pos = positionFromTileIndex(4, 0);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
@@ -184,7 +188,7 @@ public class SpawnRoom extends Room {
 	/**
 	 * dessine une door à gauche
 	 */
-	public void addOpenDoorLeft() {
+	public void drawOpenDoorLeft() {
 		Vector2 pos = positionFromTileIndex(0, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
@@ -199,7 +203,7 @@ public class SpawnRoom extends Room {
 	/**
 	 * dessine une door à droite
 	 */
-	public void addOpenDoorRight() {
+	public void drawOpenDoorRight() {
 		Vector2 pos = positionFromTileIndex(8, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
@@ -211,6 +215,21 @@ public class SpawnRoom extends Room {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
 	
+	/**
+	 * dessine un rocher sur une tuile
+	 */
+	public void drawRocks(int x, int y) {
+		Vector2 pos = positionFromTileIndex(x, y);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
+				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+	}
+	/**
+	 * add rock physic
+	 */
+	public void addRockPhysics(int x, int y) {
+		Vector2 pos = positionFromTileIndex(x, y);
+		wallphysics.add(pos);
+	}
 
 	
 	/**
