@@ -107,25 +107,26 @@ public class SpawnRoom extends Room {
 		
 	/**
 	 * prend effet si le hero specifié cogne un mur
-	 *//*
+	 */
 	public void collisionWalls(Hero monster) {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(monster.getPosition(), monster.getSize(), v, RoomInfos.TILE_SIZE)) {
-				if(monster.getDirection().getX()==-1) {
-					monster.goRightNext();
+				if(monster.getDirection().getX()==-1 && monster.getPosition().getX() - v.getX() >0) {
+					monster.getDirection().addX(3);
 				}
-				if(monster.getDirection().getX()==1) {
-					monster.goLeftNext();
+				else if(monster.getDirection().getX()==1 && monster.getPosition().getX() - v.getX() <0) {
+					monster.getDirection().addX(-3);
 				}
-				if(monster.getDirection().getY()==-1) {
-					monster.goUpNext();
+				if(monster.getDirection().getY()==-1 && monster.getPosition().getY() - v.getY() >0) {
+					monster.getDirection().addY(3);
 				}
-				if(monster.getDirection().getY()==1) {
-					monster.goDownNext();
+				else if(monster.getDirection().getY()==1 && monster.getPosition().getY() - v.getY() <0) {
+					monster.getDirection().addY(-3);
 				}
+				break;
 			}
 		}
-	}*/
+	}
 	/**
 	 * delete les physics d'un mur
 	 * @param pos
