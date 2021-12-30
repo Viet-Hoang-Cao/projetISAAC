@@ -124,17 +124,10 @@ public class SpawnRoom extends Room {
 			}
 		}
 	}*/
-	
-	@Override
-	/*
-	 * Make every entity that compose a room process one step
+	/**
+	 * delete les physics d'un mur
+	 * @param pos
 	 */
-	public void updateRoom()
-	{
-		collisionWalls();
-		super.updateRoom();
-	}
-	
 	public void deleteVectorOfWall(Vector2 pos) {
 		for(Vector2 v : wallphysics) {
 			if(v.getX() == pos.getX() && v.getY() == pos.getY()) {
@@ -142,6 +135,16 @@ public class SpawnRoom extends Room {
 				break;
 			}
 		}
+	}
+	
+	@Override
+	/**
+	 * Make every entity that compose a room process one step
+	 */
+	public void updateRoom()
+	{
+		collisionWalls();
+		super.updateRoom();
 	}
 	
 	/**
