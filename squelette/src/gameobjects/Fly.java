@@ -21,14 +21,12 @@ public class Fly extends Hero{
 		}
 	
 	
-	public void moveby1() {
-		double b= getrandomdouble(3)-1;
-		double a= getrandomdouble(3)-1;
-		getDirection().addX(a);
-		getDirection().addY(b);
-		//move();
-	}
-	
+		/*
+		 * public void moveby1() { double b= getrandomdouble(3)-1; double a=
+		 * getrandomdouble(3)-1; getDirection().addX(a); getDirection().addY(b);
+		 * //move();
+		 }
+*/	
 	
 	public double getrandomdouble(int max) {
 		return Math.floor(Math.random()*max);
