@@ -65,16 +65,16 @@ public class SpawnRoom extends Room {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(getHero().getDirection().getX()==-1) {
-					getHero().getDirection().addX(2);
+					getHero().getDirection().addX(3);
 				}
 				if(getHero().getDirection().getX()==1) {
-					getHero().getDirection().addX(-2);
+					getHero().getDirection().addX(-3);
 				}
 				if(getHero().getDirection().getY()==-1) {
-					getHero().getDirection().addY(2);
+					getHero().getDirection().addY(3);
 				}
 				if(getHero().getDirection().getY()==1) {
-					getHero().getDirection().addY(-2);
+					getHero().getDirection().addY(-3);
 				}
 			}
 		}
