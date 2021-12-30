@@ -2,11 +2,11 @@ package gameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import gameobjects.Hero;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
+
 import resources.ImagePaths;
 import resources.RoomInfos;
 
@@ -17,7 +17,7 @@ public class SpawnRoom extends Room {
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
-		this.wallphysics = new ArrayList<>();
+		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me décider sur une ArrayList, une Linkedlist ou autre
 		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
@@ -60,6 +60,7 @@ public class SpawnRoom extends Room {
 	
 	/**
 	 * prend effet si le hero cogne un mur
+	 *  
 	 */
 	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
@@ -124,6 +125,15 @@ public class SpawnRoom extends Room {
 		super.updateRoom();
 	}
 	
+	public void deleteVectorOfWall(Vector2 pos) {
+		for(Vector2 v : wallphysics) {
+			if(v.getX() == pos.getX() && v.getY() == pos.getY()) {
+				wallphysics.remove(v);
+				break;
+			}
+		}
+	}
+	
 	/**
 	 * dessine une door en haut
 	 */
@@ -131,7 +141,9 @@ public class SpawnRoom extends Room {
 		Vector2 pos = positionFromTileIndex(4, 8);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
+		deleteVectorOfWall(pos);
 	}
+	
 	/**
 	 * dessine une door en bas
 	 */	
@@ -139,6 +151,7 @@ public class SpawnRoom extends Room {
 		Vector2 pos = positionFromTileIndex(4, 0);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
+		deleteVectorOfWall(pos);
 	}
 	/**
 	 * dessine une door à gauche
@@ -147,6 +160,7 @@ public class SpawnRoom extends Room {
 		Vector2 pos = positionFromTileIndex(0, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
+		deleteVectorOfWall(pos);
 	}
 	/**
 	 * dessine une door à droite
@@ -155,6 +169,7 @@ public class SpawnRoom extends Room {
 		Vector2 pos = positionFromTileIndex(8, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
+		deleteVectorOfWall(pos);
 	}
 	
 
