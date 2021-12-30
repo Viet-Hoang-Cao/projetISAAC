@@ -16,7 +16,7 @@ public class RoomInfos
 	public static double genererInt(double borneInf, double borneSup) {
 		Random generateur = new Random();
 		double a=0;
-		a = borneInf+generateur.nextDouble(borneSup-borneInf);
+		a = borneInf+generateur.nextDouble();
 		return a;
 	}
 	public static final Vector2 POSITION_ALEATOIRE = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));

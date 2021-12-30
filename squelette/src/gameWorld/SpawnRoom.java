@@ -39,8 +39,8 @@ public class SpawnRoom extends Room {
 		//Isaac position
 		Vector2 position = positionFromTileIndex(4, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
-
-
+		//Redraw of Isaac
+		getHero().drawGameObject();
 	}
 	
 	/**
@@ -65,6 +65,7 @@ public class SpawnRoom extends Room {
 			StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
 					RoomInfos.HALF_TILE_SIZE.getY());
 		}
+		StdDraw.setPenColor(StdDraw.BLACK);
 	}
 	
 	/**
@@ -86,18 +87,19 @@ public class SpawnRoom extends Room {
 	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
-				if(getHero().getDirection().getX()==-1) {
+				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
 					getHero().getDirection().addX(3);
 				}
-				if(getHero().getDirection().getX()==1) {
+				else if(getHero().getDirection().getX()==1 && getHero().getPosition().getX() - v.getX() <0) {
 					getHero().getDirection().addX(-3);
 				}
-				if(getHero().getDirection().getY()==-1) {
+				if(getHero().getDirection().getY()==-1 && getHero().getPosition().getY() - v.getY() >0) {
 					getHero().getDirection().addY(3);
 				}
-				if(getHero().getDirection().getY()==1) {
+				else if(getHero().getDirection().getY()==1 && getHero().getPosition().getY() - v.getY() <0) {
 					getHero().getDirection().addY(-3);
 				}
+				break;
 			}
 		}
 	}
