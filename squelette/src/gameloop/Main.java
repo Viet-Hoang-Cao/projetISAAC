@@ -22,7 +22,7 @@ public class Main
 		
 		//Test de changement de room
 		world.setCurrentRoom(new TESTROOM(isaac));
-		
+		//PUSHH
 		
 		initializeDisplay();
 		// Main loop of the game
