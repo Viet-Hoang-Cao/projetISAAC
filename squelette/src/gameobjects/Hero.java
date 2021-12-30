@@ -5,7 +5,9 @@ import libraries.Vector2;
 import gameWorld.Room;
 
 public class Hero
-{
+{	
+	int LP;
+	int damage;
 	private Vector2 position;
 	private Vector2 size;
 	private String imagePath;
