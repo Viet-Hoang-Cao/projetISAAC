@@ -23,7 +23,7 @@ public class Spider extends Hero {
 		/*
 		 * public void moveby1() { double b= getrandomdouble(3)-1; double a=
 		 * getrandomdouble(3)-1; getDirection().addX(a); getDirection().addY(b);
-		 * //move(); }
+		 * move(); }
 		 */
 	
 	
