@@ -25,7 +25,7 @@ public class Spider extends Hero {
 		double a= getrandomdouble(3)-1;
 		getDirection().addX(a);
 		getDirection().addY(b);
-		move();
+		//move();
 	}
 	
 	

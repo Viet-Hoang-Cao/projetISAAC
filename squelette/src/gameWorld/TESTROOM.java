@@ -2,6 +2,7 @@ package gameWorld;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Random;
 
 import gameobjects.Fly;
 import gameobjects.Hero;
@@ -30,18 +31,21 @@ public class TESTROOM extends SpawnRoom {
 		// TODO Auto-generated constructor stub
 	}
 	
-	/*@Override
-	
-	 * Make every entity that compose a room process one step
-	 
+	@Override
+	 //Make every entity that compose a room process one step
 	public void updateRoom()
 	{
+		if (CycleInfos.Cycle%5==0)
+			moveby1allMonsters();
 		for (Hero m: this.monsters) { 
 			collisionWalls(m);
 		}
+		for(Hero m: this.monsters) {
+			m.updateGameObject();
+		}
 		super.updateRoom();
 	}
-	*/
+	
 	private void addmonster(Fly fly1) {
 		this.monsters.add(fly1);
 	}
@@ -59,9 +63,10 @@ public class TESTROOM extends SpawnRoom {
 		
 		for (Hero m: this.monsters) { m.moveby1(); }
 		
-		for (Hero n: this.monsters) {
-			n.moveby1();
-		}
+		/*
+		 * for (Hero n: this.monsters) { n.moveby1();
+		 */
+		//}
 	}
 	
 	/**
@@ -76,13 +81,18 @@ public class TESTROOM extends SpawnRoom {
 		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
 				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
 	}
+	
+	public static double genererInt(double borneInf, double borneSup) {
+		Random generateur = new Random();
+		double a=0;
+		a = borneInf+generateur.nextDouble();
+		return a;
+	}
 
 	
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
-		if (CycleInfos.Cycle%5==0)
-		moveby1allMonsters();
 		drawmonsters();
 	}
 
