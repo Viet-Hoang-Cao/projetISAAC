@@ -18,16 +18,18 @@ import resources.FlyInfos;
 //classe de test pour tes appels de monstres ;p
 
 public class TESTROOM extends SpawnRoom {
-	
+		
 	private LinkedList<Hero> monsters;
 
 	public TESTROOM(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		Spider spider1=new Spider(RoomInfos.POSITION_ALEATOIRE, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
+		Spider spider1=new Spider(a, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
 		addmonster(spider1);
 		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
 		addmonster(fly1);
+		//Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -88,6 +90,8 @@ public class TESTROOM extends SpawnRoom {
 		a = borneInf+generateur.nextDouble();
 		return a;
 	}
+	
+	//public static final Vector2 POSITION_ALEATOIRE = new Vector2(TESTROOM.genererInt(0, 0.8), TESTROOM.genererInt(0, 0.8));
 
 	
 	@Override
