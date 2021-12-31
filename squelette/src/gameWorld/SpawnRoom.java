@@ -78,9 +78,11 @@ public class SpawnRoom extends Room {
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
 			wallphysics.add(positionFromTileIndex(0, i));
-			wallphysics.add(positionFromTileIndex(i, 0));
-			wallphysics.add(positionFromTileIndex(8, i));
-			wallphysics.add(positionFromTileIndex(i, 8));
+			if(i!=0) {
+				wallphysics.add(positionFromTileIndex(i, 0));
+				wallphysics.add(positionFromTileIndex(8, i));
+				if(i!=8)wallphysics.add(positionFromTileIndex(i, 8));
+			}
 		}
 	}
 	
@@ -92,16 +94,16 @@ public class SpawnRoom extends Room {
 		for(Vector2 v : wallphysics ) {
 			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
-					getHero().getDirection().addX(3);
+					getHero().getDirection().addX(1);
 				}
 				else if(getHero().getDirection().getX()==1 && getHero().getPosition().getX() - v.getX() <0) {
-					getHero().getDirection().addX(-3);
+					getHero().getDirection().addX(-1);
 				}
 				if(getHero().getDirection().getY()==-1 && getHero().getPosition().getY() - v.getY() >0) {
-					getHero().getDirection().addY(3);
+					getHero().getDirection().addY(1);
 				}
 				else if(getHero().getDirection().getY()==1 && getHero().getPosition().getY() - v.getY() <0) {
-					getHero().getDirection().addY(-3);
+					getHero().getDirection().addY(-1);
 				}
 				break;
 			}
