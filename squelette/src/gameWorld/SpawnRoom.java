@@ -92,7 +92,8 @@ public class SpawnRoom extends Room {
 	 */
 	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
-			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
+			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
+					getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
 					getHero().getDirection().addX(1);
 				}
@@ -116,18 +117,19 @@ public class SpawnRoom extends Room {
 	 */
 	public void collisionWalls(Hero monster) {
 		for(Vector2 v : wallphysics ) {
-			if(Physics.rectangleCollision(monster.getPosition(), monster.getSize(), v, RoomInfos.TILE_SIZE)) {
+			if(Physics.rectangleCollision(monster.getPosition().addVector(monster.getNormalizedDirection())
+					, monster.getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(monster.getDirection().getX()==-1 && monster.getPosition().getX() - v.getX() >0) {
-					monster.getDirection().addX(3);
+					monster.getDirection().addX(1);
 				}
 				else if(monster.getDirection().getX()==1 && monster.getPosition().getX() - v.getX() <0) {
-					monster.getDirection().addX(-3);
+					monster.getDirection().addX(-1);
 				}
 				if(monster.getDirection().getY()==-1 && monster.getPosition().getY() - v.getY() >0) {
-					monster.getDirection().addY(3);
+					monster.getDirection().addY(1);
 				}
 				else if(monster.getDirection().getY()==1 && monster.getPosition().getY() - v.getY() <0) {
-					monster.getDirection().addY(-3);
+					monster.getDirection().addY(-1);
 				}
 				break;
 			}
