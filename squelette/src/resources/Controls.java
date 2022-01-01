@@ -1,7 +1,5 @@
 package resources;
 
-import java.awt.event.KeyEvent;
-
 import libraries.Keybinding;
 
 public class Controls
@@ -17,9 +15,9 @@ public class Controls
 	public static int goPowerfull = Keybinding.keycodeOf('p');
 	public static int goOfferGold = Keybinding.keycodeOf('o');
 	
-	public static int directionalKeyUp = KeyEvent.VK_UP;
-	public static int directionalKeyDown = KeyEvent.VK_DOWN;
-	public static int directionalKeyLeft = KeyEvent.VK_LEFT;
-	public static int directionalKeyRight = KeyEvent.VK_RIGHT;
+	public static int directionalKeyUp = Keybinding.keycodeOf(Keybinding.SpecialKeys.UP);
+	public static int directionalKeyDown = Keybinding.keycodeOf(Keybinding.SpecialKeys.DOWN);
+	public static int directionalKeyLeft = Keybinding.keycodeOf(Keybinding.SpecialKeys.LEFT);
+	public static int directionalKeyRight = Keybinding.keycodeOf(Keybinding.SpecialKeys.RIGHT);
 	
 }
