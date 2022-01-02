@@ -14,6 +14,7 @@ public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
 	List<Vector2> wallphysics;
+	Vector2 TileNumber;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
@@ -21,9 +22,20 @@ public class SpawnRoom extends Room {
 		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
 		//et enlever des elements
 		wallphysics();
-		
-		//addOpenDoorRightPhysics();
-		//addRockPhysics(3, 3);
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Ce constructeur a besoin du numero de tuile
+	 * @param hero
+	 * @param TileNumber un vector le numero est : [X, Y] par rapport au 2D ARRAY du DJ !
+	 */
+	public SpawnRoom(Hero hero, Vector2 TileNumber) {
+		super(hero);
+		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
+		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
+		//et enlever des elements
+		wallphysics();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -214,6 +226,14 @@ public class SpawnRoom extends Room {
 	 */
 	public void addOpenDoorRightPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
+	}
+
+	public Vector2 getTileNumber() {
+		return TileNumber;
+	}
+
+	public void setTileNumber(Vector2 tileNumber) {
+		TileNumber = tileNumber;
 	}
 
 }
