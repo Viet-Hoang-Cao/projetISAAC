@@ -43,7 +43,7 @@ public class MonstersRoom extends SpawnRoom {
 	}
 	
 	/**
-	 * dessine les monstres
+	 * draw the monsters
 	 */
 	public void drawmonsters() {
 		for (Hero m: this.monsters) {
@@ -52,7 +52,7 @@ public class MonstersRoom extends SpawnRoom {
 	}
 	
 	/**
-	 * dessine un rocher sur une tuile
+	 * draw a rock on a tile
 	 */
 	public void drawRocks(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
@@ -60,7 +60,7 @@ public class MonstersRoom extends SpawnRoom {
 				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
 	}
 	/**
-	 * add rock physic X,Y
+	 * add rock physic X,Y (tile position)
 	 */
 	public void addRockPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
@@ -68,7 +68,7 @@ public class MonstersRoom extends SpawnRoom {
 	}
 	
 	/**
-	 * dessine une pique sur une tuile
+	 * draw spikes on a tile
 	 */
 	public void drawSpikes(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
@@ -76,7 +76,7 @@ public class MonstersRoom extends SpawnRoom {
 				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
 	}
 	/**
-	 * add spikes physics X,Y
+	 * add spikes physics X,Y (tile position)
 	 */
 	public void addSpikesPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
@@ -92,6 +92,42 @@ public class MonstersRoom extends SpawnRoom {
 			spikes.getX();
 			spikes.getY();
 		}
+	}
+	
+	/**
+	 * draw a closed door in top position
+	 */
+	public void drawCloseDoorUp() {
+		Vector2 pos = positionFromTileIndex(4, 8);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.CLOSED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
+	}
+	
+	/**
+	 * draw a closed door in down position
+	 */	
+	public void drawCloseDoorDown() {
+		Vector2 pos = positionFromTileIndex(4, 0);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.CLOSED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
+	}
+	
+	/**
+	 * draw a closed door in left position
+	 */
+	public void drawCloseDoorLeft() {
+		Vector2 pos = positionFromTileIndex(0, 4);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.CLOSED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
+	}
+	
+	/**
+	 * draw a closed door in right position
+	 */
+	public void drawCloseDoorRight() {
+		Vector2 pos = positionFromTileIndex(8, 4);
+		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.CLOSED_DOOR,
+				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
 
 }

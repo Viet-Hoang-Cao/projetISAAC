@@ -1,8 +1,6 @@
 package gameloop;
 
-import gameWorld.GameWorld;
-import gameWorld.SpawnRoom;
-import gameWorld.TESTROOM;
+import gameWorld.*;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Timer;

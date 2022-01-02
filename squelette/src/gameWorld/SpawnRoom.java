@@ -36,20 +36,17 @@ public class SpawnRoom extends Room {
 		super.drawRoom();
 		//WALLS
 		DrawWalls();
-		//DOORS
-		//drawOpenDoorRight();
+
 		//Isaac position
 		Vector2 position = positionFromTileIndex(4, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
 		//Redraw of Isaac
 		getHero().drawGameObject();
-		
-		//draw a rock
-		//drawRocks(3, 3);
+
 	}
 	
 	/**
-	 * DrawWalls of room (must be drawn BEFORE THE OTHER STUFF)
+	 * Draw the walls of the room
 	 */
 	public void DrawWalls() {
 		StdDraw.setPenColor(150,75,0);
@@ -74,7 +71,7 @@ public class SpawnRoom extends Room {
 	}
 	
 	/**
-	 * ajoute la physique des murs
+	 *  Add the physics of walls(must be call in constructor)
 	 */
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
@@ -88,8 +85,7 @@ public class SpawnRoom extends Room {
 	}
 	
 	/**
-	 * prend effet si le hero cogne un mur
-	 *  
+	 * Check if the Hero bump a wall 
 	 */
 	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
@@ -114,7 +110,7 @@ public class SpawnRoom extends Room {
 	
 		
 	/**
-	 * prend effet si le hero specifié cogne un mur
+	 * check if a specified hero bump a wall
 	 */
 	public void collisionWalls(Hero monster) {
 		for(Vector2 v : wallphysics ) {
@@ -137,8 +133,8 @@ public class SpawnRoom extends Room {
 		}
 	}
 	/**
-	 * delete les physics d'un mur
-	 * @param pos
+	 * Delete some physics of wall
+	 * @param pos the position of the wall (NOT A TILE!)
 	 */
 	public void deleteVectorOfWall(Vector2 pos) {
 		for(Vector2 v : wallphysics) {
@@ -160,7 +156,7 @@ public class SpawnRoom extends Room {
 	}
 	
 	/**
-	 * dessine une door en haut
+	 * draw an open door in top position
 	 */
 	public void drawOpenDoorUp() {
 		Vector2 pos = positionFromTileIndex(4, 8);
@@ -169,14 +165,14 @@ public class SpawnRoom extends Room {
 		
 	}
 	/**
-	 * add physics for open door en haut
+	 * add physics for an open door in top position
 	 */
 	public void addOpenDoorUpPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(4, 8));
 	}
 	
 	/**
-	 * dessine une door en bas
+	 * draw an open door in down position
 	 */	
 	public void drawOpenDoorDown() {
 		Vector2 pos = positionFromTileIndex(4, 0);
@@ -184,14 +180,14 @@ public class SpawnRoom extends Room {
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
 	}
 	/**
-	 * add physics for open door en bas
+	 * add physics for an open door in down position
 	 */
 	public void addOpenDoorDownPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(4, 0));
 	}
 	
 	/**
-	 * dessine une door à gauche
+	 * draw an open door to the left
 	 */
 	public void drawOpenDoorLeft() {
 		Vector2 pos = positionFromTileIndex(0, 4);
@@ -199,14 +195,14 @@ public class SpawnRoom extends Room {
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
 	}
 	/**
-	 * add physics for open door à gauche
+	 * add physics for an open door in left position
 	 */
 	public void addOpenDoorLeftPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(0, 4));
 	}
 	
 	/**
-	 * dessine une door à droite
+	 * draw an open door in right position
 	 */
 	public void drawOpenDoorRight() {
 		Vector2 pos = positionFromTileIndex(8, 4);
@@ -214,24 +210,10 @@ public class SpawnRoom extends Room {
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
 	/**
-	 * add physics for open door à droite
+	 * add physics for an open door in right position
 	 */
 	public void addOpenDoorRightPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
-	
-	
-	/**
-	 * Convert a tile index to a 0-1 position.
-	 * 
-	 * @param indexX
-	 * @param indexY
-	 * @return
-	 */
-	/*private static Vector2 positionFromTileIndex(int indexX, int indexY)
-	{
-		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
-				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
-	}*/
 
 }
