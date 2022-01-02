@@ -21,8 +21,9 @@ public class SpawnRoom extends Room {
 		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
 		//et enlever des elements
 		wallphysics();
-		addOpenDoorRightPhysics();
-		addRockPhysics(3, 3);
+		
+		//addOpenDoorRightPhysics();
+		//addRockPhysics(3, 3);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -36,7 +37,7 @@ public class SpawnRoom extends Room {
 		//WALLS
 		DrawWalls();
 		//DOORS
-		drawOpenDoorRight();
+		//drawOpenDoorRight();
 		//Isaac position
 		Vector2 position = positionFromTileIndex(4, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
@@ -44,7 +45,7 @@ public class SpawnRoom extends Room {
 		getHero().drawGameObject();
 		
 		//draw a rock
-		drawRocks(3, 3);
+		//drawRocks(3, 3);
 	}
 	
 	/**
@@ -161,7 +162,7 @@ public class SpawnRoom extends Room {
 	/**
 	 * dessine une door en haut
 	 */
-	public void addOpenDoorUp() {
+	public void drawOpenDoorUp() {
 		Vector2 pos = positionFromTileIndex(4, 8);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
@@ -185,7 +186,7 @@ public class SpawnRoom extends Room {
 	/**
 	 * add physics for open door en bas
 	 */
-	public void addOpenDoorUpDown() {
+	public void addOpenDoorDownPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(4, 0));
 	}
 	
