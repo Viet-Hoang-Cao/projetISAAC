@@ -1,8 +1,14 @@
 package gameWorld;
 
 import gameobjects.Hero;
+import libraries.Vector2;
 
 public class MonstersRoomDownDoor extends MonstersRoom {
+
+	public MonstersRoomDownDoor(Hero hero, Vector2 tileNumber) {
+		super(hero, tileNumber);
+		// TODO Auto-generated constructor stub
+	}
 
 	public MonstersRoomDownDoor(Hero hero) {
 		super(hero);

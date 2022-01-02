@@ -1,8 +1,14 @@
 package gameWorld;
 
 import gameobjects.Hero;
+import libraries.Vector2;
 
 public class MonstersRoomRightDoor extends MonstersRoom {
+	
+	public MonstersRoomRightDoor(Hero hero, Vector2 tileNumber) {
+		super(hero, tileNumber);
+		// TODO Auto-generated constructor stub
+	}
 
 	public MonstersRoomRightDoor(Hero hero) {
 		super(hero);
@@ -31,4 +37,5 @@ public class MonstersRoomRightDoor extends MonstersRoom {
 			setClosed_door(false);
 		}
 	}
+
 }

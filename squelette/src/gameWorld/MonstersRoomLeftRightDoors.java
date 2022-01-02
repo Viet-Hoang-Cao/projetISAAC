@@ -3,14 +3,14 @@ package gameWorld;
 import gameobjects.Hero;
 import libraries.Vector2;
 
-public class MonstersRoomUpDoor extends MonstersRoom {
+public class MonstersRoomLeftRightDoors extends MonstersRoom {
 
-	public MonstersRoomUpDoor(Hero hero, Vector2 tileNumber) {
+	public MonstersRoomLeftRightDoors(Hero hero, Vector2 tileNumber) {
 		super(hero, tileNumber);
 		// TODO Auto-generated constructor stub
 	}
 
-	public MonstersRoomUpDoor(Hero hero) {
+	public MonstersRoomLeftRightDoors(Hero hero) {
 		super(hero);
 		// TODO Auto-generated constructor stub
 	}
@@ -22,8 +22,14 @@ public class MonstersRoomUpDoor extends MonstersRoom {
 	public void drawRoom()
 	{
 		super.drawRoom();
-		if(isClosed_door())drawCloseDoorUp();
-		else drawOpenDoorUp();
+		if(isClosed_door()) {
+			drawCloseDoorLeft();
+			drawCloseDoorRight();
+		}
+		else {
+			drawOpenDoorLeft();
+			drawOpenDoorRight();
+		}
 		getHero().drawGameObject();
 	}
 	
@@ -33,9 +39,9 @@ public class MonstersRoomUpDoor extends MonstersRoom {
 	{
 		super.updateRoom();
 		if(getMonsters().isEmpty() && isClosed_door()) {
-			addOpenDoorUpPhysics();
+			addOpenDoorLeftPhysics();
+			addOpenDoorRightPhysics();
 			setClosed_door(false);
 		}
 	}
-
 }

@@ -23,6 +23,13 @@ public class MonstersRoom extends SpawnRoom {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public MonstersRoom(Hero hero, Vector2 tileNumber) {
+		super(hero, tileNumber);
+		this.monsters = new LinkedList<Hero>();
+		this.spikes = new LinkedList<Vector2>();
+		this.closed_door=true;
+	}
+	
 	@Override
 	 //Make every entity that compose a room process one step
 	public void updateRoom()
