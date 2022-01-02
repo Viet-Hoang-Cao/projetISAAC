@@ -2,9 +2,9 @@ package gameWorld;
 
 import gameobjects.Hero;
 
-public class MonstersRoomLeftDoor extends MonstersRoom {
+public class MonstersRoomDownUpDoors extends MonstersRoom {
 
-	public MonstersRoomLeftDoor(Hero hero) {
+	public MonstersRoomDownUpDoors(Hero hero) {
 		super(hero);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,8 +16,14 @@ public class MonstersRoomLeftDoor extends MonstersRoom {
 	public void drawRoom()
 	{
 		super.drawRoom();
-		if(isClosed_door())drawCloseDoorLeft();
-		else drawOpenDoorLeft();
+		if(isClosed_door()) {
+			drawCloseDoorDown();
+			drawCloseDoorUp();
+		}
+		else {
+			drawOpenDoorDown();
+			drawOpenDoorUp();
+		}
 		getHero().drawGameObject();
 	}
 	
@@ -27,7 +33,8 @@ public class MonstersRoomLeftDoor extends MonstersRoom {
 	{
 		super.updateRoom();
 		if(getMonsters().isEmpty() && isClosed_door()) {
-			addOpenDoorLeftPhysics();
+			addOpenDoorDownPhysics();
+			addOpenDoorUpPhysics();
 			setClosed_door(false);
 		}
 	}

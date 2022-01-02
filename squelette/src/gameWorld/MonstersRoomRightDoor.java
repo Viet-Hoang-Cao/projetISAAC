@@ -16,7 +16,7 @@ public class MonstersRoomRightDoor extends MonstersRoom {
 	public void drawRoom()
 	{
 		super.drawRoom();
-		if(!getMonsters().isEmpty())drawCloseDoorRight();
+		if(isClosed_door())drawCloseDoorRight();
 		else drawOpenDoorRight();
 		getHero().drawGameObject();
 	}
@@ -26,8 +26,9 @@ public class MonstersRoomRightDoor extends MonstersRoom {
 	public void updateRoom()
 	{
 		super.updateRoom();
-		if(getMonsters().isEmpty()) {
+		if(getMonsters().isEmpty() && isClosed_door()) {
 			addOpenDoorRightPhysics();
+			setClosed_door(false);
 		}
 	}
 }

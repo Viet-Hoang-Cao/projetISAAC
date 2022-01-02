@@ -13,11 +13,13 @@ public class MonstersRoom extends SpawnRoom {
 	
 	private LinkedList<Hero> monsters;
 	private LinkedList<Vector2> spikes;
+	private boolean closed_door;
 
 	public MonstersRoom(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
 		this.spikes = new LinkedList<Vector2>();
+		this.closed_door=true;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -132,6 +134,14 @@ public class MonstersRoom extends SpawnRoom {
 
 	public LinkedList<Hero> getMonsters() {
 		return monsters;
+	}
+
+	public boolean isClosed_door() {
+		return closed_door;
+	}
+
+	public void setClosed_door(boolean closed_door) {
+		this.closed_door = closed_door;
 	}
 	
 
