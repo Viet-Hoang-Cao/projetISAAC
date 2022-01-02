@@ -75,6 +75,13 @@ public class MonstersRoom extends SpawnRoom {
 		Vector2 pos = positionFromTileIndex(x, y);
 		wallphysics.add(pos);
 	}
+	/**
+	 * delete rock X,Y(tile position)
+	 */
+	public void deleteRockPhysics(int x, int y) {
+		Vector2 pos = positionFromTileIndex(x, y);
+		wallphysics.remove(pos);
+	}
 	
 	/**
 	 * draw spikes on a tile
