@@ -130,4 +130,9 @@ public class MonstersRoom extends SpawnRoom {
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
 
+	public LinkedList<Hero> getMonsters() {
+		return monsters;
+	}
+	
+
 }

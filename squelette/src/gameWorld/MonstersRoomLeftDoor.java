@@ -6,7 +6,6 @@ public class MonstersRoomLeftDoor extends MonstersRoom {
 
 	public MonstersRoomLeftDoor(Hero hero) {
 		super(hero);
-		addOpenDoorLeftPhysics();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -17,8 +16,19 @@ public class MonstersRoomLeftDoor extends MonstersRoom {
 	public void drawRoom()
 	{
 		super.drawRoom();
-		drawCloseDoorLeft();
+		if(!getMonsters().isEmpty())drawCloseDoorLeft();
+		else drawOpenDoorLeft();
 		getHero().drawGameObject();
+	}
+	
+	@Override
+	//Make every entity that compose a room process one step
+	public void updateRoom()
+	{
+		super.updateRoom();
+		if(getMonsters().isEmpty()) {
+			addOpenDoorLeftPhysics();
+		}
 	}
 
 }
