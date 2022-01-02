@@ -220,22 +220,6 @@ public class SpawnRoom extends Room {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
 	
-	/**
-	 * dessine un rocher sur une tuile
-	 */
-	public void drawRocks(int x, int y) {
-		Vector2 pos = positionFromTileIndex(x, y);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
-				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
-	}
-	/**
-	 * add rock physic
-	 */
-	public void addRockPhysics(int x, int y) {
-		Vector2 pos = positionFromTileIndex(x, y);
-		wallphysics.add(pos);
-	}
-
 	
 	/**
 	 * Convert a tile index to a 0-1 position.
@@ -244,10 +228,10 @@ public class SpawnRoom extends Room {
 	 * @param indexY
 	 * @return
 	 */
-	private static Vector2 positionFromTileIndex(int indexX, int indexY)
+	/*private static Vector2 positionFromTileIndex(int indexX, int indexY)
 	{
 		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
 				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
-	}
+	}*/
 
 }

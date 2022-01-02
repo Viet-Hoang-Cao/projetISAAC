@@ -56,7 +56,7 @@ public class Room
 	 * @param indexY
 	 * @return
 	 */
-	private static Vector2 positionFromTileIndex(int indexX, int indexY)
+	protected Vector2 positionFromTileIndex(int indexX, int indexY)
 	{
 		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
 				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());

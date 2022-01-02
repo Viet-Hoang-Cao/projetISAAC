@@ -71,19 +71,6 @@ public class TESTROOM extends SpawnRoom {
 		//}
 	}
 	
-	/**
-	 * Convert a tile index to a 0-1 position.
-	 * 
-	 * @param indexX
-	 * @param indexY
-	 * @return
-	 */
-	private static Vector2 positionFromTileIndex(int indexX, int indexY)
-	{
-		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
-				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
-	}
-	
 	public static double genererInt(double borneInf, double borneSup) {
 		Random generateur = new Random();
 		double a=0;
