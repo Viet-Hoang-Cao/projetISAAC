@@ -23,22 +23,19 @@ public class GameWorld
 	
 	public void createDungeon() {
 		int numberOfRoom = giveNumberOfRoom(this.LV);
-		int count =0;
 		Random rand = new Random();
 		boolean[][] generationDJ = new boolean[4][4];
 		int x = rand.nextInt(4);
 		int y = rand.nextInt(4);
 		generationDJ[y][x] = true;
-		count ++;
-		checkAroundandAdd(generationDJ, x, y, count, numberOfRoom);
+		checkAroundandAdd(generationDJ, x, y, 1, numberOfRoom);
 	}
 	
 	/**
-	 * cree les 1 autour du premier 1
-	 * @param genTab
-	 * @param count
+	 * cree les 1 autour du premier 1 | Une premiere valeur a 1 doit  etre instanciee !
+	 * @param genTab tableau de boolean, les x, y sont l'emplacement du premier 1
+	 * @param count doit etre a 1
 	 * @param nbR
-	 * @return
 	 */
 	public void checkAroundandAdd(boolean[][] genTab, int x, int y, int count, int nbR ) {
 		Random rand = new Random();
