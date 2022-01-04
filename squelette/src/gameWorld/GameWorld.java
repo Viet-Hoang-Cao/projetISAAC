@@ -4,6 +4,10 @@ import gameobjects.Hero;
 import libraries.StdDraw;
 import resources.Controls;
 import java.util.Random;
+import libraries.Vector2;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class GameWorld
 {
@@ -29,10 +33,17 @@ public class GameWorld
 		int y = rand.nextInt(4);
 		generationDJ[y][x] = true;
 		checkAroundandAdd(generationDJ, x, y, 1, numberOfRoom);
+		List<Vector2> emplacementsSalles = new LinkedList<Vector2>();
+		for(int i =0; i<generationDJ.length;i++) {
+			for(int j=0; j<generationDJ[i].length;j++) {
+				if(generationDJ[i][j]==true)emplacementsSalles.add(new Vector2(j, i));
+			}
+		}
+		//TODO finir fonction
 	}
 	
 	/**
-	 * cree les 1 autour du premier 1 | Une premiere valeur a 1 doit  etre instanciee !
+	 * cree les 1 autour du premier 1 du tableau | Une premiere valeur a 1 doit  etre instanciee !
 	 * @param genTab tableau de boolean, les x, y sont l'emplacement du premier 1
 	 * @param count doit etre a 1
 	 * @param nbR
@@ -74,6 +85,26 @@ public class GameWorld
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Renvoi l'emplacement du vector le plus loin par rapport a lui meme
+	 * @param vList
+	 * @param spawn
+	 * @return le vector le plus loin
+	 */
+	public Vector2 mostfaraway(List<Vector2> vList, Vector2 spawn) {
+		Vector2 vtmp =spawn;
+		int dtmp =0;
+		int d=0;
+		for (Vector2 v : vList) {
+			dtmp=Math.abs((int)(v.getX()-vtmp.getX())) + Math.abs((int)(v.getY()-v.getY())); 
+			if(dtmp>d) {
+				d=dtmp;
+				vtmp =v;
+			}
+		}
+		return vtmp;
 	}
 	
 	/**
