@@ -62,25 +62,21 @@ public class Hero
 			 if(i%2==0) {
 				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.EMPTY_HEART_HUD, 
 							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+				 if(i<this.LP && i%2==1) {
+					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
+								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+				 }
+				 else if(this.LP%2==0 && i%2==0) {
+					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HEART_HUD, 
+								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+				 }
+				 else if(i%2==0) {
+					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.EMPTY_HEART_HUD, 
+								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+				 }
 			 }
-			 else if(i<this.LP && i%2==1) {
-				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
-							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-			 }
-			 else if(this.LP%2==0 && i%2==0) {
-				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HEART_HUD, 
-							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-			 }
-			 
-			 
-		}
-		StdDraw.picture(x,y, ImagePaths.HEART_HUD, 
-				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-		StdDraw.picture(x,y, ImagePaths.HALF_HEART_HUD, 
-				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-		StdDraw.picture(x,y, ImagePaths.EMPTY_HEART_HUD, 
-				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
 		
+	}
 	}
 
 	public void drawGameObject()
