@@ -45,6 +45,7 @@ public class TESTROOM extends SpawnRoom {
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
 		}
+		if(CycleInfos.Cycle%20==0)getHero().takeDamage(1);
 		super.updateRoom();
 	}
 	
@@ -85,7 +86,7 @@ public class TESTROOM extends SpawnRoom {
 	public void drawRoom() {
 		super.drawRoom();
 		drawmonsters();
-		getHero().drawLifePoint(positionFromTileIndex(0, 0).getX(), positionFromTileIndex(0, 0).getY());
+		getHero().drawLifePoint(positionFromTileIndex(0, 8).getX(), positionFromTileIndex(0, 8).getY());
 	}
 
 }

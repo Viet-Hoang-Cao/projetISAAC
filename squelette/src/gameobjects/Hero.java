@@ -31,7 +31,7 @@ public class Hero
 		this.maxHP=LP;
 		this.damage=damage;
 	}
-	/*
+	/**
 	 * cette fonction entre le degat que le Hero prend.
 	 */
 	public void takeDamage(int dmgMonstre) {
@@ -62,21 +62,16 @@ public class Hero
 			 if(i%2==0) {
 				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.EMPTY_HEART_HUD, 
 							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-				 if(i<this.LP && i%2==1) {
-					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
-								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-				 }
-				 else if(this.LP%2==0 && i%2==0) {
+				 if(i<this.LP) {
 					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HEART_HUD, 
 								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
 				 }
-				 else if(i%2==0) {
-					 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.EMPTY_HEART_HUD, 
-								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
-				 }
 			 }
-		
-	}
+			 if(i<this.LP && i%2==1) {
+				 StdDraw.picture(x+((i-1)*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
+							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+			 }
+		}
 	}
 
 	public void drawGameObject()
