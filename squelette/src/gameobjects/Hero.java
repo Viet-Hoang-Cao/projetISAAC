@@ -2,12 +2,16 @@ package gameobjects;
 
 import libraries.StdDraw;
 import libraries.Vector2;
+import resources.ImagePaths;
+import resources.RoomInfos;
 import gameWorld.Room;
+
 
 public class Hero
 {	
 	private int LP;
 	private int damage;
+	private int maxHP;
 	int armor;
 	private Vector2 position;
 	private Vector2 size;
@@ -24,9 +28,22 @@ public class Hero
 		this.imagePath = imagePath;
 		this.direction = new Vector2();
 		this.LP= LP;
+		this.maxHP=LP;
 		this.damage=damage;
 	}
+	/*
+	 * cette fonction entre le degat que le Hero prend.
+	 */
+	public void takeDamage(int dmgMonstre) {
+		this.LP=LP-dmgMonstre;
+	}
 
+	public int getDamage() {
+		return damage;
+	}
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
 	public void updateGameObject()
 	{
 		move();
@@ -38,6 +55,32 @@ public class Hero
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
 		direction = new Vector2();
+	}
+	// TODO fonction pas finis
+	public void drawLifePoint(double x, double y) {
+		for(int i=0; i<this.maxHP; i++) {
+			 if(i%2==0) {
+				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.EMPTY_HEART_HUD, 
+							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+			 }
+			 else if(i<this.LP && i%2==1) {
+				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
+							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+			 }
+			 else if(this.LP%2==0 && i%2==0) {
+				 StdDraw.picture(x+(i*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HEART_HUD, 
+							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+			 }
+			 
+			 
+		}
+		StdDraw.picture(x,y, ImagePaths.HEART_HUD, 
+				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+		StdDraw.picture(x,y, ImagePaths.HALF_HEART_HUD, 
+				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+		StdDraw.picture(x,y, ImagePaths.EMPTY_HEART_HUD, 
+				RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
+		
 	}
 
 	public void drawGameObject()
@@ -59,7 +102,7 @@ public class Hero
 		return Math.floor(Math.random()*max);
 	}
 	
-	public int LPhero() {
+/*	public int LPhero() {
 		int a=6;
 		boolean gameover=false;
 		while(!gameover) {
@@ -82,7 +125,7 @@ public class Hero
 	}
 	
 	public int damageInflicted() {
-		int a;
+		//int a;
 		int HP=6;
 		int damage=1;
 		boolean hit=false;
@@ -90,7 +133,7 @@ public class Hero
 			HP= HP-damage;
 		}
 		return HP;
-	}
+	}*/
 
 	/*
 	 * Moving from key inputs. Direction vector is later normalised.

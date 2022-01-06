@@ -25,9 +25,9 @@ public class TESTROOM extends SpawnRoom {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
 		Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
-		Spider spider1=new Spider(a, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER);
+		Spider spider1=new Spider(a, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
 		addmonster(spider1);
-		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY);
+		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
 		addmonster(fly1);
 		//Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
 		// TODO Auto-generated constructor stub
@@ -85,6 +85,7 @@ public class TESTROOM extends SpawnRoom {
 	public void drawRoom() {
 		super.drawRoom();
 		drawmonsters();
+		getHero().drawLifePoint(positionFromTileIndex(0, 0).getX(), positionFromTileIndex(0, 0).getY());
 	}
 
 }
