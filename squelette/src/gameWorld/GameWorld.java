@@ -36,10 +36,30 @@ public class GameWorld
 		List<Vector2> emplacementsSalles = new LinkedList<Vector2>();
 		for(int i =0; i<generationDJ.length;i++) {
 			for(int j=0; j<generationDJ[i].length;j++) {
-				if(generationDJ[i][j]==true)emplacementsSalles.add(new Vector2(j, i));
+				if(generationDJ[j][i]==true)emplacementsSalles.add(new Vector2(j, i));
 			}
 		}
 		//TODO finir fonction
+	}
+	
+	public void placeSpawnRoom(List<Vector2> emplacement, boolean [][]grille) {
+		for (Vector2 v : emplacement) {
+			if (v.getY()==0) {
+				if(grille[(int)v.getY()+1][(int)v.getX()]==true) {
+					this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomDownDoor(hero);
+					emplacement.remove(v);
+					break;
+				}
+				if(v.getX()!=grille.length && grille[(int)v.getY()][(int)v.getX()+1]) {
+					this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomRightDoor(hero);
+					emplacement.remove(v);
+					break;
+				}
+				this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomLeftDoor(hero);
+				emplacement.remove(v);
+				break;
+			}
+		}
 	}
 	
 	/**
