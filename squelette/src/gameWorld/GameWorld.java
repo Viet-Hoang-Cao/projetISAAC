@@ -39,7 +39,7 @@ public class GameWorld
 				if(generationDJ[j][i]==true)emplacementsSalles.add(new Vector2(j, i));
 			}
 		}
-		//TODO finir fonction
+		//TODO finir fonction et appeler placeSpawnRoom
 	}
 	
 	public void placeSpawnRoom(List<Vector2> emplacement, boolean [][]grille) {
@@ -59,6 +59,7 @@ public class GameWorld
 				emplacement.remove(v);
 				break;
 			}
+			//TODO finir fonction
 		}
 	}
 	
