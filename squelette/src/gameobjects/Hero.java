@@ -67,7 +67,7 @@ public class Hero
 								RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
 				 }
 			 }
-			 if(i<this.LP && i%2==1) {
+			 if(i==this.LP && i%2==1) {
 				 StdDraw.picture(x+((i-1)*RoomInfos.HALF_TILE_SIZE.getX()/2),y, ImagePaths.HALF_HEART_HUD, 
 							RoomInfos.HALF_TILE_SIZE.getX()/2, RoomInfos.HALF_TILE_SIZE.getY()/2);
 			 }
