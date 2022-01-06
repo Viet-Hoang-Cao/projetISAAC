@@ -6,8 +6,9 @@ import gameWorld.Room;
 
 public class Hero
 {	
-	int LP;
-	int damage;
+	private int LP;
+	private int damage;
+	int armor;
 	private Vector2 position;
 	private Vector2 size;
 	private String imagePath;
@@ -15,13 +16,15 @@ public class Hero
 	private Vector2 direction;
 
 
-	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
+	public Hero(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage)
 	{
 		this.position = position;
 		this.size = size;
 		this.speed = speed;
 		this.imagePath = imagePath;
 		this.direction = new Vector2();
+		this.LP= LP;
+		this.damage=damage;
 	}
 
 	public void updateGameObject()
@@ -54,6 +57,39 @@ public class Hero
 	
 	public double getrandomdouble(int max) {
 		return Math.floor(Math.random()*max);
+	}
+	
+	public int LPhero() {
+		int a=6;
+		boolean gameover=false;
+		while(!gameover) {
+			if(a<=0) {
+				gameover=true;
+				return a;
+			}
+			else if(a >= 12){
+				return a;
+			}
+		}
+		return a;
+	}
+	
+	public int damageHero(int a) { //false code
+		int Vlarme=20;
+		int degatlarme=1;
+		a=Vlarme*degatlarme;
+		return a;
+	}
+	
+	public int damageInflicted() {
+		int a;
+		int HP=6;
+		int damage=1;
+		boolean hit=false;
+		if (hit==true) {
+			HP= HP-damage;
+		}
+		return HP;
 	}
 
 	/*

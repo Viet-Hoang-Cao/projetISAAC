@@ -4,8 +4,8 @@ import libraries.Vector2;
 import java.util.Random;
 
 public class Spider extends Hero {
-	public Spider(Vector2 position, Vector2 size, double speed, String imagepath) {
-		super(position, size, speed, imagepath);
+	public Spider(Vector2 position, Vector2 size, double speed, String imagepath, int LP, int damage) {
+		super(position, size, speed, imagepath, LP, damage);
 		
 		}
 	public void updateObjects() {

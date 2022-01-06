@@ -5,8 +5,8 @@ import libraries.Vector2;
 import java.util.Random;
 
 public class Fly extends Hero{
-	public Fly(Vector2 position, Vector2 size, double speed, String imagepath) {
-		super(position, size, speed, imagepath);
+	public Fly(Vector2 position, Vector2 size, double speed, String imagepath, int LP, int damage) {
+		super(position, size, speed, imagepath, LP, damage);
 	}
 	
 	public void updateObjects() {
