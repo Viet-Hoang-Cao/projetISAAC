@@ -209,4 +209,13 @@ public class Hero
 	{
 		this.direction = direction;
 	}
+	public int getMaxHP() {
+		return maxHP;
+	}
+	public void setMaxHP(int maxHP) {
+		this.maxHP = maxHP;
+	}
+	public int getLP() {
+		return LP;
+	}
 }
