@@ -116,7 +116,7 @@ public class Hero
 	}
 	
 	public int damageInflicted() {
-		//int a;
+		int a;
 		int HP=6;
 		int damage=1;
 		boolean hit=false;
