@@ -24,7 +24,7 @@ public class TESTROOM extends SpawnRoom {
 	public TESTROOM(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
+		Vector2 a = new Vector2(genererInt(0.15, 0.8), genererInt(0.15, 0.8));
 		Spider spider1=new Spider(a, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
 		addmonster(spider1);
 		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
@@ -37,15 +37,18 @@ public class TESTROOM extends SpawnRoom {
 	 //Make every entity that compose a room process one step
 	public void updateRoom()
 	{
-		if (CycleInfos.Cycle%5==0)
-			moveby1allMonsters();
+		/*
+		 * if (CycleInfos.Cycle%5==0) moveby1allMonsters();
+		 */
+		moveSpider();
+		moveFly();
 		for (Hero m: this.monsters) { 
 			collisionWalls(m);
 		}
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
 		}
-		if(CycleInfos.Cycle%20==0)getHero().takeDamage(1);
+		//if(CycleInfos.Cycle%20==0)getHero().takeDamage(1);
 		super.updateRoom();
 	}
 	
@@ -72,6 +75,27 @@ public class TESTROOM extends SpawnRoom {
 		//}
 	}
 	
+	public void moveFly() {
+		for (Hero f:this.monsters) {
+			if (f instanceof Fly) {
+				f.moveToPositionby1(getHero().getPosition());
+			}
+		}
+	}
+	
+	public void moveSpider() {
+		Random rand = new Random();
+		Vector2 pos= SpiderInfos.POSITIONTOGO;
+		if (CycleInfos.Cycle%50==0) {
+			pos= positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
+			SpiderInfos.POSITIONTOGO=pos;
+		}
+		for (Hero s:this.monsters) {
+			if(s instanceof Spider) {
+				((Spider) s).moveToPositionby1(pos);
+			}
+		}
+	}
 	public static double genererInt(double borneInf, double borneSup) {
 		Random generateur = new Random();
 		double a=0;

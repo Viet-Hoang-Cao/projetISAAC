@@ -4,7 +4,7 @@ import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
 import resources.RoomInfos;
-import gameWorld.Room;
+import gameobjects.Inventory;
 
 
 public class Hero
@@ -18,6 +18,7 @@ public class Hero
 	private String imagePath;
 	private double speed;
 	private Vector2 direction;
+	private Inventory Inventaire;
 
 
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage)
@@ -30,6 +31,19 @@ public class Hero
 		this.LP= LP;
 		this.maxHP=LP;
 		this.damage=damage;
+		this.Inventaire=new Inventory();
+	}
+	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
+	{
+		this.position = position;
+		this.size = size;
+		this.speed = speed;
+		this.imagePath = imagePath;
+		this.direction = new Vector2();
+		this.LP= 6;
+		this.maxHP=LP;
+		this.damage=1;
+		this.Inventaire=new Inventory();
 	}
 	/**
 	 * cette fonction entre le degat que le Hero prend.
@@ -44,6 +58,12 @@ public class Hero
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
+	
+	public Inventory getInventaire() {
+		return Inventaire;
+	}
+	
+	
 	public void updateGameObject()
 	{
 		move();
@@ -80,12 +100,26 @@ public class Hero
 				0);
 	}
 	
+	public void moveToPositionby1(Vector2 position) {
+		if(position.getX()-this.getPosition().getX()>0) {
+			this.goRightNext();
+		}
+		else if(position.getX()-this.getPosition().getX()<0){
+			this.goLeftNext();
+		}
+		if(position.getY()-this.getPosition().getY()>0) {
+			this.goUpNext();
+		}
+		else if(position.getY()-this.getPosition().getY()<0) {
+			this.goDownNext();
+		}
+	}	
+	
 	public void moveby1() {
 		double b= getrandomdouble(3)-1;
 		double a= getrandomdouble(3)-1;
 		getDirection().addX(a);
 		getDirection().addY(b);
-		//move();
 	}
 	
 	

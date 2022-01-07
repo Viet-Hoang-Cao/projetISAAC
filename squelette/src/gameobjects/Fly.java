@@ -2,14 +2,32 @@ package gameobjects;
 
 import libraries.StdDraw;
 import libraries.Vector2;
-import java.util.Random;
+//import java.util.Random;
 
 public class Fly extends Hero{
 	public Fly(Vector2 position, Vector2 size, double speed, String imagepath, int LP, int damage) {
 		super(position, size, speed, imagepath, LP, damage);
 		
 	}
+	public Fly(Vector2 position, Vector2 size, double speed, String imagepath) {
+		super(position, size, speed, imagepath, 3, 1);
+		
+	}
 	
+	public void moveToPosition(Vector2 position) {
+		if(position.getX()-this.getPosition().getX()>0) {
+			this.goRightNext();
+		}
+		else if(position.getX()-this.getPosition().getX()<0){
+			this.goLeftNext();
+		}
+		if(position.getY()-this.getPosition().getY()>0) {
+			this.goUpNext();
+		}
+		else if(position.getY()-this.getPosition().getY()<0) {
+			this.goDownNext();
+		}
+	}
 	public void updateObjects() {
 		move();
 	}
