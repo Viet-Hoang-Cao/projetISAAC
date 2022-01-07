@@ -59,6 +59,33 @@ public class GameWorld
 				emplacement.remove(v);
 				break;
 			}
+			if(v.getY()==grille.length) {
+				if(grille[(int)v.getY()-1][(int)v.getX()]==true) {
+					this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomUpDoor(hero);
+					emplacement.remove(v);
+					break;
+				}
+				if(v.getX()!=grille.length && grille[(int)v.getY()][(int)v.getX()+1]) {
+					this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomRightDoor(hero);
+					emplacement.remove(v);
+					break;
+				}
+				this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomLeftDoor(hero);
+				emplacement.remove(v);
+				break;
+			}
+			if(v.getX()==0 && grille[(int)v.getY()][(int)v.getX()+1]==true) {
+				this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomRightDoor(hero);
+				emplacement.remove(v);
+				break;
+			}
+			if(v.getX()==grille.length && grille[(int)v.getY()][(int)v.getX()-1]==true) {
+				this.Donjon[(int)v.getY()][(int)v.getX()] = new SpawnRoomLeftDoor(hero);
+				emplacement.remove(v);
+				break;
+			}
+			
+			
 			//TODO finir fonction
 		}
 	}

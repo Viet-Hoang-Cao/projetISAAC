@@ -25,6 +25,7 @@ public class ImagePaths
 	public static final String SPIDER = "images/Spider.png";
 	public static final String GAPER = "images/Gaper.png";
 	public static final String FLY = "images/Fly.png";
+	public static final String BIDULF = "images/BMoucheoriginal.png";//Merci à Jally.
 
 	public static final String CLOSED_DOOR = "images/closed_door.png";
 	public static final String OPENED_DOOR = "images/opened_door.png";
