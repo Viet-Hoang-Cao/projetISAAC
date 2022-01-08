@@ -2,14 +2,14 @@ package gameWorld;
 
 import gameobjects.Hero;
 
-public class MonstersRoomUpRighLeftDownDoors extends MonstersRoom {
+public class MonstersRoomUpRightLeftDownDoors extends MonstersRoom {
 
-	public MonstersRoomUpRighLeftDownDoors(Hero hero) {
+	public MonstersRoomUpRightLeftDownDoors(Hero hero) {
 		super(hero);
 		// TODO Auto-generated constructor stub
 	}
 
-	public MonstersRoomUpRighLeftDownDoors(Hero hero, int tileNumber) {
+	public MonstersRoomUpRightLeftDownDoors(Hero hero, int tileNumber) {
 		super(hero, tileNumber);
 		// TODO Auto-generated constructor stub
 	}
