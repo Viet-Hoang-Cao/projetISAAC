@@ -3,7 +3,12 @@ package gameWorld;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import resources.Controls;
+import resources.HeroInfos;
+import resources.ImagePaths;
+import resources.RoomInfos;
+
 import java.util.Random;
+
 import libraries.Vector2;
 
 import java.util.LinkedList;
@@ -15,6 +20,17 @@ public class GameWorld
 	private Hero hero;
 	private Room[][] Donjon;
 	private int LV;
+	
+	public static void main(String[] args) {
+		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC, 6, 2);
+		GameWorld world = new GameWorld(isaac);
+		world.createDungeon();
+		for(int i =0; i<world.Donjon.length;i++) {
+			for(int j=0; j<world.Donjon[i].length;j++) {
+				System.out.println(world.Donjon[i][j].toString());
+			}
+		}
+	}
 
 	// A world needs a hero
 	public GameWorld(Hero hero)
@@ -28,40 +44,53 @@ public class GameWorld
 	public void createDungeon() {
 		int numberOfRoom = giveNumberOfRoom(this.LV);
 		Random rand = new Random();
-		boolean[][] generationDJ = new boolean[4][4];
-		int x = rand.nextInt(4);
-		int y = rand.nextInt(4);
+		boolean[][] generationDJ = new boolean[this.Donjon.length][this.Donjon.length];
+		int x = rand.nextInt(this.Donjon.length);
+		int y = rand.nextInt(this.Donjon.length);
 		generationDJ[y][x] = true;
 		checkAroundandAdd(generationDJ, x, y, 1, numberOfRoom);
 		for(int i =0; i<generationDJ.length;i++) {
 			for(int j=0; j<generationDJ[i].length;j++) {
-				if(generationDJ[j][i]==true) {
-					switch(numberinstance(generationDJ, i, j)) {
-					case 0 : 
+				if(generationDJ[i][j]==true) {
+					switch(number_typeofinstance(generationDJ, i, j)) {
+					case 0 :
+						this.Donjon[i][j] = new MonstersRoomUpRightLeftDownDoors(this.hero, i, j);
 						break;
 					case 1 :
+						this.Donjon[i][j] = new MonstersRoomDownRightDoors(this.hero, i, j);
 						break;
 					case 2 :
+						this.Donjon[i][j] = new MonstersRoomDownLeftDoors(this.hero, i, j);
 						break;
 					case 3 :
+						this.Donjon[i][j] = new MonstersRoomDownLeftRightDoors(this.hero, i, j);
 						break;
 					case 4 :
+						this.Donjon[i][j] = new MonstersRoomRightDoor(this.hero, i, j);
 						break;
 					case 5 :
+						this.Donjon[i][j] = new MonstersRoomDownDoor(this.hero, i, j);
 						break;
 					case 6 :
+						this.Donjon[i][j] = new MonstersRoomUpDoor(this.hero, i, j);
 						break;
 					case 7 :
+						this.Donjon[i][j] = new MonstersRoomLeftDoor(this.hero, i, j);
 						break;
 					case 8 :
+						this.Donjon[i][j] = new MonstersRoomUpLeftDoors(this.hero, i, j);
 						break;
 					case 9 :
+						this.Donjon[i][j] = new MonstersRoomUpLeftDownDoors(this.hero, i, j);
 						break;
 					case 10 :
+						this.Donjon[i][j] = new MonstersRoomUpRightDoors(this.hero, i, j);
 						break;
 					case 11 : 
+						this.Donjon[i][j] = new MonstersRoomUpRightDownDoors(this.hero, i, j);
 						break;
 					case 12 :
+						this.Donjon[i][j] = new MonstersRoomUpRightLeftDoors(this.hero, i, j);
 						break;
 					default :
 					}
@@ -89,7 +118,7 @@ public class GameWorld
 	 * 11 -> UpRightDown
 	 * 12 -> UpRightLeft
 	 */
-	public int numberinstance(boolean [][]tab, int y, int x) {
+	public int number_typeofinstance(boolean [][]tab, int y, int x) {
 		if(y==0) {
 			if (x==0) {
 				if(tab[y][x+1]==true && tab[y+1][x]==true) {
@@ -103,7 +132,7 @@ public class GameWorld
 				}
 				else return -1;
 			}
-			else if(x==tab[y].length) {
+			else if(x==tab[y].length-1) {
 				if(tab[y][x-1]==true && tab[y+1][x]==true) {
 					return 2;
 				}
@@ -137,7 +166,7 @@ public class GameWorld
 				else return -1;
 			}
 		}
-		else if(y==tab.length) {
+		else if(y==tab.length-1) {
 			if (x==0) {
 				if(tab[y][x+1]==true && tab[y-1][x]==true) {
 					return 10;
@@ -150,7 +179,7 @@ public class GameWorld
 				}
 				else return -1;
 			}
-			else if(x==tab[y].length) {
+			else if(x==tab[y].length-1) {
 				if(tab[y][x-1]==true && tab[y-1][x]==true) {
 					return 8;
 				}
@@ -206,7 +235,7 @@ public class GameWorld
 				}
 				else return -1;
 			}
-			else if (x==tab[y].length) {
+			else if (x==tab[y].length-1) {
 				if(tab[y][x-1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
 					return 9;
 				}
@@ -318,23 +347,43 @@ public class GameWorld
 	}
 	
 	/**
-	 * Renvoi l'emplacement du vector le plus loin par rapport a lui meme
-	 * @param vList
-	 * @param spawn
-	 * @return le vector le plus loin
+	 * @param x la piece d'origine
+	 * @param roomList La liste des piece a tester
+	 * @return le x le plus grand par rapport au x d'origine
 	 */
-	public Vector2 mostfaraway(List<Vector2> vList, Vector2 spawn) {
-		Vector2 vtmp =spawn;
-		int dtmp =0;
-		int d=0;
-		for (Vector2 v : vList) {
-			dtmp=Math.abs((int)(v.getX()-vtmp.getX())) + Math.abs((int)(v.getY()-v.getY())); 
-			if(dtmp>d) {
-				d=dtmp;
-				vtmp =v;
+	public int mostfarawayX(int x, List<SpawnRoom>roomList) {
+		int retour =x;
+		for (SpawnRoom r : roomList) {
+			if(r.getTileNumberX()>retour) {
+				retour = r.getTileNumberX();
 			}
 		}
-		return vtmp;
+		return retour;
+	}
+	/**
+	 * @param y la piece d'origine
+	 * @param roomList La liste des pieces a tester
+	 * @return le y le plus grand par rapport au x d'origine
+	 */
+	public int mostfarawayY(int y, List<SpawnRoom>roomList) {
+		int retour =y;
+		for (SpawnRoom r : roomList) {
+			if(r.getTileNumberY()>retour) {
+				retour = r.getTileNumberX();
+			}
+		}
+		return retour;
+	}
+	
+	public List<SpawnRoom> createRoomList(){
+		List<SpawnRoom>rList = new LinkedList<>();
+		for(int i =0; i<this.Donjon.length;i++) {
+			for(int j=0; j<this.Donjon[i].length;j++) {
+				if(this.Donjon[i][j]!= null)rList.add((SpawnRoom)this.Donjon[i][j]);
+			}
+		}
+		
+		return rList;
 	}
 	
 	/**
