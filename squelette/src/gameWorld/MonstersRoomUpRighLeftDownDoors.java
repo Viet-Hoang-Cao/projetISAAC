@@ -1,7 +1,6 @@
 package gameWorld;
 
 import gameobjects.Hero;
-import libraries.Vector2;
 
 public class MonstersRoomUpRighLeftDownDoors extends MonstersRoom {
 
@@ -10,7 +9,7 @@ public class MonstersRoomUpRighLeftDownDoors extends MonstersRoom {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MonstersRoomUpRighLeftDownDoors(Hero hero, Vector2 tileNumber) {
+	public MonstersRoomUpRighLeftDownDoors(Hero hero, int tileNumber) {
 		super(hero, tileNumber);
 		// TODO Auto-generated constructor stub
 	}

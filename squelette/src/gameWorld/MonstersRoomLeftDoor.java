@@ -1,13 +1,12 @@
 package gameWorld;
 
 import gameobjects.Hero;
-import libraries.Vector2;
 
 public class MonstersRoomLeftDoor extends MonstersRoom {
 	
 	private boolean bossRoom;
 
-	public MonstersRoomLeftDoor(Hero hero, Vector2 tileNumber) {
+	public MonstersRoomLeftDoor(Hero hero, int tileNumber) {
 		super(hero, tileNumber);
 		this.bossRoom = false;
 		// TODO Auto-generated constructor stub

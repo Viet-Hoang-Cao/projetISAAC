@@ -14,20 +14,25 @@ public class MonstersRoom extends SpawnRoom {
 	private LinkedList<Hero> monsters;
 	private LinkedList<Vector2> spikes;
 	private boolean closed_door;
+	private boolean spawnRoom;
+	private boolean bossRoom;
 
 	public MonstersRoom(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
 		this.spikes = new LinkedList<Vector2>();
 		this.closed_door=true;
-		// TODO Auto-generated constructor stub
+		this.spawnRoom=false;
+		this.bossRoom=false;
 	}
 	
-	public MonstersRoom(Hero hero, Vector2 tileNumber) {
+	public MonstersRoom(Hero hero, int tileNumber) {
 		super(hero, tileNumber);
-		this.monsters = new LinkedList<Hero>();
-		this.spikes = new LinkedList<Vector2>();
-		this.closed_door=true;
+		this.monsters   = new LinkedList<Hero>();
+		this.spikes     = new LinkedList<Vector2>();
+		this.closed_door= true;
+		this.spawnRoom  = false;
+		this.bossRoom   = false;
 	}
 	
 	@Override
@@ -156,6 +161,22 @@ public class MonstersRoom extends SpawnRoom {
 
 	public void setClosed_door(boolean closed_door) {
 		this.closed_door = closed_door;
+	}
+	
+	public boolean isBossRoom() {
+		return bossRoom;
+	}
+
+	public void setBossRoom(boolean bossRoom) {
+		this.bossRoom = bossRoom;
+	}
+
+	public boolean isSpawnRoom() {
+		return spawnRoom;
+	}
+
+	public void setSpawnRoom(boolean spawnRoom) {
+		this.spawnRoom = spawnRoom;
 	}
 	
 

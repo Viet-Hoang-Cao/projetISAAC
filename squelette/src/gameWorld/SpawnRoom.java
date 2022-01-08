@@ -14,7 +14,7 @@ public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
 	List<Vector2> wallphysics;
-	Vector2 TileNumber;
+	int tileNumber;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
@@ -30,8 +30,9 @@ public class SpawnRoom extends Room {
 	 * @param hero
 	 * @param TileNumber un vector le numero est : [X, Y] par rapport au 2D ARRAY du DJ !
 	 */
-	public SpawnRoom(Hero hero, Vector2 TileNumber) {
+	public SpawnRoom(Hero hero, int tileNumber) {
 		super(hero);
+		this.tileNumber=tileNumber;
 		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
 		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
 		//et enlever des elements
@@ -228,12 +229,12 @@ public class SpawnRoom extends Room {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
 
-	public Vector2 getTileNumber() {
-		return TileNumber;
+	public int getTileNumber() {
+		return tileNumber;
 	}
 
-	public void setTileNumber(Vector2 tileNumber) {
-		TileNumber = tileNumber;
+	public void setTileNumber(int tileNumber) {
+		this.tileNumber = tileNumber;
 	}
 
 }
