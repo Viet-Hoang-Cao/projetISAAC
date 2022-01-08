@@ -4,17 +4,14 @@ import gameobjects.Hero;
 
 public class MonstersRoomDownDoor extends MonstersRoom {
 	
-	private boolean bossRoom;
 
 	public MonstersRoomDownDoor(Hero hero, int tileNumber) {
 		super(hero, tileNumber);
-		this.bossRoom = false;
 		// TODO Auto-generated constructor stub
 	}
 
 	public MonstersRoomDownDoor(Hero hero) {
 		super(hero);
-		this.bossRoom = false;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -41,11 +38,5 @@ public class MonstersRoomDownDoor extends MonstersRoom {
 		}
 	}
 	
-	public boolean isBossRoom() {
-		return bossRoom;
-	}
 
-	public void setBossRoom(boolean bossRoom) {
-		this.bossRoom = bossRoom;
-	}
 }
