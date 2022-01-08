@@ -23,9 +23,11 @@ public class TESTROOM extends SpawnRoom {
 
 	public TESTROOM(Hero hero) {
 		super(hero);
+		Random rand2 = new Random();
 		this.monsters = new LinkedList<Hero>();
-		Vector2 a = new Vector2(genererInt(0.15, 0.8), genererInt(0.15, 0.8));
-		Spider spider1=new Spider(a, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
+		//Vector2 a = new Vector2(genererInt(0.15, 0.8), genererInt(0.15, 0.8));
+		Vector2 b = positionFromTileIndex(rand2.nextInt(7)+1, rand2.nextInt(7)+1);
+		Spider spider1=new Spider(b, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
 		addmonster(spider1);
 		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE.scalarMultiplication(10), FlyInfos.FLY_SPEED, ImagePaths.BIDULF, 3, 1);
 		addmonster(fly1);
