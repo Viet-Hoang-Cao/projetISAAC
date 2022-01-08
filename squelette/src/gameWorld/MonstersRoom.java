@@ -11,8 +11,17 @@ import resources.RoomInfos;
 
 public class MonstersRoom extends SpawnRoom {
 	
+	public MonstersRoom(Hero hero, int tileNumberY, int tileNumberX) {
+		super(hero, tileNumberY, tileNumberX);
+		this.monsters      = new LinkedList<Hero>();
+		this.spikesphysics = new LinkedList<Vector2>();
+		this.closed_door   = true;
+		this.spawnRoom     = false;
+		this.bossRoom      = false;
+	}
+
 	private LinkedList<Hero> monsters;
-	private LinkedList<Vector2> spikes;
+	private LinkedList<Vector2> spikesphysics;
 	private boolean closed_door;
 	private boolean spawnRoom;
 	private boolean bossRoom;
@@ -20,19 +29,10 @@ public class MonstersRoom extends SpawnRoom {
 	public MonstersRoom(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		this.spikes = new LinkedList<Vector2>();
+		this.spikesphysics = new LinkedList<Vector2>();
 		this.closed_door=true;
 		this.spawnRoom=false;
 		this.bossRoom=false;
-	}
-	
-	public MonstersRoom(Hero hero, int tileNumber) {
-		super(hero, tileNumber);
-		this.monsters   = new LinkedList<Hero>();
-		this.spikes     = new LinkedList<Vector2>();
-		this.closed_door= true;
-		this.spawnRoom  = false;
-		this.bossRoom   = false;
 	}
 	
 	@Override
@@ -101,7 +101,7 @@ public class MonstersRoom extends SpawnRoom {
 	 */
 	public void addSpikesPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		spikes.add(pos);
+		spikesphysics.add(pos);
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class MonstersRoom extends SpawnRoom {
 	 */
 	public void spikesCollisions() {
 		//TODO à faire lorsque le hero sera fini (Traite les damages ainsi que le recul)
-		for(Vector2 spikes : this.spikes) {
+		for(Vector2 spikes : this.spikesphysics) {
 			spikes.getX();
 			spikes.getY();
 		}

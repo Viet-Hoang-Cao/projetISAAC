@@ -33,13 +33,243 @@ public class GameWorld
 		int y = rand.nextInt(4);
 		generationDJ[y][x] = true;
 		checkAroundandAdd(generationDJ, x, y, 1, numberOfRoom);
-		List<Vector2> emplacementsSalles = new LinkedList<Vector2>();
 		for(int i =0; i<generationDJ.length;i++) {
 			for(int j=0; j<generationDJ[i].length;j++) {
-				if(generationDJ[j][i]==true)emplacementsSalles.add(new Vector2(j, i));
+				if(generationDJ[j][i]==true) {
+					switch(numberinstance(generationDJ, i, j)) {
+					case 0 : 
+						break;
+					case 1 :
+						break;
+					case 2 :
+						break;
+					case 3 :
+						break;
+					case 4 :
+						break;
+					case 5 :
+						break;
+					case 6 :
+						break;
+					case 7 :
+						break;
+					case 8 :
+						break;
+					case 9 :
+						break;
+					case 10 :
+						break;
+					case 11 : 
+						break;
+					case 12 :
+						break;
+					default :
+					}
+				}
 			}
 		}
-		//TODO finir fonction et appeler placeSpawnRoom
+	}
+	
+	/**
+	 * Cette fonction n'est pas optimisé //TODO à refaire si possible
+	 * Cette fonction renvoi un nombre correspondant à l'instance qui doit etre ajoute
+	 * par exemple : 
+	 * -1 -> room is bugged, please delete it
+	 * 0  -> UpRightLeftDownDoors
+	 * 1  -> DownRight
+	 * 2  -> DownLeft
+	 * 3  -> DownLeftRight
+	 * 4  -> Right
+	 * 5  -> Down
+	 * 6  -> Up
+	 * 7  -> Left
+	 * 8  -> UpLeft
+	 * 9  -> UpLeftDown
+	 * 10 -> UpRight
+	 * 11 -> UpRightDown
+	 * 12 -> UpRightLeft
+	 */
+	public int numberinstance(boolean [][]tab, int y, int x) {
+		if(y==0) {
+			if (x==0) {
+				if(tab[y][x+1]==true && tab[y+1][x]==true) {
+					return 1;
+				}
+				else if (tab[y][x+1]==true) {
+					return 4;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else return -1;
+			}
+			else if(x==tab[y].length) {
+				if(tab[y][x-1]==true && tab[y+1][x]==true) {
+					return 2;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else return -1;
+			}
+			else {
+				if(tab[y][x+1]==true && tab[y+1][x]==true && tab[y][x-1]==true ) {
+					return 3;
+				}
+				else if(tab[y][x-1]==true && tab[y+1][x]==true) {
+					return 2;
+				}
+				else if(tab[y][x+1]==true && tab[y+1][x]==true) {
+					return 1;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else if(tab[y][x+1]==true) {
+					return 4;
+				}
+				else return -1;
+			}
+		}
+		else if(y==tab.length) {
+			if (x==0) {
+				if(tab[y][x+1]==true && tab[y-1][x]==true) {
+					return 10;
+				}
+				else if (tab[y][x+1]==true) {
+					return 4;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else return -1;
+			}
+			else if(x==tab[y].length) {
+				if(tab[y][x-1]==true && tab[y-1][x]==true) {
+					return 8;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else return -1;
+			}
+			else {
+				if(tab[y][x+1]==true && tab[y-1][x]==true && tab[y][x-1]==true ) {
+					return 12;
+				}
+				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
+					return 8;
+				}
+				else if(tab[y][x+1]==true && tab[y-1][x]==true) {
+					return 10;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else if(tab[y][x+1]==true) {
+					return 4;
+				}
+				else return -1;
+			}
+		}
+		else {
+			if(x==0) {
+				if(tab[y][x+1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 11;
+				}
+				else if(tab[y][x+1]==true && tab[y-1][x]==true) {
+					return 10;
+				}
+				else if(tab[y][x+1]==true && tab[y+1][x]==true) {
+					return 1;
+				}
+				else if (tab[y][x+1]==true) {
+					return 4;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else return -1;
+			}
+			else if (x==tab[y].length) {
+				if(tab[y][x-1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 9;
+				}
+				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
+					return 8;
+				}
+				else if(tab[y][x-1]==true && tab[y+1][x]==true) {
+					return 2;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else return -1;
+			}
+			else {
+				if(tab[y][x+1]==true && tab[y-1][x]==true && tab[y+1][x]==true && tab[y][x-1]==true) {
+					return 1;
+				}
+				else if (tab[y][x+1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 11;
+				}
+				else if(tab[y-1][x]==true && tab[y+1][x]==true && tab[y][x-1]==true) {
+					return 9;
+				}
+				else if (tab[y][x+1]==true && tab[y-1][x]==true && tab[y][x-1]==true ) {
+					return 12;
+				}
+				else if(tab[y][x+1]==true && tab[y+1][x]==true && tab[y][x-1]==true ) {
+					return 3;
+				}
+				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
+					return 8;
+				}
+				else if(tab[y][x-1]==true && tab[y+1][x]==true) {
+					return 2;
+				}
+				else if(tab[y][x+1]==true && tab[y-1][x]==true) {
+					return 10;
+				}
+				else if(tab[y][x+1]==true && tab[y+1][x]==true) {
+					return 1;
+				}
+				else if (tab[y][x-1]==true) {
+					return 7;
+				}
+				else if(tab[y+1][x]==true) {
+					return 5;
+				}
+				else if(tab[y-1][x]==true) {
+					return 6;
+				}
+				else if (tab[y][x+1]==true) {
+					return 4;
+				}
+			}
+		}
+		return -1;
 	}
 	
 	/**

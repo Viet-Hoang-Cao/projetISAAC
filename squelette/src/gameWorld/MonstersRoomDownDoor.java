@@ -5,14 +5,12 @@ import gameobjects.Hero;
 public class MonstersRoomDownDoor extends MonstersRoom {
 	
 
-	public MonstersRoomDownDoor(Hero hero, int tileNumber) {
-		super(hero, tileNumber);
-		// TODO Auto-generated constructor stub
+	public MonstersRoomDownDoor(Hero hero, int tileNumberY, int tileNumberX) {
+		super(hero, tileNumberY, tileNumberX);
 	}
 
 	public MonstersRoomDownDoor(Hero hero) {
 		super(hero);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

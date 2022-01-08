@@ -6,15 +6,17 @@ public class MonstersRoomUpRightDoors extends MonstersRoom {
 
 	public MonstersRoomUpRightDoors(Hero hero) {
 		super(hero);
-		// TODO Auto-generated constructor stub
 	}
 
-	public MonstersRoomUpRightDoors(Hero hero, int tileNumber) {
-		super(hero, tileNumber);
-		// TODO Auto-generated constructor stub
+	
+	
+	public MonstersRoomUpRightDoors(Hero hero, int tileNumberY, int tileNumberX) {
+		super(hero, tileNumberY, tileNumberX);
+		
 	}
-	
-	
+
+
+
 	@Override
 	/*
 	 * Drawing

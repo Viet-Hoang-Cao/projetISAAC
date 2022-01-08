@@ -18,7 +18,7 @@ public class Main
 		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC, 6, 2);
 		GameWorld world = new GameWorld(isaac);
 		
-		//Test de changement de room
+		//Test de changement de room || Le constructeur initialisera automatiquement le DJ et cette ligne deviendra useless.
 		world.setCurrentRoom(new TESTROOM(isaac));
 		//PUSHH
 		

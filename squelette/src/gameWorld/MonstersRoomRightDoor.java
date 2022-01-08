@@ -5,14 +5,20 @@ import gameobjects.Hero;
 public class MonstersRoomRightDoor extends MonstersRoom {
 	
 	
-	public MonstersRoomRightDoor(Hero hero, int tileNumber) {
-		super(hero, tileNumber);
-	}
 
 	public MonstersRoomRightDoor(Hero hero) {
 		super(hero);
 	}
 	
+	
+	
+	public MonstersRoomRightDoor(Hero hero, int tileNumberY, int tileNumberX) {
+		super(hero, tileNumberY, tileNumberX);
+	
+	}
+
+
+
 	@Override
 	/*
 	 * Drawing
