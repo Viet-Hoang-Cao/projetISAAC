@@ -14,8 +14,6 @@ public class SpawnRoom extends Room {
 	
 	//Contient tout les emplacements ou le joueur ne peut pas aller
 	List<Vector2> wallphysics;
-	int tileNumberX;
-	int tileNumberY;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
@@ -32,9 +30,7 @@ public class SpawnRoom extends Room {
 	 * @param TileNumber un vector le numero est : [X, Y] par rapport au 2D ARRAY du DJ !
 	 */
 	public SpawnRoom(Hero hero, int tileNumberY, int tileNumberX) {
-		super(hero);
-		this.tileNumberY=tileNumberY;
-		this.tileNumberX=tileNumberX;
+		super(hero, tileNumberX, tileNumberY);
 		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
 		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
 		//et enlever des elements
@@ -57,6 +53,7 @@ public class SpawnRoom extends Room {
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
 		//Redraw of Isaac
 		getHero().drawGameObject();
+		getHero().drawLifePoint(positionFromTileIndex(0, 8).getX(), positionFromTileIndex(0, 8).getY());
 
 	}
 	
@@ -230,22 +227,5 @@ public class SpawnRoom extends Room {
 	public void addOpenDoorRightPhysics() {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
-
-	public int getTileNumberX() {
-		return tileNumberX;
-	}
-
-	public void setTileNumberX(int tileNumberX) {
-		this.tileNumberX = tileNumberX;
-	}
-
-	public int getTileNumberY() {
-		return tileNumberY;
-	}
-
-	public void setTileNumberY(int tileNumberY) {
-		this.tileNumberY = tileNumberY;
-	}
-
 
 }

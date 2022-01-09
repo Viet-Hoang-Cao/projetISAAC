@@ -426,6 +426,7 @@ public class GameWorld
 	public void drawGameObjects()
 	{
 		currentRoom.drawRoom();
+		currentRoom.draw_dungeon(this.Donjon);
 	}
 	
 

@@ -3,17 +3,27 @@ package gameWorld;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
+import resources.ImagePaths;
 import resources.RoomInfos;
 
 public class Room
 {
+	
 	private Hero hero;
-
+	int tileNumberX;
+	int tileNumberY;
 
 	public Room(Hero hero)
 	{
 		this.hero = hero;
 	}
+	
+	public Room(Hero hero, int tileNumberX, int tileNumberY) {
+		this.hero = hero;
+		this.tileNumberX = tileNumberX;
+		this.tileNumberY = tileNumberY;
+	}
+
 
 
 	/*
@@ -65,6 +75,45 @@ public class Room
 
 	public Hero getHero() {
 		return hero;
+	}
+	
+	public void draw_dungeon(Room[][]tab) {
+		Vector2 position = positionFromTileIndex(8, 6);
+		StdDraw.setPenColor(StdDraw.BLUE);
+		for(int i =0; i<tab.length;i++) {
+			for(int j=0; j<tab[i].length;j++) {
+				if(tab[i][j]!=null) {
+					StdDraw.rectangle(position.getX()-RoomInfos.HALF_TILE_SIZE.getX()/1.2+j*RoomInfos.HALF_TILE_SIZE.getX()/2,
+							position.getY()-i*RoomInfos.HALF_TILE_SIZE.getY()/2, 
+							RoomInfos.HALF_TILE_SIZE.getX()/8,
+							RoomInfos.HALF_TILE_SIZE.getY()/8);
+					if(i==tileNumberY && j == tileNumberX) {
+						StdDraw.setPenColor(StdDraw.RED);
+						StdDraw.filledCircle(position.getX()-RoomInfos.HALF_TILE_SIZE.getX()/1.2+j*RoomInfos.HALF_TILE_SIZE.getX()/2,
+								position.getY()-i*RoomInfos.HALF_TILE_SIZE.getY()/2, 
+								RoomInfos.HALF_TILE_SIZE.getX()/16);
+						StdDraw.setPenColor(StdDraw.BLUE);
+					}
+				}
+			}
+		}
+		
+	}
+	
+	public int getTileNumberX() {
+		return tileNumberX;
+	}
+
+	public void setTileNumberX(int tileNumberX) {
+		this.tileNumberX = tileNumberX;
+	}
+
+	public int getTileNumberY() {
+		return tileNumberY;
+	}
+
+	public void setTileNumberY(int tileNumberY) {
+		this.tileNumberY = tileNumberY;
 	}
 	
 	
