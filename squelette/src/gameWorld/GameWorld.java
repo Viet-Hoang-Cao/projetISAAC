@@ -18,27 +18,18 @@ public class GameWorld
 {
 	private Room currentRoom;
 	private Hero hero;
-	private Room[][] Donjon;
+	private MonstersRoom[][] Donjon;
 	private int LV;
-	
-	public static void main(String[] args) {
-		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC, 6, 2);
-		GameWorld world = new GameWorld(isaac);
-		world.createDungeon();
-		for(int i =0; i<world.Donjon.length;i++) {
-			for(int j=0; j<world.Donjon[i].length;j++) {
-				System.out.println(world.Donjon[i][j].toString());
-			}
-		}
-	}
 
 	// A world needs a hero
 	public GameWorld(Hero hero)
 	{
 		this.hero = hero;
-		currentRoom = new Room(hero);
-		this.Donjon = new Room[4][4];
+		//currentRoom = new Room(hero);
+		this.Donjon = new MonstersRoom[4][4];
 		this.LV = 1;
+		createDungeon();
+		this.currentRoom = getDJSpawnRoom(); //Par manque de temps je vais dire que la fonction create dungeon ne risque pas d'avoir de pb
 	}
 	
 	public void createDungeon() {
@@ -97,6 +88,9 @@ public class GameWorld
 				}
 			}
 		}
+		List<MonstersRoom> roomListDJ = createRoomList();
+		roomListDJ.get(0).setSpawnRoom(true);//should work dans le sens ou la premiere salle du tableau est la + en haut a gauche
+		roomListDJ.get(roomListDJ.size()-1).setBossRoom(true);//la plus en bas a droite// si time, j'optimiserais avec les fonction mostfaraway
 	}
 	
 	/**
@@ -346,6 +340,15 @@ public class GameWorld
 		}
 	}
 	
+	public Room getDJSpawnRoom() {
+		for(int i =0; i<this.Donjon.length;i++) {
+			for(int j=0; j<this.Donjon[i].length;j++) {
+				if(this.Donjon[i][j]!=null && this.Donjon[i][j].isSpawnRoom())return this.Donjon[i][j];
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * @param x la piece d'origine
 	 * @param roomList La liste des piece a tester
@@ -375,11 +378,11 @@ public class GameWorld
 		return retour;
 	}
 	
-	public List<SpawnRoom> createRoomList(){
-		List<SpawnRoom>rList = new LinkedList<>();
+	public List<MonstersRoom> createRoomList(){
+		List<MonstersRoom>rList = new LinkedList<>();
 		for(int i =0; i<this.Donjon.length;i++) {
 			for(int j=0; j<this.Donjon[i].length;j++) {
-				if(this.Donjon[i][j]!= null)rList.add((SpawnRoom)this.Donjon[i][j]);
+				if(this.Donjon[i][j]!= null)rList.add((MonstersRoom)this.Donjon[i][j]);
 			}
 		}
 		

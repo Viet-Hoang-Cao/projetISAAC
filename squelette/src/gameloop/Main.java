@@ -19,7 +19,7 @@ public class Main
 		GameWorld world = new GameWorld(isaac);
 		
 		//Test de changement de room || Le constructeur initialisera automatiquement le DJ et cette ligne deviendra useless.
-		world.setCurrentRoom(new TESTROOM(isaac));
+		//world.setCurrentRoom(new TESTROOM(isaac));
 		//PUSHH
 		
 		initializeDisplay();

@@ -76,7 +76,7 @@ public class Hero
 		setPosition(positionAfterMoving);
 		direction = new Vector2();
 	}
-	// TODO fonction pas finis
+
 	public void drawLifePoint(double x, double y) {
 		for(int i=0; i<this.maxHP; i++) {
 			 if(i%2==0) {
