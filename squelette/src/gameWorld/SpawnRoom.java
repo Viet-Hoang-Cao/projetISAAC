@@ -101,6 +101,7 @@ public class SpawnRoom extends Room {
 	 */
 	public void collisionWalls() {
 		for(Vector2 v : wallphysics ) {
+			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
 			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
 					getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
 				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
