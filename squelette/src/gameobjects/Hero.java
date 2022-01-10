@@ -44,6 +44,7 @@ public class Hero
 		this.Inventaire=new Inventory();
 		this.invicible=false;
 		this.tempInvunerability=false;
+		this.positionProjectile= new HashMap<Vector2, Vector2>();
 	}
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
 	{
@@ -58,6 +59,7 @@ public class Hero
 		this.Inventaire=new Inventory();
 		this.invicible=false;
 		this.tempInvunerability=false;
+		this.positionProjectile= new HashMap<Vector2, Vector2>();
 	}
 	/**
 	 * cette fonction entre le degat que le Hero prend.

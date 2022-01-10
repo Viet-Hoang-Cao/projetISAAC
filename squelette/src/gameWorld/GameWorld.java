@@ -19,7 +19,8 @@ public class GameWorld
 {
 	private Room currentRoom;
 	private Hero hero;
-	private MonstersRoom[][] Donjon;
+	public MonstersRoom[][] Donjon;
+	public boolean[][] generationDJ;
 	private int LV;
 
 	// A world needs a hero
@@ -28,15 +29,16 @@ public class GameWorld
 		this.hero = hero;
 		//currentRoom = new Room(hero);
 		this.Donjon = new MonstersRoom[4][4];
+		generationDJ = new boolean[this.Donjon.length][this.Donjon.length];
 		this.LV = 1;
 		createDungeon();
 		this.currentRoom = getDJSpawnRoom(); //Par manque de temps je vais dire que la fonction create dungeon ne risque pas d'avoir de pb
+		
 	}
 	
 	public void createDungeon() {
 		int numberOfRoom = giveNumberOfRoom(this.LV);
 		Random rand = new Random();
-		boolean[][] generationDJ = new boolean[this.Donjon.length][this.Donjon.length];
 		int x = rand.nextInt(this.Donjon.length);
 		int y = rand.nextInt(this.Donjon.length);
 		generationDJ[y][x] = true;
@@ -84,7 +86,14 @@ public class GameWorld
 					case 12 :
 						this.Donjon[i][j] = new MonstersRoomUpRightLeftDoors(this.hero, i, j);
 						break;
+					case 13 :
+						this.Donjon[i][j] = new MonstersRoomDownUpDoors(this.hero, i, j); 
+						break;
+					case 14 :
+						this.Donjon[i][j] = new MonstersRoomLeftRightDoors(this.hero, i, j);
+						break;
 					default :
+						this.Donjon[i][j]=null;
 					}
 				}
 			}
@@ -112,6 +121,8 @@ public class GameWorld
 	 * 10 -> UpRight
 	 * 11 -> UpRightDown
 	 * 12 -> UpRightLeft
+	 * 13 -> DownUp
+	 * 14 -> LeftRight
 	 */
 	public int number_typeofinstance(boolean [][]tab, int y, int x) {
 		if(y==0) {
@@ -142,6 +153,9 @@ public class GameWorld
 			else {
 				if(tab[y][x+1]==true && tab[y+1][x]==true && tab[y][x-1]==true ) {
 					return 3;
+				}
+				else if(tab[y][x+1]==true && tab[y][x-1]==true) {
+					return 14;
 				}
 				else if(tab[y][x-1]==true && tab[y+1][x]==true) {
 					return 2;
@@ -190,6 +204,9 @@ public class GameWorld
 				if(tab[y][x+1]==true && tab[y-1][x]==true && tab[y][x-1]==true ) {
 					return 12;
 				}
+				else if(tab[y][x+1]==true && tab[y][x-1]==true) {
+					return 14;
+				}
 				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
 					return 8;
 				}
@@ -213,6 +230,9 @@ public class GameWorld
 				if(tab[y][x+1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
 					return 11;
 				}
+				else if(tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 13;
+				}
 				else if(tab[y][x+1]==true && tab[y-1][x]==true) {
 					return 10;
 				}
@@ -233,6 +253,9 @@ public class GameWorld
 			else if (x==tab[y].length-1) {
 				if(tab[y][x-1]==true && tab[y-1][x]==true && tab[y+1][x]==true) {
 					return 9;
+				}
+				else if(tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 13;
 				}
 				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
 					return 8;
@@ -266,6 +289,12 @@ public class GameWorld
 				}
 				else if(tab[y][x+1]==true && tab[y+1][x]==true && tab[y][x-1]==true ) {
 					return 3;
+				}
+				else if(tab[y-1][x]==true && tab[y+1][x]==true) {
+					return 13;
+				}
+				else if(tab[y][x+1]==true && tab[y][x-1]==true) {
+					return 14;
 				}
 				else if(tab[y][x-1]==true && tab[y-1][x]==true) {
 					return 8;
@@ -420,7 +449,12 @@ public class GameWorld
 	}
 
 	public void updateGameObjects()
-	{
+	{	
+		if(currentRoom.changecurrentRoomX() != 0 || currentRoom.changecurrentRoomY() !=0){
+			this.setCurrentRoom(Donjon[currentRoom.tileNumberY+currentRoom.changecurrentRoomY()]
+					[currentRoom.tileNumberX+currentRoom.changecurrentRoomX()]);
+			this.hero.setPosition(currentRoom.positionFromTileIndex(4, 4));
+		}
 		currentRoom.updateRoom();
 	}
 

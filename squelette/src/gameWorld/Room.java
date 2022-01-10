@@ -1,6 +1,7 @@
 package gameWorld;
 
 import gameobjects.Hero;
+import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
@@ -18,10 +19,11 @@ public class Room
 		this.hero = hero;
 	}
 	
-	public Room(Hero hero, int tileNumberX, int tileNumberY) {
+	public Room(Hero hero, int tileNumberY, int tileNumberX) {
 		this.hero = hero;
-		this.tileNumberX = tileNumberX;
 		this.tileNumberY = tileNumberY;
+		this.tileNumberX = tileNumberX;
+		
 	}
 
 
@@ -116,5 +118,28 @@ public class Room
 		this.tileNumberY = tileNumberY;
 	}
 	
+	public int changecurrentRoomX() {
+		Vector2 v=positionFromTileIndex(0, 4);
+		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)){
+			return -1;
+		}
+		v=positionFromTileIndex(8, 4);
+		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	public int changecurrentRoomY() {
+		Vector2 v=positionFromTileIndex(4, 8);
+		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)){
+			return -1;
+		}
+		v=positionFromTileIndex(4, 0);
+		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)) {
+			return 1;
+		}
+		return 0;
+	}
 	
 }

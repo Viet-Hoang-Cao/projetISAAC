@@ -105,7 +105,8 @@ public class Vector2
 
 	public String toString()
 	{
-		return "(" + this.getX() + ", " + this.getY() + ")";
+		return "(" + String.format("%.2f", this.getX()) + ", " + String.format("%.2f", this.getY()) + ")";
+		//return "(" + this.getX() + ", " + this.getY() + ")";
 	}
 
 	/*

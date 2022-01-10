@@ -17,9 +17,24 @@ public class Main
 		// Hero, world and display initialisation.
 		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC, 6, 2);
 		GameWorld world = new GameWorld(isaac);
+		for(int i =0; i<world.Donjon.length;i++) {
+			for(int j=0; j<world.Donjon[i].length;j++) {
+				if(world.Donjon[i][j]!=null)System.out.print("r,");
+				else System.out.print(" ,");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		for(int i =0; i<world.Donjon.length;i++) {
+			for(int j=0; j<world.Donjon[i].length;j++) {
+				if(world.generationDJ[i][j]!=false)System.out.print("r,");
+				else System.out.print(" ,");
+			}
+			System.out.println();
+		}
 		
 		//Test de changement de room || Le constructeur initialisera automatiquement le DJ et cette ligne deviendra useless.
-		world.setCurrentRoom(new TESTROOM(isaac));
+		//world.setCurrentRoom(new TESTROOM(isaac));
 		
 		initializeDisplay();
 		// Main loop of the game

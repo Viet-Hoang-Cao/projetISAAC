@@ -30,7 +30,7 @@ public class SpawnRoom extends Room {
 	 * @param TileNumber un vector le numero est : [X, Y] par rapport au 2D ARRAY du DJ !
 	 */
 	public SpawnRoom(Hero hero, int tileNumberY, int tileNumberX) {
-		super(hero, tileNumberX, tileNumberY);
+		super(hero, tileNumberY, tileNumberX);
 		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
 		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
 		//et enlever des elements
@@ -49,8 +49,11 @@ public class SpawnRoom extends Room {
 		DrawWalls();
 
 		//Isaac position
-		Vector2 position = positionFromTileIndex(4, 8);
+		Vector2 position = positionFromTileIndex(6, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
+		//ROOM COORD
+		position = positionFromTileIndex(8, 8);
+		StdDraw.text(position.getX(),position.getY(), " Y: " +tileNumberY + " X:" + tileNumberX );
 		//Redraw of Isaac
 		getHero().drawGameObject();
 		getHero().drawLifePoint(positionFromTileIndex(0, 8).getX(), positionFromTileIndex(0, 8).getY());
