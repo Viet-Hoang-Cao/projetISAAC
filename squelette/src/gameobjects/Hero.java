@@ -3,9 +3,13 @@ package gameobjects;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
+import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
+import java.util.HashMap;
+import java.util.LinkedList;
 import gameobjects.Inventory;
+
 
 
 public class Hero
@@ -15,7 +19,7 @@ public class Hero
 	private int maxHP;
 	private boolean invicible;
 	private boolean tempInvunerability;
-	private Vector2 positionProjectile;
+	private HashMap<Vector2, Vector2>positionProjectile;
 	int armor;
 	private Vector2 position;
 	private Vector2 size;
@@ -24,6 +28,7 @@ public class Hero
 	private Vector2 direction;
 	private Inventory Inventaire;
 	private int dateCycleInfo;
+	private int speedTear;
 
 
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage)
@@ -109,11 +114,19 @@ public class Hero
 			 }
 		}
 	}
+	
+	public void drawProjectile() {
+		for (Vector2 v: positionProjectile.keySet()) {
+			StdDraw.picture(v.getX(), v.getY(), ImagePaths.TEAR, 
+					HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY());
+		}
+	}
 
 	public void drawGameObject()
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),
 				0);
+		drawProjectile();
 	}
 	
 	public void moveToPositionby1(Vector2 position) {
@@ -201,6 +214,7 @@ public class Hero
 	}
 	public void projectileUpNext() {
 		dateCycleInfo=CycleInfos.Cycle;
+		//positionProjectile.add(position.addVector(size.addVector(getNormalizedDirectionTear())));
 	}
 	public void projectileDownNext() {
 		dateCycleInfo=CycleInfos.Cycle;
@@ -216,6 +230,13 @@ public class Hero
 	{
 		Vector2 normalizedVector = new Vector2(direction);
 		normalizedVector.euclidianNormalize(speed);
+		return normalizedVector;
+	}
+	
+	public Vector2 getNormalizedDirectionTear()
+	{
+		Vector2 normalizedVector = new Vector2(direction);
+		normalizedVector.euclidianNormalize(speedTear);
 		return normalizedVector;
 	}
 
@@ -299,5 +320,9 @@ public class Hero
 	public void setDateCycleInfo(int dateCycleInfo) {
 		this.dateCycleInfo = dateCycleInfo;
 	}
+	public HashMap<Vector2, Vector2> getPositionProjectile() {
+		return positionProjectile;
+	}
+	
 	
 }
