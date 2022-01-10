@@ -7,6 +7,7 @@ import java.util.Random;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
+import libraries.Physics;
 import libraries.Vector2;
 import resources.CycleInfos;
 import resources.ImagePaths;
@@ -29,7 +30,7 @@ public class TESTROOM extends SpawnRoom {
 		Vector2 b = positionFromTileIndex(rand2.nextInt(7)+1, rand2.nextInt(7)+1);
 		Spider spider1=new Spider(b, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
 		addmonster(spider1);
-		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE.scalarMultiplication(10), FlyInfos.FLY_SPEED, ImagePaths.BIDULF, 3, 1);
+		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
 		addmonster(fly1);
 		//Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
 		// TODO Auto-generated constructor stub
@@ -49,6 +50,10 @@ public class TESTROOM extends SpawnRoom {
 		}
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
+		}
+		updateDamage();
+		if(CycleInfos.Cycle%50==0 && getHero().isTempInvunerability()) {
+			getHero().setTempInvunerability(false);
 		}
 		//if(CycleInfos.Cycle%20==0)getHero().takeDamage(1);
 		super.updateRoom();
@@ -103,6 +108,21 @@ public class TESTROOM extends SpawnRoom {
 		double a=0;
 		a = borneInf+generateur.nextDouble();
 		return a;
+	}
+	
+	public void updateDamage() {
+		if(!getHero().isInvicible() && !getHero().isTempInvunerability()) {
+			
+			for(Hero m:this.monsters) {
+				if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(),
+						m.getPosition(), m.getSize())) {
+					getHero().takeDamage(m.getDamage());
+					getHero().setTempInvunerability(true);
+				}
+				
+			}
+		}
+		
 	}
 	
 	//public static final Vector2 POSITION_ALEATOIRE = new Vector2(TESTROOM.genererInt(0, 0.8), TESTROOM.genererInt(0, 0.8));

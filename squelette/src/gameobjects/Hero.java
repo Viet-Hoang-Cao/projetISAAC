@@ -2,6 +2,7 @@ package gameobjects;
 
 import libraries.StdDraw;
 import libraries.Vector2;
+import resources.CycleInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 import gameobjects.Inventory;
@@ -12,6 +13,9 @@ public class Hero
 	private int LP;
 	private int damage;
 	private int maxHP;
+	private boolean invicible;
+	private boolean tempInvunerability;
+	private Vector2 positionProjectile;
 	int armor;
 	private Vector2 position;
 	private Vector2 size;
@@ -32,6 +36,8 @@ public class Hero
 		this.maxHP=LP;
 		this.damage=damage;
 		this.Inventaire=new Inventory();
+		this.invicible=false;
+		this.tempInvunerability=false;
 	}
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
 	{
@@ -44,6 +50,8 @@ public class Hero
 		this.maxHP=LP;
 		this.damage=1;
 		this.Inventaire=new Inventory();
+		this.invicible=false;
+		this.tempInvunerability=false;
 	}
 	/**
 	 * cette fonction entre le degat que le Hero prend.
@@ -57,6 +65,13 @@ public class Hero
 	}
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+	
+	public void invunerable() {
+		if(this.invicible==false) {
+			this.invicible=true;
+		}
+		else this.invicible=false;
 	}
 	
 	public Inventory getInventaire() {
@@ -126,6 +141,7 @@ public class Hero
 	public double getrandomdouble(int max) {
 		return Math.floor(Math.random()*max);
 	}
+	
 	
 /*	public int LPhero() {
 		int a=6;
@@ -252,4 +268,17 @@ public class Hero
 	public int getLP() {
 		return LP;
 	}
+	public boolean isInvicible() {
+		return invicible;
+	}
+	public void setInvicible(boolean invicible) {
+		this.invicible = invicible;
+	}
+	public boolean isTempInvunerability() {
+		return tempInvunerability;
+	}
+	public void setTempInvunerability(boolean tempInvunerability) {
+		this.tempInvunerability = tempInvunerability;
+	}
+	
 }

@@ -452,6 +452,9 @@ public class GameWorld
 		{
 			hero.goLeftNext();
 		}
+		if(StdDraw.isKeyPressed(Controls.goInvicible)) {
+			hero.invunerable();
+		}
 	}
 
 	public void setCurrentRoom(Room currentRoom) {
