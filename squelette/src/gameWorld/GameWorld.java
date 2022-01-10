@@ -19,8 +19,8 @@ public class GameWorld
 {
 	private Room currentRoom;
 	private Hero hero;
-	public MonstersRoom[][] Donjon;
-	public boolean[][] generationDJ;
+	private MonstersRoom[][] Donjon;
+	private boolean[][] generationDJ;
 	private int LV;
 
 	// A world needs a hero
