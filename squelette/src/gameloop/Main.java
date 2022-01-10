@@ -20,7 +20,6 @@ public class Main
 		
 		//Test de changement de room || Le constructeur initialisera automatiquement le DJ et cette ligne deviendra useless.
 		world.setCurrentRoom(new TESTROOM(isaac));
-		//PUSHH
 		
 		initializeDisplay();
 		// Main loop of the game

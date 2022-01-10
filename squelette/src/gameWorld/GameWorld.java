@@ -3,6 +3,7 @@ package gameWorld;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import resources.Controls;
+import resources.CycleInfos;
 import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
@@ -455,7 +456,32 @@ public class GameWorld
 		if(StdDraw.isKeyPressed(Controls.goInvicible)) {
 			hero.invunerable();
 		}
+		if (StdDraw.isKeyPressed(Controls.directionalKeyUp))
+		{
+			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+				hero.projectileUpNext();
+			}
+		}
+		if (StdDraw.isKeyPressed(Controls.directionalKeyDown))
+		{
+			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+				hero.projectileDownNext();
+			}
+		}
+		if (StdDraw.isKeyPressed(Controls.directionalKeyLeft))
+		{
+			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+				hero.projectileLeftNext();
+			}
+		}
+		if (StdDraw.isKeyPressed(Controls.directionalKeyRight))
+		{
+			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+				hero.projectileRightNext();
+			}
+		}
 	}
+	
 
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;

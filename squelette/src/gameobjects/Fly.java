@@ -32,6 +32,8 @@ public class Fly extends Hero{
 		move();
 	}
 	
+	
+	
 	private void move() {
 		Vector2 normalizedDirection = getNormalizedDirection();
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);

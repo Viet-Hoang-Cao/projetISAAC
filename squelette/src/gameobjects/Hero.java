@@ -23,6 +23,7 @@ public class Hero
 	private double speed;
 	private Vector2 direction;
 	private Inventory Inventaire;
+	private int dateCycleInfo;
 
 
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage)
@@ -198,6 +199,18 @@ public class Hero
 	{
 		getDirection().addX(1);
 	}
+	public void projectileUpNext() {
+		dateCycleInfo=CycleInfos.Cycle;
+	}
+	public void projectileDownNext() {
+		dateCycleInfo=CycleInfos.Cycle;
+	}
+	public void projectileLeftNext() {
+		dateCycleInfo=CycleInfos.Cycle;
+	}
+	public void projectileRightNext() {
+		dateCycleInfo=CycleInfos.Cycle;
+	}
 
 	public Vector2 getNormalizedDirection()
 	{
@@ -279,6 +292,12 @@ public class Hero
 	}
 	public void setTempInvunerability(boolean tempInvunerability) {
 		this.tempInvunerability = tempInvunerability;
+	}
+	public int getDateCycleInfo() {
+		return dateCycleInfo;
+	}
+	public void setDateCycleInfo(int dateCycleInfo) {
+		this.dateCycleInfo = dateCycleInfo;
 	}
 	
 }
