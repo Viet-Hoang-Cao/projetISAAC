@@ -25,6 +25,7 @@ public class MonstersRoom extends SpawnRoom {
 	private boolean closed_door;
 	private boolean spawnRoom;
 	private boolean bossRoom;
+	private boolean merchantRoom;
 
 	public MonstersRoom(Hero hero) {
 		super(hero);
@@ -33,6 +34,7 @@ public class MonstersRoom extends SpawnRoom {
 		this.closed_door=true;
 		this.spawnRoom=false;
 		this.bossRoom=false;
+		this.merchantRoom=false;
 	}
 	
 	@Override
@@ -53,6 +55,8 @@ public class MonstersRoom extends SpawnRoom {
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
+		if(isSpawnRoom())drawRocks(3, 3);
+		if(isBossRoom())drawRocks(5, 5);
 		drawmonsters();
 	}
 	
@@ -177,6 +181,14 @@ public class MonstersRoom extends SpawnRoom {
 
 	public void setSpawnRoom(boolean spawnRoom) {
 		this.spawnRoom = spawnRoom;
+	}
+
+	public boolean isMerchantRoom() {
+		return merchantRoom;
+	}
+
+	public void setMerchantRoom(boolean merchantRoom) {
+		this.merchantRoom = merchantRoom;
 	}
 	
 

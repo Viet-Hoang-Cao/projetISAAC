@@ -46,61 +46,65 @@ public class GameWorld
 		for(int i =0; i<generationDJ.length;i++) {
 			for(int j=0; j<generationDJ[i].length;j++) {
 				if(generationDJ[i][j]==true) {
-					switch(number_typeofinstance(generationDJ, i, j)) {
-					case 0 :
-						this.Donjon[i][j] = new MonstersRoomUpRightLeftDownDoors(this.hero, i, j);
-						break;
-					case 1 :
-						this.Donjon[i][j] = new MonstersRoomDownRightDoors(this.hero, i, j);
-						break;
-					case 2 :
-						this.Donjon[i][j] = new MonstersRoomDownLeftDoors(this.hero, i, j);
-						break;
-					case 3 :
-						this.Donjon[i][j] = new MonstersRoomDownLeftRightDoors(this.hero, i, j);
-						break;
-					case 4 :
-						this.Donjon[i][j] = new MonstersRoomRightDoor(this.hero, i, j);
-						break;
-					case 5 :
-						this.Donjon[i][j] = new MonstersRoomDownDoor(this.hero, i, j);
-						break;
-					case 6 :
-						this.Donjon[i][j] = new MonstersRoomUpDoor(this.hero, i, j);
-						break;
-					case 7 :
-						this.Donjon[i][j] = new MonstersRoomLeftDoor(this.hero, i, j);
-						break;
-					case 8 :
-						this.Donjon[i][j] = new MonstersRoomUpLeftDoors(this.hero, i, j);
-						break;
-					case 9 :
-						this.Donjon[i][j] = new MonstersRoomUpLeftDownDoors(this.hero, i, j);
-						break;
-					case 10 :
-						this.Donjon[i][j] = new MonstersRoomUpRightDoors(this.hero, i, j);
-						break;
-					case 11 : 
-						this.Donjon[i][j] = new MonstersRoomUpRightDownDoors(this.hero, i, j);
-						break;
-					case 12 :
-						this.Donjon[i][j] = new MonstersRoomUpRightLeftDoors(this.hero, i, j);
-						break;
-					case 13 :
-						this.Donjon[i][j] = new MonstersRoomDownUpDoors(this.hero, i, j); 
-						break;
-					case 14 :
-						this.Donjon[i][j] = new MonstersRoomLeftRightDoors(this.hero, i, j);
-						break;
-					default :
-						this.Donjon[i][j]=null;
-					}
+					createInstance(number_typeofinstance(generationDJ, i, j), i , j);
 				}
 			}
 		}
 		List<MonstersRoom> roomListDJ = createRoomList();
-		roomListDJ.get(0).setSpawnRoom(true);//should work dans le sens ou la premiere salle du tableau est la + en haut a gauche
-		roomListDJ.get(roomListDJ.size()-1).setBossRoom(true);//la plus en bas a droite// si time, j'optimiserais avec les fonction mostfaraway
+		roomListDJ.get(0).setSpawnRoom(true);//should work dans le sens ou la premiere salle du tableau est la + en haut a gauche possible
+		mostfaraway(roomListDJ).setBossRoom(true);;
+	}
+	
+	public void createInstance(int type, int y, int x) {
+		switch(type) {
+		case 0 :
+			this.Donjon[y][x] = new MonstersRoomUpRightLeftDownDoors(this.hero, y, x);
+			break;
+		case 1 :
+			this.Donjon[y][x] = new MonstersRoomDownRightDoors(this.hero,  y, x);
+			break;
+		case 2 :
+			this.Donjon[y][x] = new MonstersRoomDownLeftDoors(this.hero,  y, x);
+			break;
+		case 3 :
+			this.Donjon[y][x] = new MonstersRoomDownLeftRightDoors(this.hero,  y, x);
+			break;
+		case 4 :
+			this.Donjon[y][x] = new MonstersRoomRightDoor(this.hero, y, x);
+			break;
+		case 5 :
+			this.Donjon[y][x] = new MonstersRoomDownDoor(this.hero, y, x);
+			break;
+		case 6 :
+			this.Donjon[y][x] = new MonstersRoomUpDoor(this.hero, y, x);
+			break;
+		case 7 :
+			this.Donjon[y][x] = new MonstersRoomLeftDoor(this.hero, y, x);
+			break;
+		case 8 :
+			this.Donjon[y][x] = new MonstersRoomUpLeftDoors(this.hero, y, x);
+			break;
+		case 9 :
+			this.Donjon[y][x] = new MonstersRoomUpLeftDownDoors(this.hero, y, x);
+			break;
+		case 10 :
+			this.Donjon[y][x] = new MonstersRoomUpRightDoors(this.hero, y, x);
+			break;
+		case 11 : 
+			this.Donjon[y][x] = new MonstersRoomUpRightDownDoors(this.hero, y, x);
+			break;
+		case 12 :
+			this.Donjon[y][x] = new MonstersRoomUpRightLeftDoors(this.hero, y, x);
+			break;
+		case 13 :
+			this.Donjon[y][x] = new MonstersRoomDownUpDoors(this.hero, y, x); 
+			break;
+		case 14 :
+			this.Donjon[y][x] = new MonstersRoomLeftRightDoors(this.hero, y, x);
+			break;
+		default :
+			this.Donjon[y][x]=null;
+		}
 	}
 	
 	/**
@@ -377,6 +381,26 @@ public class GameWorld
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Renvoi l'emplacement du vector le plus loin par rapport a lui meme
+	 * @param vList
+	 * @param spawn
+	 * @return le vector le plus loin
+	 */
+	public MonstersRoom mostfaraway(List<MonstersRoom> rList) {
+		MonstersRoom rtmp =rList.get(0);
+		int dtmp =0;
+		int d=0;
+		for (MonstersRoom r : rList) {
+			dtmp=Math.abs(r.getTileNumberX()-rtmp.getTileNumberX()) + Math.abs(r.getTileNumberY()-rtmp.getTileNumberY()); 
+			if(dtmp>d) {
+				d=dtmp;
+				rtmp =r;
+			}
+		}
+		return rtmp;
 	}
 	
 	/**
