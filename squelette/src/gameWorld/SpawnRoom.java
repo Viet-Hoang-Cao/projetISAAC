@@ -57,6 +57,7 @@ public class SpawnRoom extends Room {
 		//Redraw of Isaac
 		getHero().drawGameObject();
 		getHero().drawLifePoint(positionFromTileIndex(0, 8).getX(), positionFromTileIndex(0, 8).getY());
+		getHero().getInventaire().drawInventory(positionFromTileIndex(1, 7).getX(), positionFromTileIndex(1, 7).getY());
 
 	}
 	

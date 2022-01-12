@@ -1,5 +1,10 @@
 package gameobjects;
 
+import libraries.StdDraw;
+import resources.HeroInfos;
+import resources.ImagePaths;
+import resources.RoomInfos;
+
 public class Inventory {
 	private int nbKeys;
 	private int nbBombs;
@@ -14,6 +19,21 @@ public class Inventory {
 		this.nbKeys=nbKeys;
 		this.nbBombs=nbBombs;
 		this.gold=gold;
+	}
+	
+	public void drawInventory(double x, double y) {
+		StdDraw.picture(x-RoomInfos.HALF_TILE_SIZE.getX(), y, ImagePaths.KEY, 
+				RoomInfos.TILE_SIZE.getX()/3, RoomInfos.TILE_SIZE.getY()/3);
+		StdDraw.text(x-RoomInfos.HALF_TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX()/3, y, ""+nbKeys);
+		
+		StdDraw.picture(x-RoomInfos.HALF_TILE_SIZE.getX(), y-RoomInfos.TILE_SIZE.getX()/3, ImagePaths.BOMB, 
+				RoomInfos.TILE_SIZE.getX()/3, RoomInfos.TILE_SIZE.getY()/3);
+		StdDraw.text(x-RoomInfos.HALF_TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX()/3, y-RoomInfos.TILE_SIZE.getX()/3, ""+nbBombs);
+		
+		StdDraw.picture(x-RoomInfos.HALF_TILE_SIZE.getX(), y-2*RoomInfos.TILE_SIZE.getX()/3, ImagePaths.COIN, 
+				RoomInfos.TILE_SIZE.getX()/3, RoomInfos.TILE_SIZE.getY()/3);
+		StdDraw.text(x-RoomInfos.HALF_TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX()/3, y-2*RoomInfos.TILE_SIZE.getX()/3, ""+gold);
+		
 	}
 	
 	public int getNbKeys() {
