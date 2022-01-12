@@ -24,17 +24,18 @@ public class TESTROOM extends SpawnRoom {
 
 	public TESTROOM(Hero hero) {
 		super(hero);
-		Random rand2 = new Random();
+		//Random rand2 = new Random();
 		this.monsters = new LinkedList<Hero>();
 		//Vector2 a = new Vector2(genererInt(0.15, 0.8), genererInt(0.15, 0.8));
-		Vector2 b = positionFromTileIndex(rand2.nextInt(7)+1, rand2.nextInt(7)+1);
-		Spider spider1=new Spider(b, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
+		//Vector2 b = positionFromTileIndex(rand2.nextInt(7)+1, rand2.nextInt(7)+1);
+		Spider spider1=new Spider(positionAlea(), SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER, 5, 1);
 		addmonster(spider1);
-		Fly fly1= new Fly(RoomInfos.POSITION_ALEATOIRE, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
+		Fly fly1= new Fly(positionAlea(), FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
 		addmonster(fly1);
 		//Vector2 a = new Vector2(genererInt(0, 0.8), genererInt(0, 0.8));
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	@Override
 	 //Make every entity that compose a room process one step
@@ -123,6 +124,12 @@ public class TESTROOM extends SpawnRoom {
 			}
 		}
 		
+	}
+	
+	public Vector2 positionAlea() {
+		Random rand = new Random();
+		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
+		return pos;
 	}
 	
 	//public static final Vector2 POSITION_ALEATOIRE = new Vector2(TESTROOM.genererInt(0, 0.8), TESTROOM.genererInt(0, 0.8));
