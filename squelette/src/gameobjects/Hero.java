@@ -30,7 +30,7 @@ public class Hero
 	private Vector2 direction;
 	private Inventory Inventaire;
 	private int dateCycleInfo;
-	private int speedTear;
+	private double speedTear;
 
 	
 
@@ -40,6 +40,7 @@ public class Hero
 		this.position = position;
 		this.size = size;
 		this.speed = speed;
+		this.speedTear=0.02;
 		this.imagePath = imagePath;
 		this.direction = new Vector2();
 		this.LP= LP;
@@ -58,6 +59,7 @@ public class Hero
 		this.position = position;
 		this.size = size;
 		this.speed = speed;
+		this.speedTear=0.02;
 		this.imagePath = imagePath;
 		this.direction = new Vector2();
 		this.LP= 6;
