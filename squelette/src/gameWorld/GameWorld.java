@@ -391,10 +391,11 @@ public class GameWorld
 	 */
 	public MonstersRoom mostfaraway(List<MonstersRoom> rList) {
 		MonstersRoom rtmp =rList.get(0);
-		int dtmp =0;
-		int d=0;
+		Vector2 tmp = new Vector2();
+		double dtmp=0;
+		double d=0;
 		for (MonstersRoom r : rList) {
-			dtmp=Math.abs(r.getTileNumberX()-rtmp.getTileNumberX()) + Math.abs(r.getTileNumberY()-rtmp.getTileNumberY()); 
+			dtmp = tmp.distance(new Vector2(r.getTileNumberX(), r.getTileNumberY()));
 			if(dtmp>d) {
 				d=dtmp;
 				rtmp =r;
