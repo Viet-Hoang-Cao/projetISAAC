@@ -15,7 +15,7 @@ public class MonstersRoom extends SpawnRoom {
 
 	private LinkedList<Hero> monsters;
 	private LinkedList<Vector2> spikesphysics;
-	private LinkedList<Vector2> rocks;
+	private LinkedList<Vector2> rocksphysics;
 	private boolean closed_door;
 	private boolean spawnRoom;
 	private boolean bossRoom;
@@ -25,7 +25,7 @@ public class MonstersRoom extends SpawnRoom {
 		super(hero, tileNumberY, tileNumberX);
 		this.monsters      = new LinkedList<Hero>();
 		this.spikesphysics = new LinkedList<Vector2>();
-		this.rocks         = new LinkedList<Vector2>();
+		this.rocksphysics  = new LinkedList<Vector2>();
 		this.closed_door   = true;
 		this.spawnRoom     = false;
 		this.bossRoom      = false;
@@ -36,7 +36,7 @@ public class MonstersRoom extends SpawnRoom {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
 		this.spikesphysics = new LinkedList<Vector2>();
-		this.rocks = new LinkedList<Vector2>();
+		this.rocksphysics = new LinkedList<Vector2>();
 		this.closed_door=true;
 		this.spawnRoom=false;
 		this.bossRoom=false;
@@ -62,10 +62,10 @@ public class MonstersRoom extends SpawnRoom {
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
+		drawRocks();
 		if(isSpawnRoom())StdDraw.text(0.5, 0.5, "SPAWN");
 		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
 		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
-		drawRocks();
 		drawmonsters();
 	}
 	
@@ -81,25 +81,19 @@ public class MonstersRoom extends SpawnRoom {
 	
 	public void generateRock() {
 		Random rand = new Random();
-		int nb = rand.nextInt(4);//ne pas trop mettre de rocher. On ne check pas si Isaac a un path ni si l'on excede le nbre!!
-		//de rocher
+		int nb;// = rand.nextInt(4);//ne pas trop mettre de rocher. On ne check pas si Isaac a un path ni si l'on excede le nbre de case!!
 		nb = 45;
 		int x = rand.nextInt(7)+1;
 		int y = rand.nextInt(7)+1;
 		for(int i = 0; i< nb; i++) {
-			for(Vector2 rock : rocks) {
-				while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4) || 
-						(positionFromTileIndex(x, y).getX() == rock.getX() && positionFromTileIndex(x, y).getY() == rock.getY()))
-					//On check devant les portes et si l'on ne fait pas deja parti de la liste
-					//oblige de passer par position from tile puisque les pos des rocks ont ete enregistre comme ca pour le moment
-					{
+				while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4)){
 					x = rand.nextInt(7)+1;
 					y = rand.nextInt(7)+1;
-					}
-			}	
+				}
 			addRockPhysics(x, y);
+			x = rand.nextInt(7)+1;
+			y = rand.nextInt(7)+1;
 		}
-		
 	}
 	
 	/**
@@ -114,17 +108,19 @@ public class MonstersRoom extends SpawnRoom {
 	 * draw alls rock
 	 */
 	public void drawRocks() {
-		for(Vector2 pos: rocks) {
+		int i =0;
+		for(Vector2 pos: rocksphysics) {
 			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
 					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
-			StdDraw.text(pos.getX(), pos.getY(), pos.toString());
+			//StdDraw.text(0.05, +i*0.02, i+"");
+			i++;
 		}
 	}
 	/**
 	 * gere la collision avec les rocher de la meme maniere que les murs. 
 	 */
 	public void collision_rocks() {
-		for(Vector2 v : rocks ) {
+		for(Vector2 v : rocksphysics ) {
 			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
 			//cad le deplacement n'est pas de 0, 1 mais la version norme par exemple
 			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
@@ -150,14 +146,14 @@ public class MonstersRoom extends SpawnRoom {
 	 */
 	public void addRockPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		rocks.add(pos);
+		rocksphysics.add(pos);
 	}
 	/**
 	 * delete rock X,Y(tile position)
 	 */
 	public void deleteRockPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		rocks.remove(pos);
+		rocksphysics.remove(pos);
 	}
 	
 	/**

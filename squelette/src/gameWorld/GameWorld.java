@@ -32,7 +32,9 @@ public class GameWorld
 		generationDJ = new boolean[this.Donjon.length][this.Donjon.length];
 		this.LV = 1;
 		createDungeon();
-		this.currentRoom = getDJSpawnRoom(); //Par manque de temps je vais dire que la fonction create dungeon ne risque pas d'avoir de pb
+		this.currentRoom = getDJSpawnRoom(); 
+		//Par manque de temps je vais dire que la fonction create dungeon ne risque pas d'avoir de pb
+		//Note à soi-même : Arrêter d'avoir confiance en soi.
 		
 	}
 	
@@ -55,6 +57,7 @@ public class GameWorld
 		MonstersRoom spawn = roomListDJ.get(rand.nextInt(roomListDJ.size()));
 		spawn.setSpawnRoom(true);
 		mostfarawayfrom(roomListDJ, spawn).setBossRoom(true); // on choisit la room la plus eloigne
+		//cailloux ? caillou. 
 		for(MonstersRoom r : roomListDJ) {
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
@@ -536,6 +539,10 @@ public class GameWorld
 		if(StdDraw.isKeyPressed(Controls.goInvicible)) {
 			hero.invunerable();
 		}
+		if (StdDraw.isKeyPressed(Controls.goLight))
+		{
+			hero.SPPEEEEEEEEEEEEEEED_ON_OFF();
+		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyUp))
 		{
 			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) { // on passe de 20 a 10 cycle parce qu'on veut tirer les larmes plus rapides
@@ -559,10 +566,6 @@ public class GameWorld
 			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) {
 				hero.projectileRightNext();
 			}
-		}
-		if (StdDraw.isKeyPressed(Controls.goLight))
-		{
-			hero.SPPEEEEEEEEEEEEEEED_ON_OFF();
 		}
 	}
 	
