@@ -118,6 +118,9 @@ public class Room
 		this.tileNumberY = tileNumberY;
 	}
 	
+	/**
+	 * @return -1 si changement vers la gauche du dj +1 sinon
+	 */
 	public int changecurrentRoomX() {
 		Vector2 v=positionFromTileIndex(0, 4);
 		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)){
@@ -129,7 +132,9 @@ public class Room
 		}
 		return 0;
 	}
-	
+	/**
+	 * @return -1 si changement vers le bas du dj, +1 sinon
+	 */
 	public int changecurrentRoomY() {
 		Vector2 v=positionFromTileIndex(4, 8);
 		if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)){

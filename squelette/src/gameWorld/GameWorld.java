@@ -475,10 +475,24 @@ public class GameWorld
 
 	public void updateGameObjects()
 	{	
-		if(currentRoom.changecurrentRoomX() != 0 || currentRoom.changecurrentRoomY() !=0){
-			this.setCurrentRoom(Donjon[currentRoom.tileNumberY+currentRoom.changecurrentRoomY()]
-					[currentRoom.tileNumberX+currentRoom.changecurrentRoomX()]);
-			this.hero.setPosition(currentRoom.positionFromTileIndex(4, 4));
+		int x = currentRoom.changecurrentRoomX();
+		int y = currentRoom.changecurrentRoomY();
+		if( x != 0 || y !=0){
+			this.setCurrentRoom(Donjon[currentRoom.tileNumberY+y]
+					[currentRoom.tileNumberX+x]);
+			if(x==1) {
+				hero.setPosition(currentRoom.positionFromTileIndex(1, 4));
+			}
+			else if(x==-1) {
+				hero.setPosition(currentRoom.positionFromTileIndex(7, 4));
+			}
+			else if(y==1) { //note, la maniere dont a ete construit le dj correspond a un affichage console
+				hero.setPosition(currentRoom.positionFromTileIndex(4, 7));
+			}
+			else {
+				hero.setPosition(currentRoom.positionFromTileIndex(4, 1));
+			}
+			
 		}
 		currentRoom.updateRoom();
 	}
