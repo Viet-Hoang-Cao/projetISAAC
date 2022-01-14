@@ -21,12 +21,10 @@ public class ItemsTable {
 	double lunchDroprate;
 	double jesuis_JuiceDroprate;
 	double hp_upDroprate;
-	double rienDroprate;
 	
 
 	public ItemsTable() {
 		this.bombsDroprate=0.5;
-		this.rienDroprate=0.1;
 		this.keyDroprate=0.35;
 		this.pennyDroprate=0.6;
 		this.nickelDroprate=0.3;
@@ -37,7 +35,12 @@ public class ItemsTable {
 		this.lunchDroprate=0.1;
 		this.jesuis_JuiceDroprate=0.1;
 		this.hp_upDroprate=0.1;
-		this.rienDroprate=0.2;
+	}
+	
+	public void RandomDropRoon(Hero H) {
+		Random rand = new Random();
+		double drop = rand.nextDouble();
+		//if(drop<)
 	}
 	
 	/**
