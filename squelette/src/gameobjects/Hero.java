@@ -130,43 +130,43 @@ public class Hero
 		}
 	}
 	
-	public void drawProjectile() {
-		for (Vector2 v: positionProjectileUp.keySet()) {
-			StdDraw.picture(positionProjectileUp.get(v).getX(), positionProjectileUp.get(v).getY(), ImagePaths.TEAR, 
-					HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY());
-		}
-		for (Vector2 v: positionProjectileDown.keySet()) {
-			StdDraw.picture(positionProjectileDown.get(v).getX(), positionProjectileDown.get(v).getY(), ImagePaths.TEAR, 
-					HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY());
-		}
-		for (Vector2 v: positionProjectileRight.keySet()) {
-			StdDraw.picture(positionProjectileRight.get(v).getX(), positionProjectileRight.get(v).getY(), ImagePaths.TEAR, 
-					HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY());
-		}
-		for (Vector2 v: positionProjectileLeft.keySet()) {
-			StdDraw.picture(positionProjectileLeft.get(v).getX(), positionProjectileLeft.get(v).getY(), ImagePaths.TEAR, 
-					HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY());
-		}
-	}
 	
-	public void updateProjectile() {
-		StdDraw.text(0.5, 0.6, "Y");
-		for (Vector2 v: positionProjectileUp.keySet()) {
-			positionProjectileUp.get(v).addVector(v);
-			StdDraw.text(0.5, 0.6, "Y");
-		}
-		for (Vector2 v: positionProjectileDown.keySet()) {
-			positionProjectileDown.get(v).addVector(v);
-			StdDraw.text(0.5, 0.4, "O");
-		}
-		for (Vector2 v: positionProjectileRight.keySet()) {
-			positionProjectileRight.get(v).addVector(v);
-			StdDraw.text(0.6, 0.5, "L");
-		}
-		for (Vector2 v: positionProjectileLeft.keySet()) {
-			positionProjectileLeft.get(v).addVector(v);
-			StdDraw.text(0.4, 0.5, "O");
-		}
+	  public void drawProjectile() { 
+		  for (Vector2 v: positionProjectileUp.keySet())
+	  { 
+			  StdDraw.picture(positionProjectileUp.get(v).getX(),
+	  positionProjectileUp.get(v).getY(), ImagePaths.TEAR,
+	  HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY()); } 
+		  for (Vector2 v:
+	  positionProjectileDown.keySet()) {
+	  StdDraw.picture(positionProjectileDown.get(v).getX(),
+	  positionProjectileDown.get(v).getY(), ImagePaths.TEAR,
+	  HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY()); } 
+		  for (Vector2 v:
+	  positionProjectileRight.keySet()) {
+	  StdDraw.picture(positionProjectileRight.get(v).getX(),
+	  positionProjectileRight.get(v).getY(), ImagePaths.TEAR,
+	  HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY()); } 
+		  for (Vector2 v:
+	  positionProjectileLeft.keySet()) {
+	  StdDraw.picture(positionProjectileLeft.get(v).getX(),
+	  positionProjectileLeft.get(v).getY(), ImagePaths.TEAR,
+	  HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY()); } }
+	  
+	  public void updateProjectile() {
+		  StdDraw.text(0.5, 0.6, "Y");
+		  for (Vector2 v:
+	  positionProjectileUp.keySet()) { 
+			  positionProjectileUp.get(v).addVector(v);
+	  StdDraw.text(0.5, 0.6, "Y"); } 
+		  for (Vector2 v:
+	  positionProjectileDown.keySet()) {
+			  positionProjectileDown.get(v).addVector(v); StdDraw.text(0.5, 0.4, "O"); }
+	  for (Vector2 v: positionProjectileRight.keySet()) {
+		  positionProjectileRight.get(v).addVector(v); StdDraw.text(0.6, 0.5, "L"); }
+	  for (Vector2 v: positionProjectileLeft.keySet()) {
+		  positionProjectileLeft.get(v).addVector(v); StdDraw.text(0.4, 0.5, "O"); }
+	 
 
 
 
@@ -244,21 +244,21 @@ public class Hero
 		Vector2 dir = new Vector2();
 		dir.addY(-1);
 		Vector2 futurpos = getNormalizedDirectionTear(dir);
-		positionProjectileUp.put(dir, position.addVector(futurpos));
+		positionProjectileDown.put(dir, position.addVector(futurpos));
 	}
 	public void projectileLeftNext() {
 		dateCycleInfo=CycleInfos.Cycle;
 		Vector2 dir = new Vector2();
 		dir.addX(-1);
 		Vector2 futurpos = getNormalizedDirectionTear(dir);
-		positionProjectileUp.put(dir, position.addVector(futurpos));
+		positionProjectileLeft.put(dir, position.addVector(futurpos));
 	}
 	public void projectileRightNext() {
 		dateCycleInfo=CycleInfos.Cycle;
 		Vector2 dir = new Vector2();
 		dir.addX(1);
 		Vector2 futurpos = getNormalizedDirectionTear(dir);
-		positionProjectileUp.put(dir, position.addVector(futurpos));
+		positionProjectileRight.put(dir, position.addVector(futurpos));
 	}
 
 	public Vector2 getNormalizedDirection()
