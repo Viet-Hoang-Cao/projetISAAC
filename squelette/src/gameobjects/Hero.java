@@ -33,6 +33,7 @@ public class Hero
 	private double speedTear;
 	private List<Tear>Tears;
 	private double portee;
+	private boolean superSpeed;
 
 	
 
@@ -53,6 +54,7 @@ public class Hero
 		this.tempInvunerability=false;
 		this.Tears= new LinkedList<>();
 		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.HALF_TILE_SIZE.getX();
+		this.superSpeed = false;
 	}
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
 	{
@@ -69,6 +71,7 @@ public class Hero
 		this.invicible=false;
 		this.tempInvunerability=false;
 		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX();
+		this.superSpeed = false;
 	}
 	/**
 	 * cette fonction entre le degat que le Hero prend.
@@ -275,7 +278,16 @@ public class Hero
 		}
 	}
 	
-
+	public void SPPEEEEEEEEEEEEEEED_ON_OFF (){
+		if(superSpeed) {
+			speed-=0.03;
+			superSpeed=false;
+		}
+		else {
+			speed+=0.03;
+			superSpeed=true;
+		}
+	}
 
 
 	/*

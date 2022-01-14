@@ -560,6 +560,10 @@ public class GameWorld
 				hero.projectileRightNext();
 			}
 		}
+		if (StdDraw.isKeyPressed(Controls.goLight))
+		{
+			hero.SPPEEEEEEEEEEEEEEED_ON_OFF();
+		}
 	}
 	
 

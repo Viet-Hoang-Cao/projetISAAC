@@ -55,7 +55,7 @@ public class MonstersRoom extends SpawnRoom {
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
 		}
-		collision_rocks();
+		//collision_rocks();
 		super.updateRoom();
 	}
 	
@@ -81,7 +81,9 @@ public class MonstersRoom extends SpawnRoom {
 	
 	public void generateRock() {
 		Random rand = new Random();
-		int nb = rand.nextInt(4);
+		int nb = rand.nextInt(4);//ne pas trop mettre de rocher. On ne check pas si Isaac a un path ni si l'on excede le nbre!!
+		//de rocher
+		nb = 45;
 		int x = rand.nextInt(7)+1;
 		int y = rand.nextInt(7)+1;
 		for(int i = 0; i< nb; i++) {
@@ -115,6 +117,7 @@ public class MonstersRoom extends SpawnRoom {
 		for(Vector2 pos: rocks) {
 			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
 					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+			StdDraw.text(pos.getX(), pos.getY(), pos.toString());
 		}
 	}
 	/**
@@ -125,7 +128,7 @@ public class MonstersRoom extends SpawnRoom {
 			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
 			//cad le deplacement n'est pas de 0, 1 mais la version norme par exemple
 			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
-					getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)) {
+					getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)) {//avec half tile, l'on peut passer en diagonale des rochers
 				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
 					getHero().getDirection().addX(1);
 				}
