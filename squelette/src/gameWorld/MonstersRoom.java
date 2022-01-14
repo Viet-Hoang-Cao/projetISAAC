@@ -1,8 +1,10 @@
 package gameWorld;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import gameobjects.Hero;
+import libraries.Physics;
 //import resources.CycleInfos;
 import libraries.StdDraw;
 import libraries.Vector2;
@@ -10,27 +12,31 @@ import resources.ImagePaths;
 import resources.RoomInfos;
 
 public class MonstersRoom extends SpawnRoom {
+
+	private LinkedList<Hero> monsters;
+	private LinkedList<Vector2> spikesphysics;
+	private LinkedList<Vector2> rocks;
+	private boolean closed_door;
+	private boolean spawnRoom;
+	private boolean bossRoom;
+	private boolean merchantRoom;
 	
 	public MonstersRoom(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
 		this.monsters      = new LinkedList<Hero>();
 		this.spikesphysics = new LinkedList<Vector2>();
+		this.rocks         = new LinkedList<Vector2>();
 		this.closed_door   = true;
 		this.spawnRoom     = false;
 		this.bossRoom      = false;
+		this.merchantRoom  = false;
 	}
-
-	private LinkedList<Hero> monsters;
-	private LinkedList<Vector2> spikesphysics;
-	private boolean closed_door;
-	private boolean spawnRoom;
-	private boolean bossRoom;
-	private boolean merchantRoom;
 
 	public MonstersRoom(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
 		this.spikesphysics = new LinkedList<Vector2>();
+		this.rocks = new LinkedList<Vector2>();
 		this.closed_door=true;
 		this.spawnRoom=false;
 		this.bossRoom=false;
@@ -49,14 +55,17 @@ public class MonstersRoom extends SpawnRoom {
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
 		}
+		collision_rocks();
 		super.updateRoom();
 	}
 	
 	@Override
 	public void drawRoom() {
 		super.drawRoom();
-		if(isSpawnRoom())drawRocks(3, 3);
-		if(isBossRoom())drawRocks(5, 5);
+		if(isSpawnRoom())StdDraw.text(0.5, 0.5, "SPAWN");
+		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
+		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
+		drawRocks();
 		drawmonsters();
 	}
 	
@@ -69,6 +78,28 @@ public class MonstersRoom extends SpawnRoom {
 		}
 	}
 	
+	
+	public void generateRock() {
+		Random rand = new Random();
+		int nb = rand.nextInt(4);
+		int x = rand.nextInt(7)+1;
+		int y = rand.nextInt(7)+1;
+		for(int i = 0; i< nb; i++) {
+			for(Vector2 rock : rocks) {
+				while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4) || 
+						(positionFromTileIndex(x, y).getX() == rock.getX() && positionFromTileIndex(x, y).getY() == rock.getY()))
+					//On check devant les portes et si l'on ne fait pas deja parti de la liste
+					//oblige de passer par position from tile puisque les pos des rocks ont ete enregistre comme ca pour le moment
+					{
+					x = rand.nextInt(7)+1;
+					y = rand.nextInt(7)+1;
+					}
+			}	
+			addRockPhysics(x, y);
+		}
+		
+	}
+	
 	/**
 	 * draw a rock on a tile
 	 */
@@ -78,18 +109,52 @@ public class MonstersRoom extends SpawnRoom {
 				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
 	}
 	/**
+	 * draw alls rock
+	 */
+	public void drawRocks() {
+		for(Vector2 pos: rocks) {
+			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
+					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+		}
+	}
+	/**
+	 * gere la collision avec les rocher de la meme maniere que les murs. 
+	 */
+	public void collision_rocks() {
+		for(Vector2 v : rocks ) {
+			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
+			//cad le deplacement n'est pas de 0, 1 mais la version norme par exemple
+			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
+					getHero().getSize(), v, RoomInfos.HALF_TILE_SIZE)) {
+				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
+					getHero().getDirection().addX(1);
+				}
+				else if(getHero().getDirection().getX()==1 && getHero().getPosition().getX() - v.getX() <0) {
+					getHero().getDirection().addX(-1);
+				}
+				if(getHero().getDirection().getY()==-1 && getHero().getPosition().getY() - v.getY() >0) {
+					getHero().getDirection().addY(1);
+				}
+				else if(getHero().getDirection().getY()==1 && getHero().getPosition().getY() - v.getY() <0) {
+					getHero().getDirection().addY(-1);
+				}
+				break;
+			}
+		}
+	}
+	/**
 	 * add rock physic X,Y (tile position)
 	 */
 	public void addRockPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		wallphysics.add(pos);
+		rocks.add(pos);
 	}
 	/**
 	 * delete rock X,Y(tile position)
 	 */
 	public void deleteRockPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		wallphysics.remove(pos);
+		rocks.remove(pos);
 	}
 	
 	/**

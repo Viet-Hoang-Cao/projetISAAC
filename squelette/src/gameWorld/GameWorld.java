@@ -52,7 +52,12 @@ public class GameWorld
 		}
 		List<MonstersRoom> roomListDJ = createRoomList();
 		roomListDJ.get(0).setSpawnRoom(true);//should work dans le sens ou la premiere salle du tableau est la + en haut a gauche possible
-		mostfaraway(roomListDJ).setBossRoom(true);;
+		mostfaraway(roomListDJ).setBossRoom(true);
+		for(MonstersRoom r : roomListDJ) {
+			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
+				r.generateRock();
+			}
+		}
 	}
 	
 	public void createInstance(int type, int y, int x) {
