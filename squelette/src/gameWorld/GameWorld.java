@@ -51,8 +51,10 @@ public class GameWorld
 			}
 		}
 		List<MonstersRoom> roomListDJ = createRoomList();
-		roomListDJ.get(0).setSpawnRoom(true);//should work dans le sens ou la premiere salle du tableau est la + en haut a gauche possible
-		mostfaraway(roomListDJ).setBossRoom(true);
+		//Le spawn va etre defini aleatoirement
+		MonstersRoom spawn = roomListDJ.get(rand.nextInt(roomListDJ.size()));
+		spawn.setSpawnRoom(true);
+		mostfarawayfrom(roomListDJ, spawn).setBossRoom(true); // on choisit la room la plus eloigne
 		for(MonstersRoom r : roomListDJ) {
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
@@ -394,15 +396,15 @@ public class GameWorld
 	 * @param spawn
 	 * @return le vector le plus loin
 	 */
-	public MonstersRoom mostfaraway(List<MonstersRoom> rList) {
-		MonstersRoom rtmp =rList.get(0);
-		Vector2 tmp = new Vector2();
+	public MonstersRoom mostfarawayfrom(List<MonstersRoom> rList, MonstersRoom Room) {
+		MonstersRoom rtmp = Room;
+		Vector2 spawn =new Vector2(rtmp.getTileNumberX(), rtmp.getTileNumberY());
+		Vector2 vtmp = new Vector2();
 		double dtmp=0;
-		double d=0;
 		for (MonstersRoom r : rList) {
-			dtmp = tmp.distance(new Vector2(r.getTileNumberX(), r.getTileNumberY()));
-			if(dtmp>d) {
-				d=dtmp;
+			vtmp = new Vector2(r.getTileNumberX(), r.getTileNumberY());
+			if(spawn.distance(vtmp)>dtmp) {
+				dtmp = spawn.distance(vtmp);
 				rtmp =r;
 			}
 		}
