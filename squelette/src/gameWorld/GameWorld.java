@@ -517,25 +517,25 @@ public class GameWorld
 		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyUp))
 		{
-			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) { // on passe de 20 a 10 cycle parce qu'on veut tirer les larmes plus rapides
 				hero.projectileUpNext();
 			}
 		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyDown))
 		{
-			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) {
 				hero.projectileDownNext();
 			}
 		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyLeft))
 		{
-			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) {
 				hero.projectileLeftNext();
 			}
 		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyRight))
 		{
-			if(hero.getDateCycleInfo() + 20 < CycleInfos.Cycle) {
+			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) {
 				hero.projectileRightNext();
 			}
 		}

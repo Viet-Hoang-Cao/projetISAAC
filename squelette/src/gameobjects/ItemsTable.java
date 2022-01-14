@@ -1,9 +1,7 @@
 package gameobjects;
 
+import java.util.List;
 import java.util.Random;
-
-import com.sun.tools.javac.util.List;
-
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
