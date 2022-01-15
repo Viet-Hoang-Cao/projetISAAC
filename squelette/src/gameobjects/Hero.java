@@ -150,8 +150,12 @@ public class Hero
 
 	public void drawGameObject()
 	{
-		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),
-				0);
+		if(!tempInvunerability) {
+			StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
+		}
+		else if(CycleInfos.Cycle%2==1) {//Il y a probablement mieux mais pas ltime
+			StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
+		}
 		if(invicible) {
 			StdDraw.setPenColor(StdDraw.RED);
 			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()+size.getX()/2, position.getY()-size.getY());
@@ -161,7 +165,6 @@ public class Hero
 			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()-size.getX()/2, position.getY()+size.getY()/2);
 		}
 		drawProjectile();
-
 	}
 	
 	public void moveToPosition(Vector2 position) {

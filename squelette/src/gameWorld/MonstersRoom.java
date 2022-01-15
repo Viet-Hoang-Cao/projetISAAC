@@ -86,6 +86,7 @@ public class MonstersRoom extends SpawnRoom {
 		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
 		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
 		drawmonsters();
+		getHero().getInventaire().drawInventory(positionFromTileIndex(1, 7).getX(), positionFromTileIndex(1, 7).getY());
 	}
 	
 	@Override
