@@ -44,7 +44,9 @@ public class TESTROOM extends SpawnRoom {
 		moveSpider();
 		moveFly();
 		for (Hero m : this.monsters) {
-			collisionWalls(m);
+			for(Wall w : walls) {
+				w.collisionWalls(m);
+			}
 		}
 		for (Hero m : this.monsters) {
 			m.updateGameObject();

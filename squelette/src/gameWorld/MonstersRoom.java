@@ -59,17 +59,18 @@ public class MonstersRoom extends SpawnRoom {
 				rock.collision_rocks(m);
 			}
 		}
-		
+		for(Wall w : walls) {
+			for(Hero m : monsters) {
+				w.collisionWalls(m);
+			}
+		}
 		updateDamage();
 		if(CycleInfos.Cycle > getHero().getDateCycleInvulnerabilityStart()+15 && getHero().isTempInvunerability()) {
 			getHero().setTempInvunerability(false);
 		}
 		
 		
-		for (Hero m : monsters) {
-			collisionWalls(m); // NE FONCTIONNE PAS
-			//TODO ajouter collision intermonstre
-		}
+
 		
 		for (Hero m : monsters) {
 			m.updateGameObject();
@@ -108,15 +109,10 @@ public class MonstersRoom extends SpawnRoom {
 	/**
 	 * @param Boss un monstre de type boss1.
 	 */
-	public void addMonsterBoss1(Bidulf Boss) {
-		monsters.add(Boss);
+	public void addmonster(Hero monster) {
+		monsters.add(monster);
 	}
-	public void addmonsterFly(Fly fly) {
-		this.monsters.add(fly);
-	}
-	public void addmonsterSpider(Spider spider) {
-		this.monsters.add(spider);
-	}
+
 	public boolean posinMonstersList(Vector2 pos) {
 		for(Hero m : monsters) {
 			if(m.getPosition().getX() == pos.getX() && m.getPosition().getY() == pos.getY()) {
@@ -140,7 +136,7 @@ public class MonstersRoom extends SpawnRoom {
 			while(posinMonstersList(pos) || inRockList(pos)) {
 				pos = positionAlea();
 			}
-			addmonsterFly(new Fly(pos, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY));
+			addmonster(new Fly(pos, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY));
 		}
 	}
 	

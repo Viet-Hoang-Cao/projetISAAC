@@ -22,6 +22,7 @@ public class Inventory {
 	}
 	
 	public void drawInventory(double x, double y) {
+		StdDraw.setPenColor();
 		StdDraw.picture(x-RoomInfos.HALF_TILE_SIZE.getX(), y, ImagePaths.KEY, 
 				RoomInfos.TILE_SIZE.getX()/3, RoomInfos.TILE_SIZE.getY()/3);
 		StdDraw.text(x-RoomInfos.HALF_TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX()/3, y, ""+nbKeys);

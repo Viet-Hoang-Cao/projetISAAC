@@ -66,7 +66,7 @@ public class GameWorld
 				r.generate_monsters();
 			}
 			if(r.isBossRoom()) {
-				r.addMonsterBoss1(new Bidulf(r.positionFromTileIndex(4, 4)));
+				r.addmonster(new Bidulf(r.positionFromTileIndex(4, 4)));
 			}
 		}
 	}

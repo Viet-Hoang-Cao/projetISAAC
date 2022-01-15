@@ -1,6 +1,7 @@
 package gameWorld;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import gameobjects.Hero;
 import libraries.Physics;
@@ -12,16 +13,12 @@ import resources.RoomInfos;
 
 public class SpawnRoom extends Room {
 	
-	//Contient tout les emplacements ou le joueur ne peut pas aller
-	List<Vector2> wallphysics;
+	List<Wall> walls;
 	
 	public SpawnRoom(Hero hero) {
 		super(hero);
-		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
-		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
-		//et enlever des elements
+		this.walls = new LinkedList<Wall>();
 		wallphysics();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -31,11 +28,8 @@ public class SpawnRoom extends Room {
 	 */
 	public SpawnRoom(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
-		this.wallphysics = new ArrayList<>();//to be fair : Je n'arrive pas à me decider 
-		//sur une ArrayList, une Linkedlist ou autre. J'ai besoin d'acces rapide autant que de rajouter
-		//et enlever des elements
+		this.walls = new LinkedList<Wall>();
 		wallphysics();
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -65,25 +59,9 @@ public class SpawnRoom extends Room {
 	 * Draw the walls of the room
 	 */
 	public void DrawWalls() {
-		StdDraw.setPenColor(150,75,0);
-		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
-			Vector2 position = positionFromTileIndex(0, i);
-			StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
-					RoomInfos.HALF_TILE_SIZE.getY());
-			
-			position = positionFromTileIndex(i, 0);
-			StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
-					RoomInfos.HALF_TILE_SIZE.getY());
-			
-			position = positionFromTileIndex(8, i);
-			StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
-					RoomInfos.HALF_TILE_SIZE.getY());
-			
-			position = positionFromTileIndex(i, 8);
-			StdDraw.filledRectangle(position.getX(), position.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
-					RoomInfos.HALF_TILE_SIZE.getY());
+		for(Wall w : walls) {
+			w.drawBrownWall();
 		}
-		StdDraw.setPenColor(StdDraw.BLACK);
 	}
 	
 	/**
@@ -91,72 +69,23 @@ public class SpawnRoom extends Room {
 	 */
 	public void wallphysics() {
 		for(int i = 0; i<RoomInfos.NB_TILES;i++) {
-			wallphysics.add(positionFromTileIndex(0, i));
+			walls.add(new Wall(positionFromTileIndex(0, i)));
 			if(i!=0) {
-				wallphysics.add(positionFromTileIndex(i, 0));
-				wallphysics.add(positionFromTileIndex(8, i));
-				if(i!=8)wallphysics.add(positionFromTileIndex(i, 8));
+				walls.add(new Wall(positionFromTileIndex(i, 0)));
+				walls.add(new Wall(positionFromTileIndex(8, i)));
+				if(i!=8)walls.add(new Wall(positionFromTileIndex(i, 8)));
 			}
 		}
 	}
 	
-	/**
-	 * Check if the Hero bump a wall 
-	 */
-	public void collisionWalls() {
-		for(Vector2 v : wallphysics ) {
-			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
-			if(Physics.rectangleCollision(getHero().getPosition().addVector(getHero().getNormalizedDirection()),
-					getHero().getSize(), v, RoomInfos.TILE_SIZE)) {
-				if(getHero().getDirection().getX()==-1 && getHero().getPosition().getX() - v.getX() >0) {
-					getHero().getDirection().addX(1);
-				}
-				else if(getHero().getDirection().getX()==1 && getHero().getPosition().getX() - v.getX() <0) {
-					getHero().getDirection().addX(-1);
-				}
-				if(getHero().getDirection().getY()==-1 && getHero().getPosition().getY() - v.getY() >0) {
-					getHero().getDirection().addY(1);
-				}
-				else if(getHero().getDirection().getY()==1 && getHero().getPosition().getY() - v.getY() <0) {
-					getHero().getDirection().addY(-1);
-				}
-				break;
-			}
-		}
-	}
-	
-		
-	/**
-	 * check if a specified hero bump a wall
-	 */
-	public void collisionWalls(Hero monster) {
-		for(Vector2 v : wallphysics ) {
-			if(Physics.rectangleCollision(monster.getPosition().addVector(monster.getNormalizedDirection())
-					, monster.getSize(), v, RoomInfos.TILE_SIZE)) {
-				if(monster.getDirection().getX()==-1 && monster.getPosition().getX() - v.getX() >0) {
-					monster.getDirection().addX(1);
-				}
-				else if(monster.getDirection().getX()==1 && monster.getPosition().getX() - v.getX() <0) {
-					monster.getDirection().addX(-1);
-				}
-				if(monster.getDirection().getY()==-1 && monster.getPosition().getY() - v.getY() >0) {
-					monster.getDirection().addY(1);
-				}
-				else if(monster.getDirection().getY()==1 && monster.getPosition().getY() - v.getY() <0) {
-					monster.getDirection().addY(-1);
-				}
-				break;
-			}
-		}
-	}
 	/**
 	 * Delete some physics of wall
 	 * @param pos the position of the wall (NOT A TILE!)
 	 */
 	public void deleteVectorOfWall(Vector2 pos) {
-		for(Vector2 v : wallphysics) {
-			if(v.getX() == pos.getX() && v.getY() == pos.getY()) {
-				wallphysics.remove(v);
+		for(Wall w : walls) {
+			if(w.getPos().getX() == pos.getX() && w.getPos().getY() == pos.getY()) {
+				walls.remove(w);
 				break;
 			}
 		}
@@ -168,15 +97,25 @@ public class SpawnRoom extends Room {
 	 */
 	public void updateRoom()
 	{
-		collisionWalls();
+		for(Wall w : walls) {
+			w.collisionWalls(getHero());
+		}
 		super.updateRoom();
 	}
+	
+	
+	/*
+	 * doors
+	 */
 	
 	/**
 	 * draw an open door in top position
 	 */
 	public void drawOpenDoorUp() {
 		Vector2 pos = positionFromTileIndex(4, 8);
+		StdDraw.setPenColor(150,75,0);
+		StdDraw.filledRectangle(pos.getX(), pos.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
+				RoomInfos.HALF_TILE_SIZE.getY());
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 0);
 		
@@ -193,6 +132,9 @@ public class SpawnRoom extends Room {
 	 */	
 	public void drawOpenDoorDown() {
 		Vector2 pos = positionFromTileIndex(4, 0);
+		StdDraw.setPenColor(150,75,0);
+		StdDraw.filledRectangle(pos.getX(), pos.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
+				RoomInfos.HALF_TILE_SIZE.getY());
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 180);
 	}
@@ -208,6 +150,9 @@ public class SpawnRoom extends Room {
 	 */
 	public void drawOpenDoorLeft() {
 		Vector2 pos = positionFromTileIndex(0, 4);
+		StdDraw.setPenColor(150,75,0);
+		StdDraw.filledRectangle(pos.getX(), pos.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
+				RoomInfos.HALF_TILE_SIZE.getY());
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 90);
 	}
@@ -223,6 +168,9 @@ public class SpawnRoom extends Room {
 	 */
 	public void drawOpenDoorRight() {
 		Vector2 pos = positionFromTileIndex(8, 4);
+		StdDraw.setPenColor(150,75,0);
+		StdDraw.filledRectangle(pos.getX(), pos.getY(), RoomInfos.HALF_TILE_SIZE.getX(),
+				RoomInfos.HALF_TILE_SIZE.getY());
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.OPENED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
 	}
