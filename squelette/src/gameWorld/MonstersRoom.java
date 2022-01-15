@@ -155,7 +155,7 @@ public class MonstersRoom extends SpawnRoom {
 					Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
 					SpiderInfos.POSITIONTOGO = pos;
 				}
-				m.moveToPositionby1(SpiderInfos.POSITIONTOGO);
+				m.moveToPosition(SpiderInfos.POSITIONTOGO);
 			}
 			m.updateGameObject();
 		}

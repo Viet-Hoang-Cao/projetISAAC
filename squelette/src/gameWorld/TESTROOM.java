@@ -85,7 +85,7 @@ public class TESTROOM extends SpawnRoom {
 	public void moveFly() {
 		for (Hero f : this.monsters) {
 			if (f instanceof Fly) {
-				f.moveToPositionby1(getHero().getPosition());
+				f.moveToPosition(getHero().getPosition());
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class TESTROOM extends SpawnRoom {
 		}
 		for (Hero s : this.monsters) {
 			if (s instanceof Spider) {
-				((Spider) s).moveToPositionby1(pos);
+				((Spider) s).moveToPosition(pos);
 			}
 		}
 	}
