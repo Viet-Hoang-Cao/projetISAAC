@@ -289,6 +289,8 @@ public class Hero
 			superSpeed=true;
 		}
 	}
+	
+	
 
 
 	/*
