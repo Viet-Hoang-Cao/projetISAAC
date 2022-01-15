@@ -152,8 +152,16 @@ public class Hero
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),
 				0);
+		if(invicible) {
+			StdDraw.setPenColor(StdDraw.RED);
+			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()+size.getX()/2, position.getY()-size.getY());
+		}
 		drawProjectile();
 
+	}
+	
+	public void moveToPosition(Vector2 position) {
+		
 	}
 	
 	public void moveToPositionby1(Vector2 position) {

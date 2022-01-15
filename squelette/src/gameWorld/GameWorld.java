@@ -483,7 +483,7 @@ public class GameWorld
 
 	public boolean gameOver()
 	{
-		if(hero.getLP()==0) {
+		if(hero.getLP()<=0) {
 			return true;
 		}
 		return false;

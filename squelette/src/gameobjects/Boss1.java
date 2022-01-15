@@ -21,6 +21,7 @@ public class Boss1 extends Hero {
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
 	}
 	
+	@Override
 	public void moveToPosition(Vector2 position) {
 		if(position.getX()-this.getPosition().getX()>0) {
 			this.goRightNext();
@@ -36,7 +37,7 @@ public class Boss1 extends Hero {
 		}
 	}
 	
-	@Override
+	/*@Override
 	public void updateGameObject() {
 		move();
 	}
@@ -46,5 +47,5 @@ public class Boss1 extends Hero {
 		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
 		setPosition(positionAfterMoving);
 		getDirection();
-		}
+		}*/
 }

@@ -120,7 +120,7 @@ public class SpawnRoom extends Room {
 				else if(getHero().getDirection().getY()==1 && getHero().getPosition().getY() - v.getY() <0) {
 					getHero().getDirection().addY(-1);
 				}
-				//break;
+				break;
 			}
 		}
 	}
