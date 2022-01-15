@@ -135,15 +135,40 @@ public class TESTROOM extends SpawnRoom {
 	
 	public void pushBack(double portee) { 
 		for (Hero m : this.monsters) {
-		 for (Tear t: Tears) {
-		 Vector2 a = new Vector2(t.getPositionInitial());
-		 a.addY(portee);
-		  if(Physics.rectangleCollision(a, HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
-			 m.takeDamage(m.getDamage());
-			 m.getPosition().addY(RoomInfos.TILE_SIZE.getY());
-			 Tears.remove(t);
-			  }
-		 }
+			for (Tear t: Tears) {
+				if(t.getDirection().getY()>0) {
+
+					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
+						m.takeDamage(getHero().getDamage());
+						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getY());
+						Tears.remove(t);
+					}
+				}
+				if(t.getDirection().getY()<0) {
+
+					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
+						m.takeDamage(getHero().getDamage());
+						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getY());
+						Tears.remove(t);
+					  	}
+					}
+				if(t.getDirection().getX()>0) {
+
+					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
+						m.takeDamage(getHero().getDamage());
+						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getX());
+						Tears.remove(t);
+					}
+				 }
+				if(t.getDirection().getX()<0) {
+
+					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
+						m.takeDamage(getHero().getDamage());
+						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getX());
+						Tears.remove(t);
+					}
+				}
+			}
 		 }
 	 } 
 	 
