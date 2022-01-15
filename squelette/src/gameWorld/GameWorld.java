@@ -1,5 +1,6 @@
 package gameWorld;
 
+import gameobjects.Boss1;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import resources.Controls;
@@ -62,6 +63,10 @@ public class GameWorld
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
 				r.generateSpikes();
+				//r.generateMonster
+			}
+			if(r.isBossRoom()) {
+				r.addMonster(new Boss1(r.positionFromTileIndex(4, 4)));
 			}
 		}
 	}

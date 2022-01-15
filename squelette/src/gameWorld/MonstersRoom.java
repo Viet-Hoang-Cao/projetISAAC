@@ -3,9 +3,9 @@ package gameWorld;
 import java.util.LinkedList;
 import java.util.Random;
 
+import gameobjects.Boss1;
 import gameobjects.Hero;
 import libraries.Physics;
-//import resources.CycleInfos;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
@@ -82,6 +82,12 @@ public class MonstersRoom extends SpawnRoom {
 		for (Hero m: this.monsters) {
 			m.drawGameObject();
 		}
+	}
+	/**
+	 * @param Boss un monstre de type boss1.
+	 */
+	public void addMonster(Boss1 Boss) {
+		monsters.add(Boss);
 	}
 	
 	
