@@ -55,7 +55,7 @@ public class MonstersRoom extends SpawnRoom {
 		for(Hero m: this.monsters) {
 			m.updateGameObject();
 		}
-		//collision_rocks();
+		collision_rocks();
 		super.updateRoom();
 	}
 	
@@ -81,19 +81,27 @@ public class MonstersRoom extends SpawnRoom {
 	
 	public void generateRock() {
 		Random rand = new Random();
-		int nb;// = rand.nextInt(4);//ne pas trop mettre de rocher. On ne check pas si Isaac a un path ni si l'on excede le nbre de case!!
-		nb = 45;
+		int nb = rand.nextInt(6);//ne pas trop mettre de rocher. On ne check pas si Isaac a un path ni si l'on excede le nbre de case!!
+		//nb = 45; -> permet de faire des test rapide; 49cases -4 = 45; 45 = maxvalue
 		int x = rand.nextInt(7)+1;
 		int y = rand.nextInt(7)+1;
-		for(int i = 0; i< nb; i++) {
-				while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4)){
+		for(int i = 0; i< nb && i<45; i++) {
+			while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4) || inRockList(x, y)){
 					x = rand.nextInt(7)+1;
 					y = rand.nextInt(7)+1;
-				}
+			}
 			addRockPhysics(x, y);
 			x = rand.nextInt(7)+1;
 			y = rand.nextInt(7)+1;
 		}
+	}
+	
+	public boolean inRockList(int x, int y) {
+		Vector2 pos = positionFromTileIndex(x, y);
+		for(Vector2 rock : rocksphysics) {
+			if(pos.getX() == rock.getX() && pos.getY() == rock.getY())return true;
+		}
+		return false;
 	}
 	
 	/**
