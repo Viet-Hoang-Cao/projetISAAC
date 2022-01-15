@@ -11,6 +11,7 @@ import libraries.Vector2;
 import resources.CycleInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
+import sun.font.BidiUtils;
 
 public class MonstersRoom extends SpawnRoom {
 
@@ -61,6 +62,7 @@ public class MonstersRoom extends SpawnRoom {
 		if(CycleInfos.Cycle > getHero().getDateCycleInvulnerabilityStart()+15 && getHero().isTempInvunerability()) {
 			getHero().setTempInvunerability(false);
 		}
+		moveMonster();
 		super.updateRoom();
 	}
 	
@@ -88,6 +90,14 @@ public class MonstersRoom extends SpawnRoom {
 	 */
 	public void addMonster(Boss1 Boss) {
 		monsters.add(Boss);
+	}
+	public void moveMonster() {
+		for (Hero m : this.monsters) {
+			if(m.getImagePath()==ImagePaths.BIDULF || m.getImagePath() == ImagePaths.FLY) {
+				m.moveToPositionby1(getHero().getPosition());
+			}
+			m.updateGameObject();
+		}
 	}
 	
 	

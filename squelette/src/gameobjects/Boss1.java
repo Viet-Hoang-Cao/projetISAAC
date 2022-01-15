@@ -12,7 +12,7 @@ public class Boss1 extends Hero {
 		// TODO Auto-generated constructor stub
 	}
 	public Boss1(Vector2 position) {
-		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.5), 0.02, ImagePaths.BIDULF, 12, 2);
+		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.5), 0.005, ImagePaths.BIDULF, 12, 2);
 	}
 	
 	@Override
