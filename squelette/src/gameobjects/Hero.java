@@ -290,9 +290,12 @@ public class Hero
 		}
 	}
 	
+	 
+	 
+
+
+
 	
-
-
 	/*
 	 * Getters and Setters
 	 */
@@ -376,6 +379,12 @@ public class Hero
 	public int getDateCycleInvulnerabilityStart() {
 		return dateCycleInvulnerabilityStart;
 	}
-	
+	public List<Tear> getTears() {
+		return Tears;
+	}
+	public void setTears(List<Tear> tears) {
+		Tears = tears;
+	}
 	
 }
+

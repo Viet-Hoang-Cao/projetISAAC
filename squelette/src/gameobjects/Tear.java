@@ -54,4 +54,6 @@ public class Tear {
 	public void setPosition(Vector2 position) {
 		this.position = position;
 	}
+	
+
 }

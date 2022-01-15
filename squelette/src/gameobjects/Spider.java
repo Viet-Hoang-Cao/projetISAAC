@@ -13,6 +13,7 @@ public class Spider extends Hero {
 	public Spider(Vector2 position, Vector2 size, double speed, String imagepath) {
 		super(position, size, speed, imagepath, 6, 1);
 		}
+	
 	public void updateObjects() {
 		move();
 	}
