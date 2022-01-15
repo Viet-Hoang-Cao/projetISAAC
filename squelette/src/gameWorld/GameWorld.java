@@ -63,10 +63,10 @@ public class GameWorld
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
 				r.generateSpikes();
-				//r.generateMonster
+				r.generate_monsters();
 			}
 			if(r.isBossRoom()) {
-				r.addMonster(new Boss1(r.positionFromTileIndex(4, 4)));
+				r.addMonsterBoss1(new Boss1(r.positionFromTileIndex(4, 4)));
 			}
 		}
 	}
@@ -548,6 +548,10 @@ public class GameWorld
 		if (StdDraw.isKeyPressed(Controls.goLight))
 		{
 			hero.SPPEEEEEEEEEEEEEEED_ON_OFF();
+		}
+		if (StdDraw.isKeyPressed(Controls.goKillAll))
+		{
+			currentRoom.killAllMonster();
 		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyUp))
 		{

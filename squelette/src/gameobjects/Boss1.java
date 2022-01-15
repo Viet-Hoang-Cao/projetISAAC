@@ -36,8 +36,8 @@ public class Boss1 extends Hero {
 		}
 	}
 	
-	//@Override
-	public void updateObjects() {
+	@Override
+	public void updateGameObject() {
 		move();
 	}
 	

@@ -4,14 +4,17 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import gameobjects.Boss1;
+import gameobjects.Fly;
 import gameobjects.Hero;
+import gameobjects.Spider;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
+import resources.FlyInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
-import sun.font.BidiUtils;
+import resources.SpiderInfos;
 
 public class MonstersRoom extends SpawnRoom {
 
@@ -48,21 +51,21 @@ public class MonstersRoom extends SpawnRoom {
 	@Override
 	 //Make every entity that compose a room process one step
 	public void updateRoom()
-	{
-		//TODO insérer methode pour IA monstres ici
-		
-		for (Hero m: this.monsters) { 
-			collisionWalls(m);
-		}
-		for(Hero m: this.monsters) {
-			m.updateGameObject();
-		}
+	{	
 		collision_rocks();
 		updateDamage();
 		if(CycleInfos.Cycle > getHero().getDateCycleInvulnerabilityStart()+15 && getHero().isTempInvunerability()) {
 			getHero().setTempInvunerability(false);
 		}
-		moveMonster();
+		moveMonsters();
+		for (Hero m : this.monsters) {
+			collisionWalls(m);
+			collision_rocks(m);
+			//TODO ajouter collision intermonstre
+		}
+		for (Hero m : this.monsters) {
+			m.updateGameObject();
+		}
 		super.updateRoom();
 	}
 	
@@ -77,6 +80,14 @@ public class MonstersRoom extends SpawnRoom {
 		drawmonsters();
 	}
 	
+	@Override
+	/**
+	 * tue tout les monstres.
+	 */
+	public void killAllMonster() {
+		monsters.clear();
+	}
+	
 	/**
 	 * draw the monsters
 	 */
@@ -88,13 +99,54 @@ public class MonstersRoom extends SpawnRoom {
 	/**
 	 * @param Boss un monstre de type boss1.
 	 */
-	public void addMonster(Boss1 Boss) {
+	public void addMonsterBoss1(Boss1 Boss) {
 		monsters.add(Boss);
 	}
-	public void moveMonster() {
+	public void addmonsterFly(Fly fly) {
+		this.monsters.add(fly);
+	}
+	public void addmonsterSpider(Spider spider) {
+		this.monsters.add(spider);
+	}
+	public boolean posinMonstersList(Vector2 pos) {
+		for(Hero m : monsters) {
+			if(m.getPosition().getX() == pos.getX() && m.getPosition().getY() == pos.getY()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void generate_monsters() {
+		Random rand = new Random();
+		int nbMonsterSpider = rand.nextInt(4);
+		int nbMonsterFly = rand.nextInt(3);
+		Vector2 pos = positionAlea();
+		for(int i=0; i<nbMonsterSpider; i++) {
+			while(posinMonstersList(pos) || inRockList(pos)) {
+				pos = positionAlea();
+			}
+			addmonsterSpider(new Spider(pos, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER));
+		}
+		for(int i=0; i<nbMonsterFly; i++) {
+			while(posinMonstersList(pos) || inRockList(pos)) {
+				pos = positionAlea();
+			}
+			addmonsterFly(new Fly(pos, FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY));
+		}
+	}
+	
+	public void moveMonsters() {
+		Random rand = new Random();
 		for (Hero m : this.monsters) {
 			if(m.getImagePath()==ImagePaths.BIDULF || m.getImagePath() == ImagePaths.FLY) {
 				m.moveToPositionby1(getHero().getPosition());
+			}
+			if(m.getImagePath()==ImagePaths.SPIDER) {
+				if (CycleInfos.Cycle % 50 == 0) {
+					Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
+					SpiderInfos.POSITIONTOGO = pos;
+				}
+				m.moveToPositionby1(SpiderInfos.POSITIONTOGO);
 			}
 			m.updateGameObject();
 		}
@@ -125,6 +177,12 @@ public class MonstersRoom extends SpawnRoom {
 		}
 		return false;
 	}
+	public boolean inRockList(Vector2 pos) {
+		for(Vector2 rock : rocksphysics) {
+			if(pos.getX() == rock.getX() && pos.getY() == rock.getY())return true;
+		}
+		return false;
+	}
 	
 	/**
 	 * draw a rock on a tile
@@ -144,7 +202,7 @@ public class MonstersRoom extends SpawnRoom {
 		}
 	}
 	/**
-	 * gere la collision avec les rocher de la meme maniere que les murs. 
+	 * gere la collision avec les rocher de la meme maniere que les murs pour le hero
 	 */
 	public void collision_rocks() {
 		for(Vector2 v : rocksphysics ) {
@@ -168,6 +226,35 @@ public class MonstersRoom extends SpawnRoom {
 			}
 		}
 	}
+	/**
+	 * gere la collision avec les rocher de la meme maniere que les murs
+	 */
+	public void collision_rocks(Hero m) {
+		for(Vector2 v : rocksphysics ) {
+			//addvector.getnormalizeddirection est la pour determiner le FUTUR lieu de la collision afin de ne pas y aller.
+			//cad le deplacement n'est pas de 0, 1 mais la version norme par exemple
+			if(Physics.rectangleCollision(m.getPosition().addVector(m.getNormalizedDirection()),
+					m.getSize(), v, RoomInfos.HALF_TILE_SIZE)) {//avec half tile, l'on peut passer en diagonale des rochers
+				if(m.getDirection().getX()==-1 && m.getPosition().getX() - v.getX() >0) {
+					m.getDirection().addX(1);
+				}
+				else if(m.getDirection().getX()==1 && m.getPosition().getX() - v.getX() <0) {
+					m.getDirection().addX(-1);
+				}
+				if(m.getDirection().getY()==-1 && m.getPosition().getY() - v.getY() >0) {
+					m.getDirection().addY(1);
+				}
+				else if(m.getDirection().getY()==1 && m.getPosition().getY() - v.getY() <0) {
+					m.getDirection().addY(-1);
+				}
+				break;
+			}
+		}
+	}
+
+	
+	
+	
 	/**
 	 * add rock physic X,Y (tile position)
 	 */
@@ -300,6 +387,16 @@ public class MonstersRoom extends SpawnRoom {
 				getHero().setTempInvunerability(true);
 			}
 		}
+	}
+	
+	/**
+	 *  genere une position aleatoire mais qui n'est pas le numero de la tuile
+	 * @return une position aleatoire
+	 */
+	public Vector2 positionAlea() {
+		Random rand = new Random();
+		Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
+		return pos;
 	}
 
 	public LinkedList<Hero> getMonsters() {

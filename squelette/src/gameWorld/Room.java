@@ -147,4 +147,8 @@ public class Room
 		return 0;
 	}
 	
+	public void killAllMonster() {
+		
+	}
+	
 }
