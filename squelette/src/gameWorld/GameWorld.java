@@ -61,6 +61,7 @@ public class GameWorld
 		for(MonstersRoom r : roomListDJ) {
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
+				r.generateSpikes();
 			}
 		}
 	}
