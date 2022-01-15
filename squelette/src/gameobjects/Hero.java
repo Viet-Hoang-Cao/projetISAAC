@@ -30,6 +30,7 @@ public class Hero
 	private Vector2 direction;
 	private Inventory Inventaire;
 	private int dateCycleInfo;
+	private int dateCycleInvulnerabilityStart;
 	private double speedTear;
 	private List<Tear>Tears;
 	private double portee;
@@ -364,12 +365,16 @@ public class Hero
 	}
 	public void setTempInvunerability(boolean tempInvunerability) {
 		this.tempInvunerability = tempInvunerability;
+		dateCycleInvulnerabilityStart = CycleInfos.Cycle;
 	}
 	public int getDateCycleInfo() {
 		return dateCycleInfo;
 	}
 	public void setDateCycleInfo(int dateCycleInfo) {
 		this.dateCycleInfo = dateCycleInfo;
+	}
+	public int getDateCycleInvulnerabilityStart() {
+		return dateCycleInvulnerabilityStart;
 	}
 	
 	

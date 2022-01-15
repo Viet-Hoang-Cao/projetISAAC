@@ -8,6 +8,7 @@ import libraries.Physics;
 //import resources.CycleInfos;
 import libraries.StdDraw;
 import libraries.Vector2;
+import resources.CycleInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 
@@ -56,6 +57,10 @@ public class MonstersRoom extends SpawnRoom {
 			m.updateGameObject();
 		}
 		collision_rocks();
+		updateDamage();
+		if(CycleInfos.Cycle > getHero().getDateCycleInvulnerabilityStart()+15 && getHero().isTempInvunerability()) {
+			getHero().setTempInvunerability(false);
+		}
 		super.updateRoom();
 	}
 	
@@ -63,6 +68,7 @@ public class MonstersRoom extends SpawnRoom {
 	public void drawRoom() {
 		super.drawRoom();
 		drawRocks();
+		drawSpikes();
 		if(isSpawnRoom())StdDraw.text(0.5, 0.5, "SPAWN");
 		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
 		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
@@ -113,15 +119,12 @@ public class MonstersRoom extends SpawnRoom {
 				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
 	}
 	/**
-	 * draw alls rock
+	 * draw all rocks
 	 */
 	public void drawRocks() {
-		int i =0;
 		for(Vector2 pos: rocksphysics) {
 			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.ROCK, 
 					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
-			//StdDraw.text(0.05, +i*0.02, i+"");
-			i++;
 		}
 	}
 	/**
@@ -164,6 +167,31 @@ public class MonstersRoom extends SpawnRoom {
 		rocksphysics.remove(pos);
 	}
 	
+	
+	public void generateSpikes() {
+		Random rand = new Random();
+		int nb = rand.nextInt(4); // attention, 45 - rockList = nb d'emplacement restant !
+		int x = rand.nextInt(7)+1;
+		int y = rand.nextInt(7)+1;
+		for(int i = 0; i< nb && i<45; i++) {
+			while((x == 4 && y == 1) || (x == 4 && y == 7) || (x == 1 && y == 4) || (x == 7 && y == 4) || inRockList(x, y) || 
+					inSpikesList(x, y)){
+					x = rand.nextInt(7)+1;
+					y = rand.nextInt(7)+1;
+			}
+			addSpikesPhysics(x, y);
+			x = rand.nextInt(7)+1;
+			y = rand.nextInt(7)+1;
+		}
+	}
+	
+	public boolean inSpikesList(int x, int y) {
+		Vector2 pos = positionFromTileIndex(x, y);
+		for(Vector2 rock : spikesphysics) {
+			if(pos.getX() == rock.getX() && pos.getY() == rock.getY())return true;
+		}
+		return false;
+	}
 	/**
 	 * draw spikes on a tile
 	 */
@@ -171,6 +199,15 @@ public class MonstersRoom extends SpawnRoom {
 		Vector2 pos = positionFromTileIndex(x, y);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.SPIKES, 
 				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+	}
+	/**
+	 * draw all spikes
+	 */
+	public void drawSpikes() {
+		for(Vector2 pos: spikesphysics) {
+			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.SPIKES, 
+					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+		}
 	}
 	/**
 	 * add spikes physics X,Y (tile position)
@@ -181,14 +218,15 @@ public class MonstersRoom extends SpawnRoom {
 	}
 	
 	/**
-	 * Traite de la collision avec les piques
+	 * Traite de la collision avec les piques et renvoi vrai s'il y a eu collision avec le hero
 	 */
-	public void spikesCollisions() {
-		//TODO à faire lorsque le hero sera fini (Traite les damages ainsi que le recul)
+	public boolean spikesCollisions() {
 		for(Vector2 spikes : this.spikesphysics) {
-			spikes.getX();
-			spikes.getY();
+			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), spikes, RoomInfos.HALF_TILE_SIZE)) {
+				return true;
+			}
 		}
+		return false;
 	}
 	
 	/**
@@ -225,6 +263,27 @@ public class MonstersRoom extends SpawnRoom {
 		Vector2 pos = positionFromTileIndex(8, 4);
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.CLOSED_DOOR,
 				RoomInfos.TILE_SIZE.getX()*1.5,RoomInfos.TILE_SIZE.getY()*1.1, 270);
+	}
+	
+	
+	/**
+	 * Cette methode fait en sorte que le hero ne prennent pas continuellement des degats et traites de toutes les forme de damage.
+	 * Il faut appeler ici toutes formes de damage potentiel, monstres, spikes, projectile envers le Hero.
+	 */
+	public void updateDamage() {
+		if(!getHero().isInvicible() && !getHero().isTempInvunerability()) {
+			for(Hero m:this.monsters) {
+				if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(),
+						m.getPosition(), m.getSize())) {
+					getHero().takeDamage(m.getDamage());
+					getHero().setTempInvunerability(true);
+				}		
+			}
+			if(spikesCollisions()) {
+				getHero().takeDamage(1);
+				getHero().setTempInvunerability(true);
+			}
+		}
 	}
 
 	public LinkedList<Hero> getMonsters() {
