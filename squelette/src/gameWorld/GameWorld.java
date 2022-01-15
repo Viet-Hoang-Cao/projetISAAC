@@ -553,6 +553,14 @@ public class GameWorld
 		{
 			currentRoom.killAllMonster();
 		}
+		if (StdDraw.isKeyPressed(Controls.goOfferGold))
+		{
+			hero.getInventaire().addDime();
+		}
+		if (StdDraw.isKeyPressed(Controls.goPowerfull))
+		{
+			hero.POWWWW_ON_OFF();
+		}
 		if (StdDraw.isKeyPressed(Controls.directionalKeyUp))
 		{
 			if(hero.getDateCycleInfo() + 10 < CycleInfos.Cycle) { // on passe de 20 a 10 cycle parce qu'on veut tirer les larmes plus rapides

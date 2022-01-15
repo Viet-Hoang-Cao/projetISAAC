@@ -20,16 +20,4 @@ public class Bidulf extends Hero {
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
 	}
-	
-	/*@Override
-	public void updateGameObject() {
-		move();
-	}
-	
-	private void move() {
-		Vector2 normalizedDirection = getNormalizedDirection();
-		Vector2 positionAfterMoving = getPosition().addVector(normalizedDirection);
-		setPosition(positionAfterMoving);
-		getDirection();
-		}*/
 }

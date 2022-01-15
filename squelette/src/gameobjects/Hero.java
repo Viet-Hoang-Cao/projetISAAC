@@ -35,6 +35,7 @@ public class Hero
 	private List<Tear>Tears;
 	private double portee;
 	private boolean superSpeed;
+	private boolean POWAAAAAA;
 
 	
 
@@ -56,6 +57,7 @@ public class Hero
 		this.Tears= new LinkedList<>();
 		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.HALF_TILE_SIZE.getX();
 		this.superSpeed = false;
+		this.POWAAAAAA = false;
 	}
 	public Hero(Vector2 position, Vector2 size, double speed, String imagePath)
 	{
@@ -73,30 +75,14 @@ public class Hero
 		this.tempInvunerability=false;
 		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX();
 		this.superSpeed = false;
+		this.POWAAAAAA = false;
 	}
+	
 	/**
 	 * cette fonction entre le degat que le Hero prend.
 	 */
 	public void takeDamage(int dmgMonstre) {
 		this.LP=LP-dmgMonstre;
-	}
-
-	public int getDamage() {
-		return damage;
-	}
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-	
-	public void invunerable() {
-		if(this.invicible==false) {
-			this.invicible=true;
-		}
-		else this.invicible=false;
-	}
-	
-	public Inventory getInventaire() {
-		return Inventaire;
 	}
 	
 	
@@ -151,19 +137,29 @@ public class Hero
 	public void drawGameObject()
 	{
 		if(!tempInvunerability) {
-			StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
+			StdDraw.picture(getPosition().getX(), getPosition().getY(), 
+					getImagePath(), getSize().getX(), getSize().getY(),0);
 		}
 		else if(CycleInfos.Cycle%2==1) {//Il y a probablement mieux mais pas ltime
-			StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
+			StdDraw.picture(getPosition().getX(), getPosition().getY(), 
+					getImagePath(), getSize().getX(), getSize().getY(),0);
 		}
 		if(invicible) {
 			StdDraw.setPenColor(StdDraw.RED);
-			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()+size.getX()/2, position.getY()-size.getY());
+			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), 
+					position.getX()+size.getX()/2, position.getY()-size.getY());
 		}
 		if(superSpeed) {
 			StdDraw.setPenColor(StdDraw.BLUE);
-			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()-size.getX()/2, position.getY()+size.getY()/2);
+			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), 
+					position.getX()-size.getX()/2, position.getY()+size.getY()/2);
 		}
+		if(POWAAAAAA) {
+			StdDraw.setPenColor(StdDraw.MAGENTA);
+			StdDraw.line(position.getX()+size.getX()/2, position.getY()-size.getY(), 
+					position.getX()+size.getX()/2, position.getY()+size.getY()/2);
+		}
+		
 		drawProjectile();
 	}
 	
@@ -220,6 +216,11 @@ public class Hero
 	{
 		getDirection().addX(1);
 	}
+	
+	
+	/*
+	 * Projectile
+	 */
 	public void projectileUpNext() {
 		dateCycleInfo=CycleInfos.Cycle;
 		Vector2 dirNorm= new Vector2(0,1);
@@ -290,6 +291,9 @@ public class Hero
 		}
 	}
 	
+	/**
+	 * cheatcodeSpeed
+	 */
 	public void SPPEEEEEEEEEEEEEEED_ON_OFF (){
 		if(superSpeed) {
 			speed-=0.03;
@@ -300,16 +304,46 @@ public class Hero
 			superSpeed=true;
 		}
 	}
+	/**
+	 * cheatcodePOWWAAAA
+	 */
+	public void POWWWW_ON_OFF() {
+		if(POWAAAAAA) {
+			damage-=10;
+			POWAAAAAA=false;
+		}
+		else {
+			damage+=10;
+			POWAAAAAA=true;
+		}
+	}
 	
-	 
-	 
-
+	/**
+	 * cheatcode invulnerabilite
+	 */
+	public void invunerable() {
+		if(this.invicible==false) {
+			this.invicible=true;
+		}
+		else this.invicible=false;
+	}
 
 
 	
 	/*
 	 * Getters and Setters
 	 */
+	public Inventory getInventaire() {
+		return Inventaire;
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+	
 	public Vector2 getPosition()
 	{
 		return position;
