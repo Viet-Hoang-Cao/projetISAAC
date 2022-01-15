@@ -1,10 +1,8 @@
 package gameWorld;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import gameobjects.Hero;
-import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 

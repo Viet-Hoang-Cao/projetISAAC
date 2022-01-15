@@ -144,7 +144,7 @@ public class MonstersRoom extends SpawnRoom {
 		Random rand = new Random();
 		for (Hero m : this.monsters) {
 			if(m.getImagePath()==ImagePaths.BIDULF || m.getImagePath() == ImagePaths.FLY) {
-				m.moveToPosition(positionFromTileIndex(8, 8));
+				m.moveToPosition(getHero().getPosition());
 			}
 			if(m.getImagePath()==ImagePaths.SPIDER) {
 				if (CycleInfos.Cycle % 50 == 0) {
@@ -153,7 +153,6 @@ public class MonstersRoom extends SpawnRoom {
 				}
 				m.moveToPosition(SpiderInfos.POSITIONTOGO);
 			}
-			m.updateGameObject();
 		}
 	}
 	
