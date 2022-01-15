@@ -1,6 +1,6 @@
 package gameWorld;
 
-import gameobjects.Boss1;
+import gameobjects.Bidulf;
 import gameobjects.Hero;
 import libraries.StdDraw;
 import resources.Controls;
@@ -66,7 +66,7 @@ public class GameWorld
 				r.generate_monsters();
 			}
 			if(r.isBossRoom()) {
-				r.addMonsterBoss1(new Boss1(r.positionFromTileIndex(4, 4)));
+				r.addMonsterBoss1(new Bidulf(r.positionFromTileIndex(4, 4)));
 			}
 		}
 	}

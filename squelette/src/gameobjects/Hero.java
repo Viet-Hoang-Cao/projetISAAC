@@ -168,7 +168,18 @@ public class Hero
 	}
 	
 	public void moveToPosition(Vector2 position) {
-		
+		if(position.getX()-this.getPosition().getX()>0) {
+			this.goRightNext();
+		}
+		else if(position.getX()-this.getPosition().getX()<0){
+			this.goLeftNext();
+		}
+		if(position.getY()-this.getPosition().getY()>0) {
+			this.goUpNext();
+		}
+		else if(position.getY()-this.getPosition().getY()<0) {
+			this.goDownNext();
+		}
 	}
 	
 	public void moveToPositionby1(Vector2 position) {

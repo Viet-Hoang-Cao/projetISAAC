@@ -3,7 +3,7 @@ package gameWorld;
 import java.util.LinkedList;
 import java.util.Random;
 
-import gameobjects.Boss1;
+import gameobjects.Bidulf;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
@@ -19,7 +19,7 @@ import resources.SpiderInfos;
 public class MonstersRoom extends SpawnRoom {
 
 	private LinkedList<Hero> monsters;
-	private LinkedList<Vector2> spikesphysics;
+	private LinkedList<Spikes> spikes;
 	private LinkedList<Cailloux> rocks;
 	private boolean closed_door;
 	private boolean spawnRoom;
@@ -29,7 +29,7 @@ public class MonstersRoom extends SpawnRoom {
 	public MonstersRoom(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
 		this.monsters      = new LinkedList<Hero>();
-		this.spikesphysics = new LinkedList<Vector2>();
+		this.spikes        = new LinkedList<Spikes>();
 		this.rocks         = new LinkedList<Cailloux>();
 		this.closed_door   = true;
 		this.spawnRoom     = false;
@@ -40,7 +40,7 @@ public class MonstersRoom extends SpawnRoom {
 	public MonstersRoom(Hero hero) {
 		super(hero);
 		this.monsters = new LinkedList<Hero>();
-		this.spikesphysics = new LinkedList<Vector2>();
+		this.spikes = new LinkedList<Spikes>();
 		this.rocks = new LinkedList<Cailloux>();
 		this.closed_door=true;
 		this.spawnRoom=false;
@@ -108,7 +108,7 @@ public class MonstersRoom extends SpawnRoom {
 	/**
 	 * @param Boss un monstre de type boss1.
 	 */
-	public void addMonsterBoss1(Boss1 Boss) {
+	public void addMonsterBoss1(Bidulf Boss) {
 		monsters.add(Boss);
 	}
 	public void addmonsterFly(Fly fly) {
@@ -148,7 +148,7 @@ public class MonstersRoom extends SpawnRoom {
 		Random rand = new Random();
 		for (Hero m : this.monsters) {
 			if(m.getImagePath()==ImagePaths.BIDULF || m.getImagePath() == ImagePaths.FLY) {
-				m.moveToPosition(getHero().getPosition());
+				m.moveToPosition(positionFromTileIndex(8, 8));
 			}
 			if(m.getImagePath()==ImagePaths.SPIDER) {
 				if (CycleInfos.Cycle % 50 == 0) {
@@ -228,26 +228,18 @@ public class MonstersRoom extends SpawnRoom {
 	
 	public boolean inSpikesList(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		for(Vector2 rock : spikesphysics) {
-			if(pos.getX() == rock.getX() && pos.getY() == rock.getY())return true;
+		for(Spikes spike : spikes) {
+			if(pos.getX() == spike.getPos().getX() && pos.getY() == spike.getPos().getY())return true;
 		}
 		return false;
 	}
-	/**
-	 * draw spikes on a tile
-	 */
-	public void drawSpikes(int x, int y) {
-		Vector2 pos = positionFromTileIndex(x, y);
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.SPIKES, 
-				RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
-	}
+
 	/**
 	 * draw all spikes
 	 */
 	public void drawSpikes() {
-		for(Vector2 pos: spikesphysics) {
-			StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.SPIKES, 
-					RoomInfos.TILE_SIZE.getX(), RoomInfos.TILE_SIZE.getY());
+		for(Spikes spike : spikes) {
+			spike.drawSpikes();
 		}
 	}
 	/**
@@ -255,19 +247,7 @@ public class MonstersRoom extends SpawnRoom {
 	 */
 	public void addSpikesPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
-		spikesphysics.add(pos);
-	}
-	
-	/**
-	 * Traite de la collision avec les piques et renvoi vrai s'il y a eu collision avec le hero
-	 */
-	public boolean spikesCollisions() {
-		for(Vector2 spikes : this.spikesphysics) {
-			if(Physics.rectangleCollision(getHero().getPosition(), getHero().getSize(), spikes, RoomInfos.HALF_TILE_SIZE)) {
-				return true;
-			}
-		}
-		return false;
+		spikes.add(new Spikes(pos));
 	}
 	
 	/**
@@ -320,9 +300,11 @@ public class MonstersRoom extends SpawnRoom {
 					getHero().setTempInvunerability(true);
 				}		
 			}
-			if(spikesCollisions()) {
-				getHero().takeDamage(1);
-				getHero().setTempInvunerability(true);
+			for(Spikes spike: spikes) {
+				if(spike.spikesCollisions(getHero())) {
+					getHero().takeDamage(1);
+					getHero().setTempInvunerability(true);
+				}
 			}
 		}
 	}

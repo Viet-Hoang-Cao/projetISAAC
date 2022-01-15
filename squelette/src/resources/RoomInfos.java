@@ -1,7 +1,6 @@
 package resources;
 
 import libraries.Vector2;
-//import gameWorld.TESTROOM;
 
 public class RoomInfos
 {

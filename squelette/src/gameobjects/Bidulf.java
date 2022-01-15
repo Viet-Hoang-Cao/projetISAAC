@@ -5,13 +5,13 @@ import libraries.Vector2;
 import resources.ImagePaths;
 import resources.RoomInfos;
 
-public class Boss1 extends Hero {
+public class Bidulf extends Hero {
 	
-	public Boss1(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage) {
+	public Bidulf(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage) {
 		super(position, size, speed, imagePath, LP, damage);
 		// TODO Auto-generated constructor stub
 	}
-	public Boss1(Vector2 position) {
+	public Bidulf(Vector2 position) {
 		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.5), 0.005, ImagePaths.BIDULF, 12, 2);
 	}
 	
@@ -19,22 +19,6 @@ public class Boss1 extends Hero {
 	public void drawGameObject()
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
-	}
-	
-	@Override
-	public void moveToPosition(Vector2 position) {
-		if(position.getX()-this.getPosition().getX()>0) {
-			this.goRightNext();
-		}
-		else if(position.getX()-this.getPosition().getX()<0){
-			this.goLeftNext();
-		}
-		if(position.getY()-this.getPosition().getY()>0) {
-			this.goUpNext();
-		}
-		else if(position.getY()-this.getPosition().getY()<0) {
-			this.goDownNext();
-		}
 	}
 	
 	/*@Override
