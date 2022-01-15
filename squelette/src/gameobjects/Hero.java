@@ -156,6 +156,10 @@ public class Hero
 			StdDraw.setPenColor(StdDraw.RED);
 			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()+size.getX()/2, position.getY()-size.getY());
 		}
+		if(superSpeed) {
+			StdDraw.setPenColor(StdDraw.BLUE);
+			StdDraw.line(position.getX()-size.getX()/2, position.getY()-size.getY(), position.getX()-size.getX()/2, position.getY()+size.getY()/2);
+		}
 		drawProjectile();
 
 	}
