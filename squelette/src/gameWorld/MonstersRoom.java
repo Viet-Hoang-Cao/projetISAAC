@@ -451,6 +451,12 @@ public class MonstersRoom extends SpawnRoom {
 	}
 	
 	
+	
+	
+	public LinkedList<Cailloux> getRocks() {
+		return rocks;
+	}
+
 	/**
 	 * setup du magasin
 	 */
@@ -462,6 +468,7 @@ public class MonstersRoom extends SpawnRoom {
 		}
 		this.magasin= new MerchantRoom(ItemAVendre);
 	}
+	
 	
 
 }

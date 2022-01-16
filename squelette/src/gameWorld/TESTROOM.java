@@ -22,10 +22,11 @@ import gameobjects.Tear;
 
 //classe de test pour tes appels de monstres ;p
 
-public class TESTROOM extends SpawnRoom {
+public class TESTROOM extends MonstersRoom {
 
 	private LinkedList<Hero> monsters;
-	LinkedList<Wall>Walls;
+	private LinkedList<Wall> Walls;
+
 	
 	public static void main(String[] args)
 	{
@@ -81,6 +82,8 @@ public class TESTROOM extends SpawnRoom {
 		addmonster(spider1);
 		Fly fly1 = new Fly(positionAlea(), FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
 		addmonster(fly1);
+		generateRock();
+		
 	}
 
 	@Override
@@ -93,7 +96,10 @@ public class TESTROOM extends SpawnRoom {
 		moveSpider();
 		moveFly();
 		pushBack();
+		collisionRocksMonstre();
+		collisionTearsRocks();
 		collisionWallsMonstre();
+		collisionWallsTear();
 		for (Hero m : this.monsters) {
 			for(Wall w : walls) {
 				w.collisionWalls(m);
@@ -230,6 +236,7 @@ public class TESTROOM extends SpawnRoom {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getY());
 						getHero().getTears().remove(t);
+						break;
 					}
 				}
 				if(t.getDirection().getY()<0) {
@@ -237,7 +244,7 @@ public class TESTROOM extends SpawnRoom {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getY());
 						getHero().getTears().remove(t);
-						
+						break;
 					  	}
 					}
 				if(t.getDirection().getX()>0) {
@@ -245,33 +252,73 @@ public class TESTROOM extends SpawnRoom {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addX(RoomInfos.HALF_TILE_SIZE.getX());
 						getHero().getTears().remove(t);
+						break;
 					}
 				 }
 				if(t.getDirection().getX()<0) {
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
-						m.takeDamage(getHero().getDamage());						
+						m.takeDamage(getHero().getDamage());				
 						m.getPosition().addX(-RoomInfos.HALF_TILE_SIZE.getX());
 						getHero().getTears().remove(t);
+						break;
+
 					}
 				}
 			}
 		 }
 	 }
 	
-	public void collisionWallsMonstre() {
+	public void collisionRocksMonstre() {
 		for(Hero m:this.monsters) {
-			for(Wall w: walls) {
+			for(Cailloux rock: getRocks()) {
+				rock.collision_rocks(m);
+				}
+			}
+		}
+	
+	public void collisionWallsMonstre() {
+		for (Hero m:this.monsters) {
+			for (Wall w: getWalls()) {
 				w.collisionWalls(m);
+				
 			}
 		}
 	}
 	
+	
 	/**
 	 * Fonction collision entre larmes et le mur qui fait disparaitre les larmes lors du contact
 	 */
-	public void collisionTearsWalls() {
+	public void collisionTearsRocks() {
 		for (Tear t:getHero().getTears()) {
-			for(Wall w: walls) {
+			for(Cailloux w: getRocks()) {
+				if(t.getDirection().getY()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getY()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getX()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getX()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+			}
+		}
+	}
+	
+	public void collisionWallsTear() {
+		for (Tear t:getHero().getTears()) {
+			for(Wall w: getWalls()) {
 				if(t.getDirection().getY()>0) {
 					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
 						getHero().getTears().remove(t);

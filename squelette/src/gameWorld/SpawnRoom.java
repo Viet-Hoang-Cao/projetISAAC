@@ -180,4 +180,10 @@ public class SpawnRoom extends Room {
 		deleteVectorOfWall(positionFromTileIndex(8, 4));
 	}
 
+	public List<Wall> getWalls() {
+		return walls;
+	}
+	
+	
+
 }
