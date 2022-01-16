@@ -184,6 +184,33 @@ public class Hero
 	}
 	
 	/**
+	 * 
+	 * @param position vers la ou l'on veut aller
+	 * @param size la taille afin de se stop lors qu'on est dans la hitbox de l'objet
+	 */
+	public void moveToPosition(Vector2 position, Vector2 size) {
+		if(position.getX() + size.getX()/2 < this.position.getX() || 
+				position.getX() - size.getX()/2 > this.position.getX()) {
+			if(position.getX()-this.getPosition().getX()>0 ) {
+				this.goRightNext();
+			}
+			else if(position.getX()-this.getPosition().getX()<0){
+				this.goLeftNext();
+			}
+		}
+		if(position.getY() + size.getY()/2 < this.position.getY() || 
+				position.getY() - size.getY()/2 > this.position.getY()) {
+			if(position.getY()-this.getPosition().getY()>0) {
+				this.goUpNext();
+			}
+			else if(position.getY()-this.getPosition().getY()<0) {
+				this.goDownNext();
+			}
+		}
+	}
+
+	
+	/**
 	 * Ancienne IA de extremement basique
 	 */
 	public void moveby1() {

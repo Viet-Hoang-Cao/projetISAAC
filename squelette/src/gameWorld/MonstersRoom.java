@@ -200,14 +200,14 @@ public class MonstersRoom extends SpawnRoom {
 		Random rand = new Random();
 		for (Hero m : this.monsters) {
 			if(m instanceof Bidulf || m instanceof Fly) {
-				m.moveToPosition(getHero().getPosition());
+				m.moveToPosition(getHero().getPosition(), getHero().getSize());
 			}
 			if(m instanceof Spider) {
-				if (CycleInfos.Cycle % 50 == 0) {
+				if (CycleInfos.Cycle % 75 == 0) {
 					Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
 					((Spider) m).setPOSITIONTOGO(pos);
 				}
-				m.moveToPosition(((Spider) m).getPOSITIONTOGO());
+				m.moveToPosition(((Spider) m).getPOSITIONTOGO(), RoomInfos.HALF_TILE_SIZE);
 			}
 		}
 	}

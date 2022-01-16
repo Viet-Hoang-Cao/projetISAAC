@@ -589,6 +589,7 @@ public class GameWorld
 			//hero.useBomb
 		}
 		if(StdDraw.isKeyPressed(Controls.goInvicible)) {
+			//TODO En creant un timer booleen avec cycle, on devrait eviter le bug
 			hero.invunerable();
 		}
 		if (StdDraw.isKeyPressed(Controls.goLight))
