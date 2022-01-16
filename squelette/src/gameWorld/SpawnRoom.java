@@ -41,6 +41,7 @@ public class SpawnRoom extends Room {
 		DrawWalls();
 
 		//Isaac position
+		StdDraw.setPenColor();
 		Vector2 position = positionFromTileIndex(6, 8);
 		StdDraw.text(position.getX(),position.getY(), getHero().getPosition().toString());
 		//ROOM COORD

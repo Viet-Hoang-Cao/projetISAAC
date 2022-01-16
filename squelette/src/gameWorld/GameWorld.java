@@ -3,6 +3,7 @@ package gameWorld;
 import gameobjects.Bidulf;
 import gameobjects.Hero;
 import gameobjects.ItemsTable;
+import items.Item;
 import libraries.StdDraw;
 import resources.Controls;
 import resources.CycleInfos;
@@ -530,13 +531,34 @@ public class GameWorld
 			}
 			
 		}
+		if(currentRoom instanceof MonstersRoom) {
+			Vector2 pos = ((MonstersRoom) currentRoom).emplacement_libre();
+			if(((MonstersRoom) currentRoom).getMonsters().isEmpty()) {
+				if(((MonstersRoom) currentRoom).isBossRoom()) {
+					Item I = Table.dropofTheBossRoom();
+					if(currentRoom.getItemRoomList().size()<100) { //pour le fun, permet de voir le pb du fait que 
+						//l'on ajoute les meme objets TODO si time : ajouter des objets different via la table
+						I.setPos(pos);
+						currentRoom.getItemRoomList().add(I);
+					}
+				}
+				else if(!((MonstersRoom) currentRoom).isMerchantRoom() && !((MonstersRoom) currentRoom).isSpawnRoom() ) {
+					if(!((MonstersRoom) currentRoom).isItemdropped()){
+						Item I = Table.dropofTheRoom();
+						I.setPos(pos);
+						currentRoom.getItemRoomList().add(I);
+						((MonstersRoom) currentRoom).setItemdropped(true);
+					}
+				}
+			}	
+		}
 		currentRoom.updateRoom();
 	}
 
 	public void drawGameObjects()
 	{
 		currentRoom.drawRoom();
-		currentRoom.draw_dungeon(this.Donjon);
+		currentRoom.draw_dungeon_Map(this.Donjon);
 	}
 	
 

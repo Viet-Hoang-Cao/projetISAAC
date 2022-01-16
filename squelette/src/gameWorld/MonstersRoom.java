@@ -28,6 +28,7 @@ public class MonstersRoom extends SpawnRoom {
 	private boolean bossRoom;
 	private boolean merchantRoom;
 	private MerchantRoom magasin;
+	private boolean Itemdropped;
 	
 	public MonstersRoom(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
@@ -38,6 +39,7 @@ public class MonstersRoom extends SpawnRoom {
 		this.spawnRoom     = false;
 		this.bossRoom      = false;
 		this.merchantRoom  = false;
+		this.Itemdropped   = false; 
 	}
 
 	public MonstersRoom(Hero hero) {
@@ -49,6 +51,7 @@ public class MonstersRoom extends SpawnRoom {
 		this.spawnRoom=false;
 		this.bossRoom=false;
 		this.merchantRoom=false;
+		this.Itemdropped=false;
 	}
 	
 	@Override
@@ -93,7 +96,12 @@ public class MonstersRoom extends SpawnRoom {
 			StdDraw.text(positionFromTileIndex(4, 3).getX(), positionFromTileIndex(4, 3).getY(), 
 					"Appuyer sur E pour utiliser les bombes");
 		}
-		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
+		if(isBossRoom()) {
+			if(monsters.isEmpty()) {
+				StdDraw.text(0.5, 0.5, "WIN");
+			}
+			else StdDraw.text(0.5, 0.5, "BOSS");
+		}
 		if(isMerchantRoom()) {
 			magasin.drawRoom();
 			StdDraw.text(0.5, 0.5, "MERCHANTROOM");
@@ -233,6 +241,13 @@ public class MonstersRoom extends SpawnRoom {
 		}
 	}
 	
+	public boolean inSpikesList(Vector2 pos) {
+		for(Spikes spike : spikes) {
+			if(pos.getX() == spike.getPos().getX() && pos.getY() == spike.getPos().getY())return true;
+		}
+		return false;
+	}
+	
 	public boolean inSpikesList(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
 		for(Spikes spike : spikes) {
@@ -255,6 +270,27 @@ public class MonstersRoom extends SpawnRoom {
 	public void addSpikesPhysics(int x, int y) {
 		Vector2 pos = positionFromTileIndex(x, y);
 		spikes.add(new Spikes(pos));
+	}
+	
+	
+	public boolean inpositionItemList(Vector2 pos) {
+		for(Item I : getItemRoomList()) {
+			if(pos.getX() == I.getPos().getX() && pos.getY() == I.getPos().getY())return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return un emplacement innocupe
+	 */
+	public Vector2 emplacement_libre() {
+		Random rand = new Random();
+		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
+		while(inRockList(pos)|| inSpikesList(pos)|| inpositionItemList(pos)) {
+			pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
+		}
+		return pos;
 	}
 	
 	/**
@@ -354,6 +390,15 @@ public class MonstersRoom extends SpawnRoom {
 	public void setSpawnRoom(boolean spawnRoom) {
 		this.spawnRoom = spawnRoom;
 	}
+	
+
+	public boolean isItemdropped() {
+		return Itemdropped;
+	}
+
+	public void setItemdropped(boolean itemdropped) {
+		Itemdropped = itemdropped;
+	}
 
 	public boolean isMerchantRoom() {
 		return merchantRoom;
@@ -362,6 +407,7 @@ public class MonstersRoom extends SpawnRoom {
 	public void setMerchantRoom(boolean merchantRoom) {
 		this.merchantRoom = merchantRoom;
 	}
+	
 	
 	/**
 	 * setup du magasin

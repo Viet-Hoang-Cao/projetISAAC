@@ -11,6 +11,7 @@ public class ItemsTable {
 	
 	List <Item> DropListRoom;
 	List <Item> DropListMerchant;
+	List <Item> DropListBossRoom;
 	
 
 	public ItemsTable() {
@@ -24,8 +25,10 @@ public class ItemsTable {
 		 * un item vendable
 		 */
 		this.DropListMerchant = new ArrayList<Item>();
+		this.DropListBossRoom = new ArrayList<Item>();
 		InitDropListRoom();
 		InitDropListMerchant();
+		InitDropListBoss();
 		
 	}
 	
@@ -91,6 +94,19 @@ public class ItemsTable {
 		DropListMerchant.add(new Blood_of_the_Martyr());
 	}
 	
+	public void InitDropListBoss() {
+		
+		DropListBossRoom.add(new Dime());
+		
+		DropListBossRoom.add(new Hp_Up());
+		
+		DropListBossRoom.add(new Jesuis_Juice());
+		
+		DropListBossRoom.add(new Magic_Mushroom());
+		
+		DropListBossRoom.add(new Blood_of_the_Martyr());
+	}
+	
 	/**
 	 * Ps : ne pas oublier de donner une position a l'item pour l'afficher. //TODO a faire dans Room
 	 * @return un Item correspond a la DropList
@@ -100,7 +116,7 @@ public class ItemsTable {
 		return DropListRoom.get(rand.nextInt(DropListRoom.size()));
 	}
 	/**
-	 * Ps : c'est une linkedList //TODO a faire dans merchantRoom
+	 * Ps : c'est une linkedList 
 	 * @return Une liste de 3 objet pour le magasin
 	 */
 	public List<Item> MerchantRoomSellingList() {
@@ -110,6 +126,15 @@ public class ItemsTable {
 			r.add(DropListMerchant.get(rand.nextInt(DropListMerchant.size())));
 		}
 		return r;
+	}
+	
+	/**
+	 * Ps : ne pas oublier de donner une position a l'item pour l'afficher.
+	 * @return un Item correspond a la DropList de boss
+	 */
+	public Item dropofTheBossRoom() {
+		Random rand = new Random();
+		return DropListBossRoom.get(rand.nextInt(DropListBossRoom.size()));
 	}
 	
 

@@ -1,6 +1,10 @@
 package gameWorld;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import gameobjects.Hero;
+import items.Item;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
@@ -13,17 +17,19 @@ public class Room
 	private Hero hero;
 	int tileNumberX;
 	int tileNumberY;
+	private List<Item> ItemRoomList;
 
 	public Room(Hero hero)
 	{
 		this.hero = hero;
+		this.ItemRoomList = new LinkedList<Item>();
 	}
 	
 	public Room(Hero hero, int tileNumberY, int tileNumberX) {
 		this.hero = hero;
 		this.tileNumberY = tileNumberY;
 		this.tileNumberX = tileNumberX;
-		
+		this.ItemRoomList = new LinkedList<Item>();
 	}
 
 
@@ -58,6 +64,9 @@ public class Room
 						RoomInfos.HALF_TILE_SIZE.getY());
 			}
 		}
+		for(Item I : ItemRoomList) {
+			if(I.getPos()!= null)I.drawitem();
+		}
 		hero.drawGameObject();
 	}
 	
@@ -79,7 +88,7 @@ public class Room
 		return hero;
 	}
 	
-	public void draw_dungeon(Room[][]tab) {
+	public void draw_dungeon_Map(Room[][]tab) {
 		Vector2 position = positionFromTileIndex(8, 6);
 		StdDraw.setPenColor(StdDraw.BLUE);
 		for(int i =0; i<tab.length;i++) {
@@ -147,8 +156,21 @@ public class Room
 		return 0;
 	}
 	
+	/**
+	 * se fait override dans monsterroom, soit ca , soit instance of en amont
+	 */
 	public void killAllMonster() {
 		
 	}
+
+	public List<Item> getItemRoomList() {
+		return ItemRoomList;
+	}
+
+	public void setItemRoomList(List<Item> itemRoomList) {
+		ItemRoomList = itemRoomList;
+	}
+	
+	
 	
 }
