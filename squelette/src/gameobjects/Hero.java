@@ -55,7 +55,7 @@ public class Hero
 		this.invicible=false;
 		this.tempInvunerability=false;
 		this.Tears= new LinkedList<>();
-		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.HALF_TILE_SIZE.getX();
+		this.portee=4*RoomInfos.TILE_SIZE.getX()+RoomInfos.HALF_TILE_SIZE.getX();
 		this.superSpeed = false;
 		this.POWAAAAAA = false;
 	}
@@ -73,7 +73,7 @@ public class Hero
 		this.Inventaire=new Inventory();
 		this.invicible=false;
 		this.tempInvunerability=false;
-		this.portee=2*RoomInfos.TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX();
+		this.portee=4*RoomInfos.TILE_SIZE.getX()+RoomInfos.TILE_SIZE.getX();
 		this.superSpeed = false;
 		this.POWAAAAAA = false;
 	}

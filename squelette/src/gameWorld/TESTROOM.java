@@ -24,8 +24,8 @@ import gameobjects.Tear;
 
 public class TESTROOM extends SpawnRoom {
 
-	private LinkedList<Tear> Tears;
 	private LinkedList<Hero> monsters;
+	LinkedList<Wall>Walls;
 	
 	public static void main(String[] args)
 	{
@@ -93,6 +93,7 @@ public class TESTROOM extends SpawnRoom {
 		moveSpider();
 		moveFly();
 		pushBack();
+		collisionWallsMonstre();
 		for (Hero m : this.monsters) {
 			for(Wall w : walls) {
 				w.collisionWalls(m);
@@ -228,42 +229,68 @@ public class TESTROOM extends SpawnRoom {
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getY());
-						Tears.remove(t);
+						getHero().getTears().remove(t);
 					}
 				}
 				if(t.getDirection().getY()<0) {
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getY());
-						Tears.remove(t);
+						getHero().getTears().remove(t);
+						
 					  	}
 					}
 				if(t.getDirection().getX()>0) {
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
-						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getX());
-						Tears.remove(t);
+						m.getPosition().addX(RoomInfos.HALF_TILE_SIZE.getX());
+						getHero().getTears().remove(t);
 					}
 				 }
 				if(t.getDirection().getX()<0) {
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
-						m.takeDamage(getHero().getDamage());
-						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getX());
-						Tears.remove(t);
+						m.takeDamage(getHero().getDamage());						
+						m.getPosition().addX(-RoomInfos.HALF_TILE_SIZE.getX());
+						getHero().getTears().remove(t);
 					}
 				}
 			}
 		 }
 	 }
 	
+	public void collisionWallsMonstre() {
+		for(Hero m:this.monsters) {
+			for(Wall w: walls) {
+				w.collisionWalls(m);
+			}
+		}
+	}
+	
 	/**
 	 * Fonction collision entre larmes et le mur qui fait disparaitre les larmes lors du contact
 	 */
 	public void collisionTearsWalls() {
-		for (Tear t:Tears) {
-			for(Wall w: walls) {				
-				if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { //je ne sais pas trop ou trouve pour le size du mur :|
-					Tears.remove(t);
+		for (Tear t:getHero().getTears()) {
+			for(Wall w: walls) {
+				if(t.getDirection().getY()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getY()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getX()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
+				}
+				if(t.getDirection().getX()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+					}
 				}
 			}
 		}
