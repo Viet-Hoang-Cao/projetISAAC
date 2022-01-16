@@ -15,6 +15,7 @@ import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
 import resources.FlyInfos;
+import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 import resources.SpiderInfos;
@@ -118,6 +119,10 @@ public class MonstersRoom extends SpawnRoom {
 		if(isMerchantRoom()) {
 			magasin.updateRoom(getHero());
 		}
+		
+		//collisions larme et rochers/murs
+		collisionTearsRocks();
+		collisionWallsTear();
 		
 		super.updateRoom();
 	}
@@ -469,6 +474,70 @@ public class MonstersRoom extends SpawnRoom {
 		this.magasin= new MerchantRoom(ItemAVendre);
 	}
 	
+	/**
+	 * Fonction collision entre larmes et le mur qui fait disparaitre les larmes lors du contact
+	 */
+	public void collisionTearsRocks() {
+		for (Tear t:getHero().getTears()) {
+			for(Cailloux w: getRocks()) {
+				if(t.getDirection().getY()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getY()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getX()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getX()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	public void collisionWallsTear() {
+		for (Tear t:getHero().getTears()) {
+			for(Wall w: getWalls()) {
+				if(t.getDirection().getY()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getY()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getX()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+				if(t.getDirection().getX()<0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
+						getHero().getTears().remove(t);
+						break;
+					}
+				}
+			}
+		}
+	}
 	
 
 }
