@@ -2,6 +2,7 @@ package gameWorld;
 
 import gameobjects.Bidulf;
 import gameobjects.Hero;
+import gameobjects.ItemsTable;
 import libraries.StdDraw;
 import resources.Controls;
 import resources.CycleInfos;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class GameWorld
 {
+	private ItemsTable Table;
 	private Room currentRoom;
 	private Hero hero;
 	private MonstersRoom[][] Donjon;
@@ -27,6 +29,7 @@ public class GameWorld
 	// A world needs a hero
 	public GameWorld(Hero hero)
 	{
+		this.Table = new ItemsTable();
 		this.hero = hero;
 		//currentRoom = new Room(hero);
 		this.Donjon = new MonstersRoom[4][4];
@@ -57,12 +60,23 @@ public class GameWorld
 				}
 			}
 		}
+		//On recup le DJ sous forme de Liste afin de simplifier le travail dessus
 		List<MonstersRoom> roomListDJ = createRoomList();
+		
 		//Le spawn va etre defini aleatoirement
 		MonstersRoom spawn = roomListDJ.get(rand.nextInt(roomListDJ.size()));
 		spawn.setSpawnRoom(true);
 		mostfarawayfrom(roomListDJ, spawn).setBossRoom(true); // on choisit la room la plus eloigne
-		//cailloux ? caillou. 
+		
+		//magasin
+		MonstersRoom magasin = roomListDJ.get(rand.nextInt(roomListDJ.size()));
+		while(magasin.isBossRoom() || magasin.isSpawnRoom()) {
+			magasin = roomListDJ.get(rand.nextInt(roomListDJ.size()));
+		}
+		magasin.setMerchantRoom(true);
+		magasin.setupmagasin(Table.MerchantRoomSellingList());
+		
+		//cailloux ? caillou. And Spikes.
 		for(MonstersRoom r : roomListDJ) {
 			if(!r.isBossRoom() && !r.isMerchantRoom() && !r.isSpawnRoom()) {
 				r.generateRock();
@@ -547,6 +561,10 @@ public class GameWorld
 		if (StdDraw.isKeyPressed(Controls.goLeft))
 		{
 			hero.goLeftNext();
+		}
+		if (StdDraw.isKeyPressed(Controls.Bomb))
+		{
+			//hero.useBomb
 		}
 		if(StdDraw.isKeyPressed(Controls.goInvicible)) {
 			hero.invunerable();

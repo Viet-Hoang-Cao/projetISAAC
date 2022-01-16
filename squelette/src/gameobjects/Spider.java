@@ -1,17 +1,25 @@
 package gameobjects;
 import libraries.StdDraw;
 import libraries.Vector2;
+import resources.RoomInfos;
+
 import java.util.List;
 import java.util.Random;
 
 public class Spider extends Hero {
+	
+	private Vector2 POSITIONTOGO;
+	
 	public Spider(Vector2 position, Vector2 size, double speed, String imagepath, int LP, int damage) {
 		super(position, size, speed, imagepath, LP, damage);
-		
+		Random rand = new Random();
+		this.POSITIONTOGO= new Vector2(rand.nextDouble(),rand.nextDouble());
 		
 		}
 	public Spider(Vector2 position, Vector2 size, double speed, String imagepath) {
 		super(position, size, speed, imagepath, 6, 1);
+		Random rand = new Random();
+		this.POSITIONTOGO= new Vector2(rand.nextDouble(),rand.nextDouble());
 		}
 	
 	public void updateObjects() {
@@ -58,5 +66,13 @@ public class Spider extends Hero {
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),
 				0);}
-
+	
+	public Vector2 getPOSITIONTOGO() {
+		return POSITIONTOGO;
+	}
+	public void setPOSITIONTOGO(Vector2 pOSITIONTOGO) {
+		POSITIONTOGO = pOSITIONTOGO;
+	}
+	
+	
 }

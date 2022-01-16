@@ -25,7 +25,8 @@ public class Half_Heart extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HALF_HEART_PICKABLE, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HALF_HEART_PICKABLE, 
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 
 	}
 
@@ -33,6 +34,12 @@ public class Half_Heart extends Item {
 	public void effect(Hero h) {
 		h.setLP(h.getLP()+1);
 		if(h.getLP() >h.getMaxHP()) h.setLP(h.getMaxHP());
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

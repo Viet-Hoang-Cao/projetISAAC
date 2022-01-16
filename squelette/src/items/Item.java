@@ -10,7 +10,11 @@ public abstract class Item {
 	private Vector2 pos;
 	private boolean used;
 	private int price;
+	//private Vector2 size //add si time
 
+	/**
+	 *\/!\/ Un item sans position ne doit pas etre dessine !!
+	 */
 	public Item() {
 		this.pos=null;
 		this.used=false;
@@ -24,8 +28,7 @@ public abstract class Item {
 	}
 	
 	public boolean physics(Hero h) {
-		if(Physics.rectangleCollision(h.getPosition().addVector(h.getNormalizedDirection()),
-				h.getSize(), pos, RoomInfos.HALF_TILE_SIZE)) {
+		if(Physics.rectangleCollision(h.getPosition(), h.getSize(), pos, RoomInfos.HALF_TILE_SIZE)) {
 			return true;
 		}
 		return false;
@@ -33,6 +36,7 @@ public abstract class Item {
 	
 	abstract public void effect();
 	abstract public void effect(Hero h);
+	abstract public void removeeffect(Hero h);
 	
 	abstract public void drawitem();
 

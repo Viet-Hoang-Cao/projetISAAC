@@ -61,6 +61,8 @@ public class ItemsTable {
 		DropListRoom.add(new Red_Heart());
 		DropListRoom.add(new Red_Heart());
 		
+		DropListRoom.add(new Blood_of_the_Martyr());
+		
 	}
 	private void InitDropListMerchant() {
 		DropListMerchant.add(new Bomb());
@@ -85,6 +87,8 @@ public class ItemsTable {
 		DropListMerchant.add(new Red_Heart());
 		DropListMerchant.add(new Red_Heart());
 		DropListMerchant.add(new Red_Heart());
+		
+		DropListMerchant.add(new Blood_of_the_Martyr());
 	}
 	
 	/**
@@ -99,11 +103,11 @@ public class ItemsTable {
 	 * Ps : c'est une linkedList //TODO a faire dans merchantRoom
 	 * @return Une liste de 3 objet pour le magasin
 	 */
-	public List<Item> MerchantRoom() {
+	public List<Item> MerchantRoomSellingList() {
 		Random rand = new Random();
 		List<Item> r = new LinkedList<Item>();
 		for(int i = 0 ; i<3; i++) {
-			r.add(DropListMerchant.get(rand.nextInt(DropListRoom.size())));
+			r.add(DropListMerchant.get(rand.nextInt(DropListMerchant.size())));
 		}
 		return r;
 	}

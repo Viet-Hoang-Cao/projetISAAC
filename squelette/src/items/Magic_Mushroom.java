@@ -27,7 +27,8 @@ public class Magic_Mushroom extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.MAGIC_MUSHROOM, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.MAGIC_MUSHROOM, 
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 	}
 
 	@Override
@@ -37,6 +38,12 @@ public class Magic_Mushroom extends Item {
 		h.setLP(h.getMaxHP());
 		h.setSpeed(h.getSpeed()+h.getSpeed()/3);
 		h.setSize(h.getSize().scalarMultiplication(1.2));
+		
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		// TODO Auto-generated method stub
 		
 	}
 

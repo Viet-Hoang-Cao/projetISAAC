@@ -26,7 +26,8 @@ public class Hp_Up extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HP_UP, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HP_UP, 
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 
 	}
 
@@ -35,6 +36,12 @@ public class Hp_Up extends Item {
 		h.setMaxHP(h.getMaxHP()+2);
 		h.setLP(h.getMaxHP());
 		
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		h.setMaxHP(h.getMaxHP()-2);
+		if(h.getLP()>h.getMaxHP())h.setLP(h.getMaxHP());
 	}
 
 }

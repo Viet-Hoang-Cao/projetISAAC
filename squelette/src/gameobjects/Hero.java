@@ -264,6 +264,7 @@ public class Hero
 			a.addX(portee);
 			if(Physics.rectangleCollision(a, RoomInfos.HALF_TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) {
 				Tears.remove(t);
+				break; //permet d'eviter de faire bugg la liste
 			}
 		}
 		if(t.getDirection().getX()<0) {
@@ -271,6 +272,7 @@ public class Hero
 			a.addX(-portee);
 			if(Physics.rectangleCollision(a, RoomInfos.HALF_TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) {
 				Tears.remove(t);
+				break;
 			}
 		}
 		if(t.getDirection().getY()>0) {
@@ -278,6 +280,7 @@ public class Hero
 			a.addY(portee);
 			if(Physics.rectangleCollision(a, RoomInfos.HALF_TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) {
 				Tears.remove(t);
+				break;
 			}
 		}
 		if(t.getDirection().getY()<0) {
@@ -285,6 +288,7 @@ public class Hero
 			a.addY(-portee);
 			if(Physics.rectangleCollision(a, RoomInfos.HALF_TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) {
 				Tears.remove(t);
+				break;
 			}
 		}
 		}

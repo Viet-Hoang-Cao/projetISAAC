@@ -166,13 +166,13 @@ public class TESTROOM extends SpawnRoom {
 	 */
 	public void moveSpider() {
 		Random rand = new Random();
-		Vector2 pos = SpiderInfos.POSITIONTOGO;
+		Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
 		if (CycleInfos.Cycle % 50 == 0) {
 			pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
-			SpiderInfos.POSITIONTOGO = pos;
 		}
 		for (Hero s : this.monsters) {
 			if (s instanceof Spider) {
+				((Spider) s).setPOSITIONTOGO(pos);
 				((Spider) s).moveToPosition(pos);
 			}
 		}

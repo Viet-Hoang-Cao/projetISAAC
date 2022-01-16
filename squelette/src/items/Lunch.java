@@ -25,7 +25,8 @@ public class Lunch extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.LUNCH, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.LUNCH,
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 
 	}
 
@@ -33,6 +34,12 @@ public class Lunch extends Item {
 	public void effect(Hero h) {
 		h.setMaxHP(h.getMaxHP()+2);
 		h.setLP(h.getLP()+2);
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

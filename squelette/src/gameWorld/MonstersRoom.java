@@ -1,19 +1,19 @@
 package gameWorld;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import gameobjects.Bidulf;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
-import gameobjects.Tear;
+import items.Item;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
 import resources.FlyInfos;
-import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 import resources.SpiderInfos;
@@ -27,6 +27,7 @@ public class MonstersRoom extends SpawnRoom {
 	private boolean spawnRoom;
 	private boolean bossRoom;
 	private boolean merchantRoom;
+	private MerchantRoom magasin;
 	
 	public MonstersRoom(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
@@ -71,12 +72,14 @@ public class MonstersRoom extends SpawnRoom {
 			getHero().setTempInvunerability(false);
 		}
 		
-		
-
-		
 		for (Hero m : monsters) {
 			m.updateGameObject();
 		}
+		
+		if(isMerchantRoom()) {
+			magasin.updateRoom(getHero());
+		}
+		
 		super.updateRoom();
 	}
 	
@@ -87,10 +90,14 @@ public class MonstersRoom extends SpawnRoom {
 		drawSpikes();
 		if(isSpawnRoom()) {
 			StdDraw.text(0.5, 0.5, "SPAWN" );
-			StdDraw.text(positionFromTileIndex(4, 3).getX(), positionFromTileIndex(4, 3).getY(), "Appuyer sur E pour utiliser les bombes");
+			StdDraw.text(positionFromTileIndex(4, 3).getX(), positionFromTileIndex(4, 3).getY(), 
+					"Appuyer sur E pour utiliser les bombes");
 		}
 		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
-		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
+		if(isMerchantRoom()) {
+			magasin.drawRoom();
+			StdDraw.text(0.5, 0.5, "MERCHANTROOM");
+		}
 		drawmonsters();
 		getHero().getInventaire().drawInventory(positionFromTileIndex(1, 7).getX(), positionFromTileIndex(1, 7).getY());
 	}
@@ -131,12 +138,12 @@ public class MonstersRoom extends SpawnRoom {
 		int nbMonsterSpider = rand.nextInt(4);
 		int nbMonsterFly = rand.nextInt(3);
 		Vector2 pos = positionAlea();
-		/*for(int i=0; i<nbMonsterSpider; i++) {
+		for(int i=0; i<nbMonsterSpider; i++) {
 			while(posinMonstersList(pos) || inRockList(pos)) {
 				pos = positionAlea();
 			}
-			addmonsterSpider(new Spider(pos, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER));
-		}*/
+			addmonster(new Spider(pos, SpiderInfos.SPIDER_SIZE, SpiderInfos.SPIDER_SPEED, ImagePaths.SPIDER));
+		}
 		for(int i=0; i<nbMonsterFly; i++) {
 			while(posinMonstersList(pos) || inRockList(pos)) {
 				pos = positionAlea();
@@ -148,15 +155,15 @@ public class MonstersRoom extends SpawnRoom {
 	public void moveMonsters() {
 		Random rand = new Random();
 		for (Hero m : this.monsters) {
-			if(m.getImagePath()==ImagePaths.BIDULF || m.getImagePath() == ImagePaths.FLY) {
+			if(m instanceof Bidulf || m instanceof Fly) {
 				m.moveToPosition(getHero().getPosition());
 			}
-			if(m.getImagePath()==ImagePaths.SPIDER) {
+			if(m instanceof Spider) {
 				if (CycleInfos.Cycle % 50 == 0) {
 					Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
-					SpiderInfos.POSITIONTOGO = pos;
+					((Spider) m).setPOSITIONTOGO(pos);
 				}
-				m.moveToPosition(SpiderInfos.POSITIONTOGO);
+				m.moveToPosition(((Spider) m).getPOSITIONTOGO());
 			}
 		}
 	}
@@ -354,6 +361,18 @@ public class MonstersRoom extends SpawnRoom {
 
 	public void setMerchantRoom(boolean merchantRoom) {
 		this.merchantRoom = merchantRoom;
+	}
+	
+	/**
+	 * setup du magasin
+	 */
+	public void setupmagasin(List<Item> ItemAVendre) {
+		int i =0;
+		for(Item I : ItemAVendre) {
+			I.setPos(positionFromTileIndex(2+i, 3)); //La liste devrait faire 3 items
+			i+=2;
+		}
+		this.magasin= new MerchantRoom(ItemAVendre);
 	}
 	
 

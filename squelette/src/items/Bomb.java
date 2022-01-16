@@ -7,6 +7,7 @@ import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
+import resources.RoomInfos;
 
 public class Bomb extends Item {
 
@@ -32,12 +33,19 @@ public class Bomb extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.BOMB);
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.BOMB, 
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 	}
 
 	@Override
 	public void effect(Hero h) {
 		h.getInventaire().addBomb();
+		
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		// TODO Auto-generated method stub
 		
 	}
 

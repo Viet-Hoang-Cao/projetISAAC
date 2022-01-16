@@ -25,13 +25,20 @@ public class Penny extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.COIN, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.COIN, 
+				RoomInfos.HALF_TILE_SIZE.getX(),RoomInfos.HALF_TILE_SIZE.getY());
 
 	}
 
 	@Override
 	public void effect(Hero h) {
 		h.getInventaire().addPenny();
+		
+	}
+
+	@Override
+	public void removeeffect(Hero h) {
+		// TODO Auto-generated method stub
 		
 	}
 
