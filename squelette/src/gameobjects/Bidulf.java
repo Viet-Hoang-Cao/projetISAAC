@@ -1,6 +1,5 @@
 package gameobjects;
 
-import libraries.StdDraw;
 import libraries.Vector2;
 import resources.FlyInfos;
 import resources.ImagePaths;
@@ -31,7 +30,8 @@ public class Bidulf extends Hero {
 	
 	@Override
 	public void updateGameObject() {
-		//fly.updateGameObject();
+		fly.updateGameObject();
+		spider.updateGameObject();
 		
 		
 		//problem de ref donc manual test

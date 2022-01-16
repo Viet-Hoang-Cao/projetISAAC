@@ -1,6 +1,5 @@
 package gameWorld;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -25,7 +24,6 @@ import gameobjects.Tear;
 public class TESTROOM extends MonstersRoom {
 
 	private LinkedList<Hero> monsters;
-	private LinkedList<Wall> Walls;
 
 	
 	public static void main(String[] args)
@@ -286,62 +284,7 @@ public class TESTROOM extends MonstersRoom {
 	}
 	
 	
-	/**
-	 * Fonction collision entre larmes et le mur qui fait disparaitre les larmes lors du contact
-	 */
-	public void collisionTearsRocks() {
-		for (Tear t:getHero().getTears()) {
-			for(Cailloux w: getRocks()) {
-				if(t.getDirection().getY()>0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getY()<0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getX()>0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getX()<0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-			}
-		}
-	}
 	
-	public void collisionWallsTear() {
-		for (Tear t:getHero().getTears()) {
-			for(Wall w: getWalls()) {
-				if(t.getDirection().getY()>0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getY()<0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getX()>0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-				if(t.getDirection().getX()<0) {
-					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, t.getPosition(), HeroInfos.TEAR_SIZE)) { 
-						getHero().getTears().remove(t);
-					}
-				}
-			}
-		}
-	}
 		
 
 	@Override

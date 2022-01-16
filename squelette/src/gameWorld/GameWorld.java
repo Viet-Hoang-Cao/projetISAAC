@@ -7,9 +7,7 @@ import items.Item;
 import libraries.StdDraw;
 import resources.Controls;
 import resources.CycleInfos;
-import resources.HeroInfos;
-import resources.ImagePaths;
-import resources.RoomInfos;
+
 
 import java.util.Random;
 

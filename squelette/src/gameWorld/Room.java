@@ -8,7 +8,6 @@ import items.Item;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
-import resources.ImagePaths;
 import resources.RoomInfos;
 
 public class Room

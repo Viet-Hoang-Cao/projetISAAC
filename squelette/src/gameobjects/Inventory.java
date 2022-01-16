@@ -4,7 +4,6 @@ import items.Bomb;
 import items.Item;
 import libraries.StdDraw;
 import libraries.Vector2;
-import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 

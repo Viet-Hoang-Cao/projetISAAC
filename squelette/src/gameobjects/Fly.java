@@ -1,9 +1,8 @@
 package gameobjects;
 
-import libraries.StdDraw;
+
 import libraries.Vector2;
-//import java.util.Random;
-import resources.CycleInfos;
+
 import resources.RoomInfos;
 
 public class Fly extends Hero{

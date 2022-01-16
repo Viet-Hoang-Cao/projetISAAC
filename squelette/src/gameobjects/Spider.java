@@ -1,9 +1,6 @@
 package gameobjects;
 import libraries.StdDraw;
 import libraries.Vector2;
-import resources.RoomInfos;
-
-import java.util.List;
 import java.util.Random;
 
 public class Spider extends Hero {

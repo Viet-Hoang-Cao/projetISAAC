@@ -1,7 +1,6 @@
 package items;
 
 import java.util.List;
-import java.util.Random;
 
 import gameobjects.Hero;
 import libraries.StdDraw;
