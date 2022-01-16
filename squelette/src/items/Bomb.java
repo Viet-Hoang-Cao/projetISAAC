@@ -25,7 +25,7 @@ public class Bomb extends Item {
 	}
 	
 	public void effect(List<Hero> m) {
-		
+		//TODO A faire
 	}
 
 	@Override

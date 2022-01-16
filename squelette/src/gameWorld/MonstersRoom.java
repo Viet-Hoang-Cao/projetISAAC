@@ -85,7 +85,10 @@ public class MonstersRoom extends SpawnRoom {
 		super.drawRoom();
 		drawRocks();
 		drawSpikes();
-		if(isSpawnRoom())StdDraw.text(0.5, 0.5, "SPAWN");
+		if(isSpawnRoom()) {
+			StdDraw.text(0.5, 0.5, "SPAWN" );
+			StdDraw.text(positionFromTileIndex(4, 3).getX(), positionFromTileIndex(4, 3).getY(), "Appuyer sur E pour utiliser les bombes");
+		}
 		if(isBossRoom())StdDraw.text(0.5, 0.5, "BOSS");
 		if(isMerchantRoom())StdDraw.text(0.5, 0.5, "MERCHANTROOM");
 		drawmonsters();

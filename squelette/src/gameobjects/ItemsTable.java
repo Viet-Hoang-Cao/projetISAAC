@@ -120,33 +120,6 @@ public class ItemsTable {
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.MAGIC_MUSHROOM);
 	}
 	
-	public void randomDrawLunch(List<Vector2> wallsPhysics) {
-		Random rand = new Random();
-		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		while(collisionsmuretObjet(pos, wallsPhysics)) {
-			pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		}
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.LUNCH);
-	}
-	
-	public void randomDrawJesuis_Juice(List<Vector2> wallsPhysics) {
-		Random rand = new Random();
-		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		while(collisionsmuretObjet(pos, wallsPhysics)) {
-			pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		}
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.JESUS_JUICE);
-	}
-	
-	public void randomDrawHp_Up(List<Vector2> wallsPhysics) {
-		Random rand = new Random();
-		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		while(collisionsmuretObjet(pos, wallsPhysics)) {
-			pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		}
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.HP_UP);
-	}
-	
 	
 	/**
 	 * Convert a tile index to a 0-1 position.
