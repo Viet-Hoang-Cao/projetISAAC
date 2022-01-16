@@ -7,7 +7,6 @@ import resources.CycleInfos;
 import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -402,6 +401,9 @@ public class Hero
 	public int getLP() {
 		return LP;
 	}
+	public void setLP(int lP) {
+		LP = lP;
+	}
 	public boolean isInvicible() {
 		return invicible;
 	}
@@ -430,6 +432,19 @@ public class Hero
 	public void setTears(List<Tear> tears) {
 		Tears = tears;
 	}
+	public double getSpeedTear() {
+		return speedTear;
+	}
+	public void setSpeedTear(double speedTear) {
+		this.speedTear = speedTear;
+	}
+	public double getPortee() {
+		return portee;
+	}
+	public void setPortee(double portee) {
+		this.portee = portee;
+	}
+	
 	
 }
 

@@ -1,71 +1,112 @@
 package gameobjects;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import libraries.Physics;
-import libraries.StdDraw;
-import libraries.Vector2;
-import resources.ImagePaths;
-import resources.RoomInfos;
+
+import items.*;
 
 public class ItemsTable {
 	
-	double bombsDroprate;
-	double keyDroprate;
-	double pennyDroprate;
-	double nickelDroprate;
-	double dimeDroprate;
-	double red_heartDroprate;
-	double red_half_heartDroprate;
-	double magic_MushroomDroprate;
-	double lunchDroprate;
-	double jesuis_JuiceDroprate;
-	double hp_upDroprate;
+	List <Item> DropListRoom;
+	List <Item> DropListMerchant;
 	
 
 	public ItemsTable() {
-		this.bombsDroprate=0.5;
-		this.keyDroprate=0.35;
-		this.pennyDroprate=0.6;
-		this.nickelDroprate=0.3;
-		this.dimeDroprate=0.05;
-		this.red_heartDroprate=0.4;
-		this.red_half_heartDroprate=0.6;
-		this.magic_MushroomDroprate=0.2;
-		this.lunchDroprate=0.1;
-		this.jesuis_JuiceDroprate=0.1;
-		this.hp_upDroprate=0.1;
+		this.DropListRoom = new ArrayList<Item>(); //L'instanciation se fera une fois
+		/*
+		 * Ok, donc celle la elle va merite une explication. Chaque item va avoir un "poid"
+		 * Une iteration dans la liste, poid == 1, 2 iteration poid == 2
+		 * Les poids les faible sont donc les items les plus rare
+		 * Il y aura une initialisation de la table au lancement du jeu puis il n'y aura que des acces a celle-ci
+		 * d'ou une arraylist.  Il sera rajouter une Lise d'item specifique au marchant. Cela evitera de boucler tant qu'on ne trouve pas
+		 * un item vendable
+		 */
+		this.DropListMerchant = new ArrayList<Item>();
+		InitDropListRoom();
+		InitDropListMerchant();
+		
 	}
 	
-	public void RandomDropRoon(Hero H) {
+	private void InitDropListRoom() {
+		DropListRoom.add(new Bomb());
+		DropListRoom.add(new Bomb());
+		DropListRoom.add(new Bomb());
+		
+		DropListRoom.add(new Dime());
+		
+		DropListRoom.add(new Half_Heart());
+		DropListRoom.add(new Half_Heart());
+		DropListRoom.add(new Half_Heart());
+		
+		DropListRoom.add(new Hp_Up());
+		
+		DropListRoom.add(new Jesuis_Juice());
+		
+		DropListRoom.add(new Key());
+		
+		DropListRoom.add(new Lunch());
+		DropListRoom.add(new Lunch());
+		
+		DropListRoom.add(new Magic_Mushroom());
+		
+		DropListRoom.add(new Nickel());
+		DropListRoom.add(new Nickel());
+		
+		DropListRoom.add(new Penny());
+		DropListRoom.add(new Penny());
+		DropListRoom.add(new Penny());
+		
+		DropListRoom.add(new Red_Heart());
+		DropListRoom.add(new Red_Heart());
+		
+	}
+	private void InitDropListMerchant() {
+		DropListMerchant.add(new Bomb());
+		DropListMerchant.add(new Bomb());
+		DropListMerchant.add(new Bomb());
+		
+		DropListMerchant.add(new Half_Heart());
+		DropListMerchant.add(new Half_Heart());
+		DropListMerchant.add(new Half_Heart());
+		
+		DropListMerchant.add(new Hp_Up());
+		
+		DropListMerchant.add(new Jesuis_Juice());
+		
+		DropListMerchant.add(new Key());
+		DropListMerchant.add(new Key());
+		
+		DropListMerchant.add(new Lunch());
+		
+		DropListMerchant.add(new Magic_Mushroom());
+		
+		DropListMerchant.add(new Red_Heart());
+		DropListMerchant.add(new Red_Heart());
+		DropListMerchant.add(new Red_Heart());
+	}
+	
+	/**
+	 * Ps : ne pas oublier de donner une position a l'item pour l'afficher. //TODO a faire dans Room
+	 * @return un Item correspond a la DropList
+	 */
+	public Item dropofTheRoom() {
 		Random rand = new Random();
-		double drop = rand.nextDouble();
-		//if(drop<)
+		return DropListRoom.get(rand.nextInt(DropListRoom.size()));
 	}
-	
 	/**
-	 * renvoie true si l'objet est en collision avec les murs
+	 * Ps : c'est une linkedList //TODO a faire dans merchantRoom
+	 * @return Une liste de 3 objet pour le magasin
 	 */
-	public boolean collisionsmuretObjet(Vector2 pos, List<Vector2> wallsPhysics ) {
-		for(Vector2 v: wallsPhysics) {
-			if(Physics.rectangleCollision(pos, RoomInfos.TILE_SIZE, v, RoomInfos.TILE_SIZE)) {
-				return true;
-			}
+	public List<Item> MerchantRoom() {
+		Random rand = new Random();
+		List<Item> r = new LinkedList<Item>();
+		for(int i = 0 ; i<3; i++) {
+			r.add(DropListMerchant.get(rand.nextInt(DropListRoom.size())));
 		}
-		return false;
+		return r;
 	}
 	
-	/**
-	 * Convert a tile index to a 0-1 position.
-	 * 
-	 * @param indexX
-	 * @param indexY
-	 * @return
-	 */
-	private Vector2 positionFromTileIndex(int indexX, int indexY)
-	{
-		return new Vector2(indexX * RoomInfos.TILE_WIDTH + RoomInfos.HALF_TILE_SIZE.getX(),
-				indexY * RoomInfos.TILE_HEIGHT + RoomInfos.HALF_TILE_SIZE.getY());
-	}
 
 }

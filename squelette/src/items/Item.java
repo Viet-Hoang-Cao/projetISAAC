@@ -9,15 +9,18 @@ public abstract class Item {
 	
 	private Vector2 pos;
 	private boolean used;
+	private int price;
 
 	public Item() {
 		this.pos=null;
 		this.used=false;
+		this.price = 0;
 	}
 	
 	public Item(Vector2 pos) {
 		this.pos = pos;
 		this.used=false;
+		this.price = 0;
 	}
 	
 	public boolean physics(Hero h) {
@@ -29,6 +32,7 @@ public abstract class Item {
 	}
 	
 	abstract public void effect();
+	abstract public void effect(Hero h);
 	
 	abstract public void drawitem();
 
@@ -47,6 +51,15 @@ public abstract class Item {
 	public void setUsed(boolean used) {
 		this.used = used;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
 	
 	
 

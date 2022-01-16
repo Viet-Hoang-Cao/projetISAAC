@@ -1,5 +1,6 @@
 package items;
 
+import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
@@ -26,6 +27,12 @@ public class Nickel extends Item {
 	public void drawitem() {
 		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.NICKEL, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
 
+	}
+
+	@Override
+	public void effect(Hero h) {
+		h.getInventaire().addNickel();
+		
 	}
 
 }

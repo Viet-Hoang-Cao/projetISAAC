@@ -12,10 +12,12 @@ public class Bomb extends Item {
 
 	public Bomb() {
 		super();
+		setPrice(5);
 	}
 
 	public Bomb(Vector2 pos) {
 		super(pos);
+		setPrice(5);
 	}
 
 	@Override
@@ -31,6 +33,12 @@ public class Bomb extends Item {
 	@Override
 	public void drawitem() {
 		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.BOMB);
+	}
+
+	@Override
+	public void effect(Hero h) {
+		h.getInventaire().addBomb();
+		
 	}
 
 }
