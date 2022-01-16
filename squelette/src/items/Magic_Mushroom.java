@@ -36,8 +36,8 @@ public class Magic_Mushroom extends Item {
 		h.setDamage(h.getDamage()+1);
 		h.setMaxHP(h.getMaxHP()+2);
 		h.setLP(h.getMaxHP());
-		h.setSpeed(h.getSpeed()+h.getSpeed()/3);
-		h.setSize(h.getSize().scalarMultiplication(1.2));
+		if(h.getSpeed() < 0.03)h.setSpeed(h.getSpeed()+h.getSpeed()/3);
+		if(h.getSize().getY() <RoomInfos.TILE_SIZE.getY()-RoomInfos.TILE_SIZE.getY()/9)h.setSize(h.getSize().scalarMultiplication(1.1));
 		
 	}
 

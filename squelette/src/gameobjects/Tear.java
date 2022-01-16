@@ -1,6 +1,7 @@
 package gameobjects;
 
 
+import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.HeroInfos;
@@ -31,6 +32,16 @@ public class Tear {
 		  StdDraw.picture(position.getX(),
 		  position.getY(), ImagePaths.TEAR,
 		  HeroInfos.TEAR_SIZE.getX(), HeroInfos.TEAR_SIZE.getY()); } 
+	
+	/**
+	 * 
+	 * @param m un monstre
+	 * @return vrai s'il y a collision avec un monstre
+	 */
+	public boolean PhysicTear(Hero m) {
+		if(Physics.rectangleCollision(position, HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize()))return true;
+		return false;
+	}
 	
 		 	
 			

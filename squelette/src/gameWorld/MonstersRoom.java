@@ -8,6 +8,7 @@ import gameobjects.Bidulf;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
+import gameobjects.Tear;
 import items.Item;
 import libraries.Physics;
 import libraries.StdDraw;
@@ -58,27 +59,62 @@ public class MonstersRoom extends SpawnRoom {
 	 //Make every entity that compose a room process one step
 	public void updateRoom()
 	{	
+		/*
+		 *TODO A refaire, optimisation des differentes boucles for en une -> permetrait de moins ralentir le jeu
+		 *-> pas apercu du probleme, mais sur des pc plus faible que le mien(), ca fera la difference
+		 */
+		
+		//deplacement des montres
 		moveMonsters();
+		
+		//check collision avec caillou monstre et hero
 		for(Cailloux rock: rocks) {
 			rock.collision_rocks(getHero());
 			for(Hero m : monsters) {
 				rock.collision_rocks(m);
 			}
 		}
+		//check collision monstres
 		for(Wall w : walls) {
 			for(Hero m : monsters) {
 				w.collisionWalls(m);
 			}
 		}
+		//update des degats des monstres + frame invu
 		updateDamage();
 		if(CycleInfos.Cycle > getHero().getDateCycleInvulnerabilityStart()+15 && getHero().isTempInvunerability()) {
 			getHero().setTempInvunerability(false);
 		}
 		
+		//degats des larmes du hero
+		for(Hero m : monsters) {
+			for(Tear t : getHero().getTears()) {
+				if(t.PhysicTear(m)) {
+					m.takeDamage(getHero().getDamage());
+					/*m.setTempInvunerability(true);*/
+					getHero().getTears().remove(t);
+					break;
+				}
+			}
+		}
+		
+		//enlever invu tempo des monstres /TODO ne fonctionne pas
+		/*for(Hero m : monsters) {
+			if(CycleInfos.Cycle > m.getDateCycleInvulnerabilityStart()+30 && m.isTempInvunerability()) {
+				m.setTempInvunerability(false);
+			}
+		}*/
+		
+		//update des monstres
 		for (Hero m : monsters) {
+			if(m.getLP()<0) {
+				monsters.remove(m);
+				break;
+			}
 			m.updateGameObject();
 		}
 		
+		//update magasin
 		if(isMerchantRoom()) {
 			magasin.updateRoom(getHero());
 		}

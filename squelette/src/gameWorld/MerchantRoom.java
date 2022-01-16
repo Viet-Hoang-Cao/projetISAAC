@@ -24,7 +24,7 @@ public class MerchantRoom {
 			if(I.physics(h) && h.getInventaire().getGold()>= I.getPrice()) {
 				h.getInventaire().setGold(h.getInventaire().getGold()-I.getPrice());
 				I.effect(h);
-				deleteObjetVendu(I); //TODO A TEST
+				deleteObjetVendu(I);
 				break; // S'il reste des  element a itere, la boucle crash. Il vaut mieux l'arretez a defaut de faire qqch de plus propre
 			}
 		}

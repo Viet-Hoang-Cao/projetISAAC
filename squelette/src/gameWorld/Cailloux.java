@@ -19,7 +19,7 @@ public class Cailloux {
 	 */
 	public void collision_rocks(Hero m) {
 		if(Physics.rectangleCollision(m.getPosition().addVector(m.getNormalizedDirection()),
-			m.getSize(), pos, RoomInfos.HALF_TILE_SIZE)) {//avec half tile, l'on peut passer en diagonale des rochers
+			m.getSize(), pos, RoomInfos.HALF_TILE_SIZE)) {
 			if(m.getDirection().getX()==-1 && m.getPosition().getX() - pos.getX() >0) {
 				m.goRightNext();
 			}

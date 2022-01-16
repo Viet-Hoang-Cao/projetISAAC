@@ -40,8 +40,15 @@ public class Room
 	public void updateRoom()
 	{
 		makeHeroPlay();
+		
+		for (Item I : ItemRoomList) {
+			if(I.physics(getHero())) {
+				I.effect(getHero());
+				ItemRoomList.remove(I);
+				break; // S'il reste des  element a itere, la boucle crash. Il vaut mieux l'arretez a defaut de faire qqch de plus propre
+			}
+		}
 	}
-
 
 	private void makeHeroPlay()
 	{

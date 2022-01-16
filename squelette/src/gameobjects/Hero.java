@@ -90,6 +90,12 @@ public class Hero
 		move();
 		updateProjectile();
 		deleteTear(this.portee);
+		
+		/*
+		 * permet d'eviter de sortir de l'ecran
+		 */
+		if(position.getX()<0 || position.getX()>1)position.setX(0.5);
+		if(position.getY()<0 || position.getY()>1)position.setY(0.5);
 	}
 
 	private void move()
@@ -177,6 +183,9 @@ public class Hero
 		}
 	}
 	
+	/**
+	 * Ancienne IA de extremement basique
+	 */
 	public void moveby1() {
 		double b= getrandomdouble(3)-1;
 		double a= getrandomdouble(3)-1;
