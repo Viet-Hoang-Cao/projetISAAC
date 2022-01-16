@@ -3,6 +3,7 @@ package items;
 import java.util.List;
 import java.util.Random;
 
+import gameobjects.Hero;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
@@ -20,7 +21,10 @@ public class Bomb extends Item {
 	@Override
 	public void effect() {
 		// TODO Auto-generated method stub
-
+	}
+	
+	public void effect(List<Hero> m) {
+		
 	}
 
 	@Override
