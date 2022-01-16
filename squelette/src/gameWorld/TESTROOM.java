@@ -269,15 +269,53 @@ public class TESTROOM extends MonstersRoom {
 	public void collisionRocksMonstre() {
 		for(Hero m:this.monsters) {
 			for(Cailloux rock: getRocks()) {
-				rock.collision_rocks(m);
+				if(m.getDirection().getY()>0) {
+				if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+					m.getPosition().addY(-1);
 				}
+				}
+				if(m.getDirection().getY()<0) {
+					if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+						m.getPosition().addY(1);
+					}
+					}
+				if(m.getDirection().getX()>0) {
+					if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+						m.getPosition().addX(-1);
+					}
+					}
+				if(m.getDirection().getX()<0) {
+					if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+						m.getPosition().addY(1);
+					}
+					}
 			}
 		}
+	}
 	
 	public void collisionWallsMonstre() {
 		for (Hero m:this.monsters) {
 			for (Wall w: getWalls()) {
-				w.collisionWalls(m);
+				if(m.getDirection().getY()>0) {
+					if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+						m.getPosition().addY(-1);
+					}
+					}
+					if(m.getDirection().getY()<0) {
+						if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+							m.getPosition().addY(1);
+						}
+						}
+					if(m.getDirection().getX()>0) {
+						if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+							m.getPosition().addX(-1);
+						}
+						}
+					if(m.getDirection().getX()<0) {
+						if(Physics.rectangleCollision(w.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+							m.getPosition().addY(1);
+						}
+						}
 				
 			}
 		}
