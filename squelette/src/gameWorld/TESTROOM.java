@@ -36,12 +36,14 @@ public class TESTROOM extends SpawnRoom {
 
 	@Override
 	// Make every entity that compose a room process one step
+	
+	/**
+	 * Fonction pour verifier les autres fonctions
+	 */
 	public void updateRoom() {
-		/*
-		 * if (CycleInfos.Cycle%5==0) moveby1allMonsters();
-		 */
 		moveSpider();
 		moveFly();
+		pushBack();
 		for (Hero m : this.monsters) {
 			for(Wall w : walls) {
 				w.collisionWalls(m);
@@ -57,20 +59,35 @@ public class TESTROOM extends SpawnRoom {
 		super.updateRoom();
 	}
 
+	/**
+	 * Ajouter une mouche
+	 * @param fly1
+	 */
 	private void addmonster(Fly fly1) {
 		this.monsters.add(fly1);
 	}
-
+	
+	/**
+	 * Ajouter une araignee
+	 * @param monster
+	 */
 	public void addmonster(Spider monster) {
 		this.monsters.add(monster);
 	}
-
+	
+	/**
+	 * Dessiner les monstres
+	 */
 	public void drawmonsters() {
 		for (Hero m : this.monsters) {
 			m.drawGameObject();
 		}
 	}
-
+	
+	
+	/**
+	 * Fonction qui fait avancer tout les monstres
+	 */
 	public void moveby1allMonsters() {
 
 		for (Hero m : this.monsters) {
@@ -82,7 +99,10 @@ public class TESTROOM extends SpawnRoom {
 		 */
 		// }
 	}
-
+	
+	/**
+	 * Fonction qui permet de faire bouger la mouche vers la position d'Isaac
+	 */
 	public void moveFly() {
 		for (Hero f : this.monsters) {
 			if (f instanceof Fly) {
@@ -90,7 +110,10 @@ public class TESTROOM extends SpawnRoom {
 			}
 		}
 	}
-
+	
+	/**
+	 * Fonction qui permet de faire bouger l'araignee aleatoirement
+	 */
 	public void moveSpider() {
 		Random rand = new Random();
 		Vector2 pos = SpiderInfos.POSITIONTOGO;
@@ -104,14 +127,23 @@ public class TESTROOM extends SpawnRoom {
 			}
 		}
 	}
-
-	public static double genererInt(double borneInf, double borneSup) {
-		Random generateur = new Random();
-		double a = 0;
-		a = borneInf + generateur.nextDouble();
-		return a;
-	}
-
+	
+	/**
+	 * 
+	 * @param borneInf
+	 * @param borneSup
+	 * @return a qui est une double 
+	 */
+	//public static double genererInt(double borneInf, double borneSup) {
+		//Random generateur = new Random();
+		//double a = 0;
+		//a = borneInf + generateur.nextDouble();
+		//return a;
+	//}
+	
+	/**
+	 * Les degats que Isaac va recevoir lorsqu'il est touche par les monstres
+	 */
 	public void updateDamage() {
 		if (!getHero().isInvicible() && !getHero().isTempInvunerability()) {
 
@@ -126,19 +158,24 @@ public class TESTROOM extends SpawnRoom {
 		}
 
 	}
-
+	
+	/**
+	 * Fonction creee pour mettre une placement aleatoire des monstres dans le room des monstres
+	 * @return une position aleatoire sur le room
+	 */
 	public Vector2 positionAlea() {
 		Random rand = new Random();
 		Vector2 pos = positionFromTileIndex(rand.nextInt(7) + 1, rand.nextInt(7) + 1);
 		return pos;
 	}
 
-	
-	public void pushBack(double portee) { 
+	/**
+	 * Fonction qui fait reculer les enemies lorsqu'ils sont touches par les larmes
+	 */
+	public void pushBack() { 
 		for (Hero m : this.monsters) {
 			for (Tear t: Tears) {
 				if(t.getDirection().getY()>0) {
-
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getY());
@@ -146,7 +183,6 @@ public class TESTROOM extends SpawnRoom {
 					}
 				}
 				if(t.getDirection().getY()<0) {
-
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getY());
@@ -154,7 +190,6 @@ public class TESTROOM extends SpawnRoom {
 					  	}
 					}
 				if(t.getDirection().getX()>0) {
-
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(RoomInfos.HALF_TILE_SIZE.getX());
@@ -162,7 +197,6 @@ public class TESTROOM extends SpawnRoom {
 					}
 				 }
 				if(t.getDirection().getX()<0) {
-
 					if(Physics.rectangleCollision(t.getPosition(), HeroInfos.TEAR_SIZE, m.getPosition(), m.getSize())) {
 						m.takeDamage(getHero().getDamage());
 						m.getPosition().addY(-RoomInfos.HALF_TILE_SIZE.getX());
@@ -171,11 +205,21 @@ public class TESTROOM extends SpawnRoom {
 				}
 			}
 		 }
-	 } 
-	 
-
-	// public static final Vector2 POSITION_ALEATOIRE = new
-	// Vector2(TESTROOM.genererInt(0, 0.8), TESTROOM.genererInt(0, 0.8));
+	 }
+	
+	/**
+	 * Fonction collision entre larmes et le mur qui fait disparaitre les larmes lors du contact
+	 */
+	public void collisionTearsWalls() {
+		for (Tear t:Tears) {
+			for(Wall w: walls) {				
+				if(Physics.rectangleCollision(w.getPos(), null, t.getPosition(), HeroInfos.TEAR_SIZE)) {
+					Tears.remove(t);
+				}
+			}
+		}
+	}
+		
 
 	@Override
 	public void drawRoom() {
