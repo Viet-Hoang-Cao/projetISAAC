@@ -12,7 +12,6 @@ public class MonstersRoomDownUpDoors extends MonstersRoom {
 	
 	public MonstersRoomDownUpDoors(Hero hero, int tileNumberY, int tileNumberX) {
 		super(hero, tileNumberY, tileNumberX);
-		// TODO Auto-generated constructor stub
 	}
 
 

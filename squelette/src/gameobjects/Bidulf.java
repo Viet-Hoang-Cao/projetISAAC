@@ -9,7 +9,6 @@ public class Bidulf extends Hero {
 	
 	public Bidulf(Vector2 position, Vector2 size, double speed, String imagePath, int LP, int damage) {
 		super(position, size, speed, imagePath, LP, damage);
-		// TODO Auto-generated constructor stub
 	}
 	public Bidulf(Vector2 position) {
 		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.5), 0.005, ImagePaths.BIDULF, 12, 2);
@@ -20,4 +19,6 @@ public class Bidulf extends Hero {
 	{
 		StdDraw.picture(getPosition().getX(), getPosition().getY(), getImagePath(), getSize().getX(), getSize().getY(),0);
 	}
+	
+	//TODO ADD PATERNS
 }

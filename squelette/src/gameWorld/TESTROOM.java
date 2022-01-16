@@ -32,7 +32,6 @@ public class TESTROOM extends SpawnRoom {
 		addmonster(spider1);
 		Fly fly1 = new Fly(positionAlea(), FlyInfos.FLY_SIZE, FlyInfos.FLY_SPEED, ImagePaths.FLY, 3, 1);
 		addmonster(fly1);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
