@@ -3,6 +3,7 @@ package items;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
+import resources.RoomInfos;
 
 public class Lunch extends Item {
 
@@ -22,7 +23,7 @@ public class Lunch extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.LUNCH);
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.LUNCH, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
 
 	}
 

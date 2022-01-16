@@ -5,13 +5,13 @@ import libraries.Vector2;
 import resources.ImagePaths;
 import resources.RoomInfos;
 
-public class Jesuis_Juice extends Item {
+public class Magic_Mushroom extends Item {
 
-	public Jesuis_Juice() {
+	public Magic_Mushroom() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Jesuis_Juice(Vector2 pos) {
+	public Magic_Mushroom(Vector2 pos) {
 		super(pos);
 		// TODO Auto-generated constructor stub
 	}
@@ -24,8 +24,7 @@ public class Jesuis_Juice extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.JESUS_JUICE, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
-
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.MAGIC_MUSHROOM, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
 	}
 
 }

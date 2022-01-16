@@ -3,6 +3,7 @@ package items;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.ImagePaths;
+import resources.RoomInfos;
 
 public class Hp_Up extends Item {
 
@@ -23,7 +24,7 @@ public class Hp_Up extends Item {
 
 	@Override
 	public void drawitem() {
-		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HP_UP);
+		StdDraw.picture(getPos().getX(), getPos().getY(), ImagePaths.HP_UP, RoomInfos.TILE_SIZE.getX(),RoomInfos.TILE_SIZE.getY());
 
 	}
 
