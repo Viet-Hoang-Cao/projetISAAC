@@ -64,14 +64,7 @@ public class ItemsTable {
 		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.KEY);
 	}
 	
-	public void randomDrawBomb(List<Vector2> wallsPhysics) {
-		Random rand = new Random();
-		Vector2 pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		while(collisionsmuretObjet(pos, wallsPhysics)) {
-			pos = positionFromTileIndex(rand.nextInt(7)+1, rand.nextInt(7)+1);
-		}
-		StdDraw.picture(pos.getX(), pos.getY(), ImagePaths.BOMB);
-	}
+	
 	
 	public void randomDrawPenny(List<Vector2> wallsPhysics) {
 		Random rand = new Random();
