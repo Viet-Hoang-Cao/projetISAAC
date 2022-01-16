@@ -12,7 +12,7 @@ public class MerchantRoom {
 	List<Item> EnVente;
 	
 	/**
-	 * 
+	 *TODO le probleme du fait qu'il  n'y est que 2 objet ou 1 vient de la TABLE ITEM
 	 * @param enVente Ne pas oublier de fournir les positions 2,3; 4,3; 6,3; pour les items
 	 */
 	public MerchantRoom(List<Item> enVente) {

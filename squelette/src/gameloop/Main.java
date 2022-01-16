@@ -17,6 +17,7 @@ public class Main
 		// Hero, world and display initialisation.
 		Hero isaac = new Hero(RoomInfos.POSITION_CENTER_OF_ROOM, HeroInfos.ISAAC_SIZE, HeroInfos.ISAAC_SPEED, ImagePaths.ISAAC, 6, 2);
 		GameWorld world = new GameWorld(isaac);
+		//TODO trouver le pb dans la generation du DJ qui empeche de le jeu de parfois se lancer
 		
 		//Test de changement de room || Le constructeur initialisera automatiquement le DJ et cette ligne deviendra useless.
 		//world.setCurrentRoom(new TESTROOM(isaac));

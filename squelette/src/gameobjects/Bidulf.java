@@ -11,7 +11,7 @@ public class Bidulf extends Hero {
 		super(position, size, speed, imagePath, LP, damage);
 	}
 	public Bidulf(Vector2 position) {
-		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.5), 0.005, ImagePaths.BIDULF, 12, 2);
+		super(position, RoomInfos.TILE_SIZE.scalarMultiplication(1.2), 0.005, ImagePaths.BIDULF, 12, 2);
 	}
 	
 	@Override
