@@ -377,7 +377,13 @@ public class MonstersRoom extends SpawnRoom {
 						m.getPosition(), m.getSize())) {
 					getHero().takeDamage(m.getDamage());
 					getHero().setTempInvunerability(true);
-				}		
+				}
+				for(Tear t : m.getTears()) {
+					if(t.PhysicTear(getHero())) {
+						getHero().takeDamage(m.getDamage());
+						getHero().setTempInvunerability(true);
+					}
+				}
 			}
 			for(Spikes spike: spikes) {
 				if(spike.spikesCollisions(getHero())) {
