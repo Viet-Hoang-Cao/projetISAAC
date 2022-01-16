@@ -14,6 +14,7 @@ public class Controls
 	public static int goKillAll = Keybinding.keycodeOf('k');
 	public static int goPowerfull = Keybinding.keycodeOf('p');
 	public static int goOfferGold = Keybinding.keycodeOf('o');
+	public static int Bomb = Keybinding.keycodeOf('e');
 	
 	public static int directionalKeyUp = Keybinding.keycodeOf(Keybinding.SpecialKeys.UP);
 	public static int directionalKeyDown = Keybinding.keycodeOf(Keybinding.SpecialKeys.DOWN);

@@ -7,11 +7,13 @@ import gameobjects.Bidulf;
 import gameobjects.Fly;
 import gameobjects.Hero;
 import gameobjects.Spider;
+import gameobjects.Tear;
 import libraries.Physics;
 import libraries.StdDraw;
 import libraries.Vector2;
 import resources.CycleInfos;
 import resources.FlyInfos;
+import resources.HeroInfos;
 import resources.ImagePaths;
 import resources.RoomInfos;
 import resources.SpiderInfos;
@@ -303,6 +305,7 @@ public class MonstersRoom extends SpawnRoom {
 			}
 		}
 	}
+	
 	
 	/**
 	 *  genere une position aleatoire mais qui n'est pas le numero de la tuile

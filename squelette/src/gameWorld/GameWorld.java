@@ -34,11 +34,15 @@ public class GameWorld
 		this.LV = 1;
 		createDungeon();
 		this.currentRoom = getDJSpawnRoom(); 
+		
 		//Par manque de temps je vais dire que la fonction create dungeon ne risque pas d'avoir de pb
 		//Note à soi-même : Arrêter d'avoir confiance en soi.
 		
 	}
 	
+	/**
+	 * Creation des rooms dans le donjons de facon aleatoire
+	 */
 	public void createDungeon() {
 		int numberOfRoom = giveNumberOfRoom(this.LV);
 		Random rand = new Random();
@@ -70,6 +74,8 @@ public class GameWorld
 			}
 		}
 	}
+	
+	
 	
 	public void createInstance(int type, int y, int x) {
 		switch(type) {
