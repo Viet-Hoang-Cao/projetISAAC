@@ -213,7 +213,7 @@ public class TESTROOM extends SpawnRoom {
 	public void collisionTearsWalls() {
 		for (Tear t:Tears) {
 			for(Wall w: walls) {				
-				if(Physics.rectangleCollision(w.getPos(), null, t.getPosition(), HeroInfos.TEAR_SIZE)) {
+				if(Physics.rectangleCollision(w.getPos(), null, t.getPosition(), HeroInfos.TEAR_SIZE)) { //je ne sais pas trop ou trouve pour le size du mur :|
 					Tears.remove(t);
 				}
 			}
