@@ -275,8 +275,8 @@ public class TESTROOM extends MonstersRoom {
 				}
 				}
 				if(m.getDirection().getY()<0) {
-					if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
-						m.getPosition().addY(1);
+						if(Physics.rectangleCollision(rock.getPos(), RoomInfos.TILE_SIZE, m.getPosition(), m.getSize())) {
+							m.getPosition().addY(1);
 					}
 					}
 				if(m.getDirection().getX()>0) {

@@ -4,10 +4,10 @@ import libraries.Keybinding;
 
 public class Controls
 {
-	public static int goUp = Keybinding.keycodeOf('z');
+	public static int goUp = Keybinding.keycodeOf('w');
 	public static int goDown = Keybinding.keycodeOf('s');
 	public static int goRight = Keybinding.keycodeOf('d');
-	public static int goLeft = Keybinding.keycodeOf('q');
+	public static int goLeft = Keybinding.keycodeOf('a');
 	
 	public static int goInvicible = Keybinding.keycodeOf('i');
 	public static int goLight = Keybinding.keycodeOf('l');
